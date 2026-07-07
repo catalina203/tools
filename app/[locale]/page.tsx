@@ -1,9 +1,14 @@
+'use client';
+
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/src/i18n/navigation';
 import ThemeToggle from '@/app/components/ThemeToggle';
 import LanguageSwitcher from '@/app/components/LanguageSwitcher';
+import SearchBar from '@/app/components/SearchBar';
 
 export default function Home() {
+  const [query, setQuery] = useState('');
   const t = useTranslations('home');
   const tc = useTranslations('common');
   const tt = useTranslations('tools');
@@ -29,14 +34,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0a0a1a] relative overflow-hidden transition-colors">
-      {/* 背景装饰 */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
         <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-cyan-500/15 rounded-full blur-3xl"></div>
       </div>
 
-      {/* 顶部导航 */}
       <nav className="relative z-10 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
         <div className="flex items-center space-x-3">
           <div className="w-11 h-11 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/30">
@@ -61,9 +64,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* 主体内容 */}
       <main className="relative z-10 max-w-7xl mx-auto px-8 py-20">
-        {/* 英雄区域 */}
         <div className="text-center mb-20">
           <div className="inline-block px-4 py-2 bg-gradient-to-r from-violet-500/20 to-indigo-500/20 rounded-full border border-violet-500/30 mb-6">
             <span className="text-violet-600 dark:text-violet-300 text-sm font-medium">{t('badge')}</span>
@@ -80,24 +81,10 @@ export default function Home() {
           <p className="text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto mb-14 leading-relaxed">
             {t('description')}
           </p>
-          
-          {/* 搜索栏 */}
-          <div className="max-w-2xl mx-auto relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
-            <div className="relative flex items-center bg-gray-100 dark:bg-[#1a1a2e] rounded-2xl border border-gray-200 dark:border-white/10 p-1">
-              <input
-                type="text"
-                placeholder={tc('searchPlaceholder')}
-                className="flex-1 px-8 py-5 bg-transparent text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none text-lg"
-              />
-              <button className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white px-8 py-4 rounded-xl font-medium transition-all shadow-lg shadow-violet-500/30">
-                {tc('search')}
-              </button>
-            </div>
-          </div>
+
+          <SearchBar query={query} setQuery={setQuery} />
         </div>
 
-        {/* 工具分类概览 */}
         <div className="mb-24">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">
@@ -129,7 +116,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 精选工具 */}
         <div className="mb-24">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">
@@ -178,7 +164,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 特性介绍 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="relative group bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-8 hover:border-violet-500/30 transition-all duration-300 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -213,7 +198,6 @@ export default function Home() {
         </div>
       </main>
 
-      {/* 页脚 */}
       <footer className="relative z-10 border-t border-gray-200 dark:border-white/5 mt-24 bg-gray-50/80 dark:bg-[#0a0a1a]/80 backdrop-blur-lg">
         <div className="max-w-7xl mx-auto px-8 py-12">
           <div className="flex flex-col md:flex-row justify-between items-center">

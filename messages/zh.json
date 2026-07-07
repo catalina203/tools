@@ -1,16 +1,20 @@
 {
-  "common": {
-    "appName": "办公工具箱",
-    "home": "首页",
-    "tools": "工具箱",
-    "about": "关于",
-    "search": "搜索",
-    "searchPlaceholder": "搜索工具...例如：裁剪、JSON、二维码",
-    "viewAllTools": "查看全部88个工具",
-    "suggestTool": "建议新工具",
-    "copyright": "© 2024 办公工具箱. 让办公更简单。",
-    "language": "语言"
-  },
+    "common": {
+      "appName": "办公工具箱",
+      "home": "首页",
+      "tools": "工具箱",
+      "about": "关于",
+      "search": "搜索",
+      "searchPlaceholder": "搜索工具...例如：裁剪、JSON、二维码",
+      "viewAllTools": "查看全部88个工具",
+      "suggestTool": "建议新工具",
+      "copyright": "© 2024 办公工具箱. 让办公更简单。",
+      "language": "语言"
+    },
+    "search": {
+      "noResults": "没有找到匹配的工具",
+      "tryAlternative": "建议尝试更换关键词或查看全部工具"
+    },
   "home": {
     "badge": "✨ 88个纯Web工具，无需后端",
     "title1": "高效办公",

@@ -1,5 +1,5 @@
 {
-  "common": {
+    "common": {
     "appName": "Office Toolbox",
     "home": "Home",
     "tools": "Tools",
@@ -10,6 +10,10 @@
     "suggestTool": "Suggest a Tool",
     "copyright": "© 2024 Office Toolbox. Making office easier.",
     "language": "Language"
+  },
+  "search": {
+    "noResults": "No matching tools found",
+    "tryAlternative": "Try different keywords or view all tools"
   },
   "home": {
     "badge": "✨ 88 pure web tools, no backend required",
