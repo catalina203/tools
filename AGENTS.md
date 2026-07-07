@@ -24,12 +24,25 @@
 
 ## 项目结构
 
-- `app/` - App Router (Next.js 15+)
-  - `page.tsx` - 首页
-  - `layout.tsx` - 根布局
+- `app/` - App Router (Next.js 16+)
+  - `layout.tsx` - 根布局（不含字体，避免网络问题）
+  - `page.tsx` - 根页面（重定向到 /zh）
   - `globals.css` - 全局样式
   - `context/ThemeContext.tsx` - 主题上下文（深色/浅色模式）
-  - `components/ThemeToggle.tsx` - 主题切换按钮组件
+  - `components/` - 共享组件
+    - `ThemeToggle.tsx` - 主题切换按钮
+    - `LanguageSwitcher.tsx` - 语言切换按钮
+  - `[locale]/` - 语言路由目录
+    - `layout.tsx` - 语言布局（NextIntlClientProvider）
+    - `page.tsx` - 首页
+    - `tools/page.tsx` - 工具箱页面
+- `messages/` - 国际化语言包
+  - `zh.json` - 中文翻译
+  - `en.json` - 英文翻译
+- `src/i18n/` - i18n 配置
+  - `routing.ts` - 路由配置（支持 zh/en）
+  - `request.ts` - 服务端请求配置
+  - `navigation.ts` - 导航工具函数
 - `public/` - 静态资源
 - `package.json` - 依赖和脚本
 
@@ -47,19 +60,64 @@ npm run lint     # ESLint 检查
 - **React 版本**：19.2.4
 - **Next.js 版本**：16.2.10 (stable channel)
 - **TypeScript**：严格模式已启用
-- **Tailwind CSS**：v4 (通过 CDN, 无需配置)
+- **Tailwind CSS**：v4 (PostCSS 集成)
 - **ESLint**：平面配置 (eslint.config.mjs)
 - **CSS**：全局 CSS 位于 `app/globals.css`
+- **i18n**：使用 next-intl 库实现国际化
 
 ## 重要事项
 
 - 使用 App Router (非 Pages Router)
-- 无 `src/` 目录 (文件位于 `app/` 目录下)
-- Tailwind 已配置并正常工作
-- ESLint 使用平面配置格式
-- 支持深色/浅色主题切换（通过 ThemeContext 实现）
-- 主题状态保存在 localStorage 中
-- 所有组件都支持主题切换，使用 dark: 前缀适配深色模式
+- Tailwind CSS v4 使用 `@custom-variant dark` 实现 class-based 暗色模式
+- 支持深色/浅色主题切换（通过 ThemeContext 和 localStorage 实现）
+- **国际化**：所有页面内容必须支持中英文双语
+
+## 国际化 (i18n) 开发规范
+
+### 架构说明
+- 使用 `next-intl` 库实现国际化
+- 路由结构：`/[locale]/page.tsx`（locale 为 zh 或 en）
+- 语言包位于 `messages/zh.json` 和 `messages/en.json`
+- 根路径 `/` 自动重定向到 `/zh`（默认中文）
+
+### 新增页面/工具的 i18n 流程
+**每次新增页面、工具或 UI 文案时，必须同时更新两个语言包：**
+
+1. **在 `messages/zh.json` 添加中文翻译**
+2. **在 `messages/en.json` 添加英文翻译**
+3. **在组件中使用 `useTranslations` hook**
+
+### 翻译键命名规范
+```
+tools.categories.image          # 图像处理分类名
+tools.imageTools.crop           # 图片裁剪工具名
+tools.imageTools.cropDesc       # 图片裁剪工具描述
+common.home                     # 首页导航文本
+common.search                   # 搜索按钮文本
+```
+
+### 组件中使用翻译
+```tsx
+import { useTranslations } from 'next-intl';
+
+export default function MyComponent() {
+  const t = useTranslations('tools');
+  const tc = useTranslations('common');
+  
+  return (
+    <div>
+      <h1>{t('title')}</h1>
+      <p>{t('imageTools.cropDesc')}</p>
+      <button>{tc('search')}</button>
+    </div>
+  );
+}
+```
+
+### 语言切换组件
+- 使用 `LanguageSwitcher` 组件实现语言切换
+- 位置：`app/components/LanguageSwitcher.tsx`
+- 在导航栏中与 ThemeToggle 一起使用
 
 ## 办公工具产品计划
 
@@ -143,11 +201,11 @@ npm run lint     # ESLint 检查
 - 多图片批量处理
 - 数据导出（Excel/CSV）
 - 本地存储历史记录
-- 暗黑/亮白主题切换
 - PWA离线支持
 
 2. **技术栈**
    - 前端：Next.js (App Router), TypeScript, Tailwind CSS
+   - 国际化：next-intl
    - 图像处理：Canvas API、FileReader API
    - 数据可视化：Chart.js 或 D3.js
    - 文件处理：JSZip、FileSaver.js
@@ -162,12 +220,13 @@ npm run lint     # ESLint 检查
 
 4. **里程碑**
    1. 基础项目脚手架（已完成）
-   2. 图像处理工具（约2周）
-   3. 文本/编码工具（约1.5周）
-   4. 文件处理与数据工具（约1.5周）
-   5. 办公效率工具（约1周）
-   6. UI打磨、主题切换、响应式优化（约1周）
-   7. 部署到Vercel（约0.5周）
+   2. 国际化支持（已完成）
+   3. 图像处理工具（约2周）
+   4. 文本/编码工具（约1.5周）
+   5. 文件处理与数据工具（约1.5周）
+   6. 办公效率工具（约1周）
+   7. UI打磨、响应式优化（约1周）
+   8. 部署到Vercel（约0.5周）
 
 5. **测试**
    - 单元测试：vitest（覆盖工具函数）
@@ -181,15 +240,13 @@ npm run lint     # ESLint 检查
    - `docs/` 文件夹包含功能指南与API文档
 
 **下一步**：
-- 添加 `docs/` 文件夹并编写首批功能文档
-- 在 `feature/office-tools` 分支上实现首批高优先级工具
+- 实现首批高优先级工具（图像处理）
+- 每个工具必须同时支持中英文
 - 优先实现纯Web工具，不依赖后端或AI模型
-- 主题切换功能已实现，可作为后续开发参考
 
-## 常见任务 (office-tools 分支)
+## 常见任务
 
 ```bash
-cd tools
 npm run dev  # 运行开发服务器
 npm run build # 生产构建
 ```
