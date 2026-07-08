@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
+import { FavoriteToolsProvider } from "./context/FavoriteToolsContext";
 
 export const metadata: Metadata = {
   title: "办公工具箱 - 一站式在线工具集合",
@@ -37,7 +38,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-white dark:bg-[#0a0a1a] text-gray-900 dark:text-white transition-colors">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <FavoriteToolsProvider>{children}</FavoriteToolsProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

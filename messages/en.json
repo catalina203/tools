@@ -9,7 +9,9 @@
     "viewAllTools": "View All 88 Tools",
     "suggestTool": "Suggest a Tool",
     "copyright": "© 2024 Office Toolbox. Making office easier.",
-    "language": "Language"
+    "language": "Language",
+    "addFavorite": "Add to Favorites",
+    "removeFavorite": "Remove from Favorites"
   },
   "search": {
     "noResults": "No matching tools found",
@@ -22,8 +24,11 @@
     "description": "One-stop online toolbox covering image processing, text encoding, development tools, office efficiency and more. All tools are pure web implementations, ready to use without installation.",
     "categories": "Tool Categories",
     "categoriesDesc": "7 categories, 88 tools covering all office scenarios",
-    "featured": "Featured Tools",
-    "featuredDesc": "Most popular tools, quick start",
+    "myFavorites": "My Favorites",
+    "myFavoritesDesc": "Your most frequently used tools, quick access",
+    "noFavorites": "No favorite tools yet",
+    "noFavoritesDesc": "Click the star button on tool cards to add your favorite tools here",
+    "addFavorites": "Go add favorite tools",
     "feature1Title": "Pure Web Implementation",
     "feature1Desc": "No backend, no installation, just open your browser",
     "feature2Title": "Privacy & Security",

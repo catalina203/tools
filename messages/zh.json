@@ -9,7 +9,9 @@
       "viewAllTools": "查看全部88个工具",
       "suggestTool": "建议新工具",
       "copyright": "© 2024 办公工具箱. 让办公更简单。",
-      "language": "语言"
+      "language": "语言",
+      "addFavorite": "添加到常用",
+      "removeFavorite": "移除常用"
     },
     "search": {
       "noResults": "没有找到匹配的工具",
@@ -22,8 +24,11 @@
     "description": "一站式在线工具箱，涵盖图像处理、文本编码、开发工具、办公效率等多个领域，所有工具纯Web实现，打开即用，无需安装。",
     "categories": "工具分类",
     "categoriesDesc": "7大类别，88个工具，覆盖办公全场景",
-    "featured": "精选工具",
-    "featuredDesc": "最受欢迎的工具，快速开始",
+    "myFavorites": "我的常用",
+    "myFavoritesDesc": "您最常使用的工具，快速访问",
+    "noFavorites": "暂无常用工具",
+    "noFavoritesDesc": "点击工具卡片上的星形按钮，将常用工具添加到这里",
+    "addFavorites": "去添加常用工具",
     "feature1Title": "纯Web实现",
     "feature1Desc": "无需后端，无需安装，打开浏览器即用",
     "feature2Title": "隐私安全",

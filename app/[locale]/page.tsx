@@ -6,21 +6,47 @@ import { Link } from '@/src/i18n/navigation';
 import ThemeToggle from '@/app/components/ThemeToggle';
 import LanguageSwitcher from '@/app/components/LanguageSwitcher';
 import SearchBar from '@/app/components/SearchBar';
+import { useFavoriteTools } from '@/app/context/FavoriteToolsContext';
+import { allTools } from '@/src/data/tools';
 
 export default function Home() {
   const [query, setQuery] = useState('');
   const t = useTranslations('home');
   const tc = useTranslations('common');
   const tt = useTranslations('tools');
+  const { favorites } = useFavoriteTools();
 
-  const featuredTools = [
-    { nameKey: 'crop', icon: '✂️', category: 'image', descriptionKey: 'cropDesc', gradient: 'from-pink-500 to-rose-500' },
-    { nameKey: 'jsonFormat', icon: '{ }', category: 'text', descriptionKey: 'jsonFormatDesc', gradient: 'from-amber-500 to-orange-500' },
-    { nameKey: 'qrcode', icon: '📱', category: 'efficiency', descriptionKey: 'qrcodeDesc', gradient: 'from-violet-500 to-purple-500' },
-    { nameKey: 'colorPicker', icon: '🎨', category: 'dev', descriptionKey: 'colorPickerDesc', gradient: 'from-emerald-500 to-teal-500' },
-    { nameKey: 'markdown', icon: '📝', category: 'text', descriptionKey: 'markdownDesc', gradient: 'from-blue-500 to-indigo-500' },
-    { nameKey: 'zip', icon: '📦', category: 'file', descriptionKey: 'zipDesc', gradient: 'from-cyan-500 to-blue-500' },
-  ];
+  // 从allTools中获取用户选择的常用工具
+  const favoriteTools = favorites
+    .map(key => {
+      const tool = allTools.find(t => t.key === key);
+      if (!tool) return null;
+      // 确定工具分类
+      let category = '';
+      if (['crop', 'resize', 'rotate', 'brightness', 'contrast', 'saturation', 'hue', 'grayscale', 'vintage', 'blur', 'sharpen', 'watermark', 'formatConvert', 'compress', 'mosaic', 'grid', 'rounded', 'colorExtract', 'eyedropper', 'exif', 'base64', 'compare', 'bgRemove', 'toPdf'].includes(key)) {
+        category = 'image';
+      } else if (['jsonFormat', 'xmlFormat', 'yamlToJson', 'csvToJson', 'markdown', 'wordCount', 'dedup', 'caseConvert', 'traditionalSimplified', 'regexTest', 'urlEncode', 'md5', 'sha', 'uuid', 'password', 'lorem', 'escape', 'sqlFormat', 'diff'].includes(key)) {
+        category = 'text';
+      } else if (['colorPicker', 'gradient', 'shadow', 'flexbox', 'radix', 'timestamp', 'unitConvert', 'dateCalc', 'emailValidate', 'jsonVisual', 'colorConvert', 'regexVisual', 'mimeQuery'].includes(key)) {
+        category = 'dev';
+      } else if (['qrcode', 'barcode', 'calculator', 'scientificCalc', 'notepad', 'stickyNote', 'countdown', 'stopwatch', 'pomodoro', 'worldClock', 'timezone', 'passwordStrength', 'randomNum', 'radixCalc'].includes(key)) {
+        category = 'efficiency';
+      } else if (['imageConvert', 'zip', 'unzip', 'preview', 'fileHash', 'editor'].includes(key)) {
+        category = 'file';
+      } else if (['csvEditor', 'jsonEditor', 'chart', 'statistics'].includes(key)) {
+        category = 'data';
+      } else if (['colorScheme', 'fontPreview', 'gridGenerator', 'contrastCheck', 'responsiveTest', 'cssVariable'].includes(key)) {
+        category = 'design';
+      }
+      return {
+        nameKey: key,
+        icon: tool.icon,
+        category,
+        descriptionKey: key + 'Desc',
+        gradient: tool.gradient
+      };
+    })
+    .filter(Boolean);
 
   const categories = [
     { nameKey: 'image', icon: '🖼️', count: 24, gradient: 'from-pink-500 to-rose-500' },
@@ -120,38 +146,62 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">
               <span className="bg-gradient-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
-                {t('featured')}
+                {t('myFavorites')}
               </span>
             </h2>
-            <p className="text-gray-500 dark:text-gray-400">{t('featuredDesc')}</p>
+            <p className="text-gray-500 dark:text-gray-400">{t('myFavoritesDesc')}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredTools.map((tool, index) => (
-              <div
-                key={index}
-                className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-6 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 cursor-pointer overflow-hidden"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                <div className="relative z-10">
-                  <div className="flex items-center mb-4">
-                    <div className={`w-14 h-14 bg-gradient-to-br ${tool.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
-                      <span className="text-2xl">{tool.icon}</span>
-                    </div>
-                    <div className="ml-4">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
-                        {tt(`${tool.category}Tools.${tool.nameKey}` as any)}
-                      </h3>
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {tt(`categories.${tool.category}` as any)}
-                      </span>
+            {favoriteTools.length > 0 ? (
+              favoriteTools.map((tool, index) => {
+                if (!tool) return null;
+                return (
+                  <div
+                    key={index}
+                    className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-6 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 cursor-pointer overflow-hidden"
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+                    <div className="relative z-10">
+                      <div className="flex items-center mb-4">
+                        <div className={`w-14 h-14 bg-gradient-to-br ${tool.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
+                          <span className="text-2xl">{tool.icon}</span>
+                        </div>
+                        <div className="ml-4">
+                          <h3 className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                            {tt(`${tool.category}Tools.${tool.nameKey}` as any)}
+                          </h3>
+                          <span className="text-sm text-gray-500 dark:text-gray-400">
+                            {tt(`categories.${tool.category}` as any)}
+                          </span>
+                        </div>
+                      </div>
+                      <p className="text-gray-500 dark:text-gray-400">
+                        {tt(`${tool.category}Tools.${tool.descriptionKey}` as any)}
+                      </p>
                     </div>
                   </div>
-                  <p className="text-gray-500 dark:text-gray-400">
-                    {tt(`${tool.category}Tools.${tool.descriptionKey}` as any)}
-                  </p>
+                );
+              })
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">⭐</span>
                 </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  {t('noFavorites')}
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400 mb-6">
+                  {t('noFavoritesDesc')}
+                </p>
+                <Link
+                  href="/tools"
+                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white rounded-xl font-medium transition-all shadow-lg shadow-violet-500/30 hover:shadow-violet-500/50"
+                >
+                  {t('addFavorites')}
+                  <span className="ml-2">→</span>
+                </Link>
               </div>
-            ))}
+            )}
           </div>
           <div className="text-center mt-10">
             <Link

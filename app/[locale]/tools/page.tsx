@@ -1,11 +1,15 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import { Link } from '@/src/i18n/navigation';
 import ThemeToggle from '@/app/components/ThemeToggle';
 import LanguageSwitcher from '@/app/components/LanguageSwitcher';
+import { useFavoriteTools } from '@/app/context/FavoriteToolsContext';
 
 export default function ToolsPage() {
   const t = useTranslations('tools');
   const tc = useTranslations('common');
+  const { isFavorite, toggleFavorite } = useFavoriteTools();
 
   const imageTools = [
     { key: 'crop', icon: '✂️', gradient: 'from-pink-500 to-rose-500' },
@@ -202,13 +206,29 @@ export default function ToolsPage() {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
                     <div className="relative z-10">
-                      <div className="flex items-center mb-3">
-                        <div className={`w-11 h-11 bg-gradient-to-br ${tool.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
-                          <span className="text-lg">{tool.icon}</span>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center">
+                          <div className={`w-11 h-11 bg-gradient-to-br ${tool.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
+                            <span className="text-lg">{tool.icon}</span>
+                          </div>
+                          <h3 className="ml-3 text-base font-semibold text-gray-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+                            {t(`${category.nameKey}Tools.${tool.key}` as any)}
+                          </h3>
                         </div>
-                        <h3 className="ml-3 text-base font-semibold text-gray-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
-                          {t(`${category.nameKey}Tools.${tool.key}` as any)}
-                        </h3>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleFavorite(tool.key);
+                          }}
+                          className={`p-2 rounded-lg transition-all ${
+                            isFavorite(tool.key)
+                              ? 'text-yellow-500 hover:text-yellow-600'
+                              : 'text-gray-400 hover:text-yellow-500'
+                          }`}
+                          title={isFavorite(tool.key) ? tc('removeFavorite') : tc('addFavorite')}
+                        >
+                          {isFavorite(tool.key) ? '⭐' : '☆'}
+                        </button>
                       </div>
                       <p className="text-gray-500 dark:text-gray-400 text-sm">
                         {t(`${category.nameKey}Tools.${tool.key}Desc` as any)}

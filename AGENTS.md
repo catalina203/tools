@@ -29,9 +29,12 @@
   - `page.tsx` - 根页面（重定向到 /zh）
   - `globals.css` - 全局样式
   - `context/ThemeContext.tsx` - 主题上下文（深色/浅色模式）
+  - `context/FavoriteToolsContext.tsx` - 常用工具上下文（管理用户常用工具）
   - `components/` - 共享组件
     - `ThemeToggle.tsx` - 主题切换按钮
     - `LanguageSwitcher.tsx` - 语言切换按钮
+    - `SearchBar.tsx` - 搜索输入框组件
+    - `SearchResults.tsx` - 搜索结果展示组件
   - `[locale]/` - 语言路由目录
     - `layout.tsx` - 语言布局（NextIntlClientProvider）
     - `page.tsx` - 首页
@@ -43,8 +46,80 @@
   - `routing.ts` - 路由配置（支持 zh/en）
   - `request.ts` - 服务端请求配置
   - `navigation.ts` - 导航工具函数
+- `src/data/` - 数据文件
+  - `tools.ts` - 所有工具数据定义（88个工具）
 - `public/` - 静态资源
 - `package.json` - 依赖和脚本
+
+## 搜索功能
+
+### 组件结构
+- `SearchBar.tsx`：搜索输入框，接收 `query` 和 `setQuery` props
+- `SearchResults.tsx`：搜索结果展示，实时过滤显示匹配工具
+
+### 搜索逻辑
+1. **数据源**：从 `src/data/tools.ts` 导入 `allTools` 数组（包含所有88个工具）
+2. **分类映射**：`toolCategoryMap` 对象定义每个工具key对应的分类（image/text/dev/efficiency/file/data/design）
+3. **匹配规则**：搜索时匹配以下三个字段（不区分大小写）：
+   - 工具名称（通过i18n获取当前语言的翻译）
+   - 工具描述（通过i18n获取当前语言的翻译）
+   - 工具key（原始英文标识符）
+4. **结果显示**：匹配结果以卡片网格形式展示，包含工具图标、名称和描述
+
+### 国际化支持
+- 搜索占位符：`common.searchPlaceholder`
+- 无结果提示：`search.noResults`、`search.tryAlternative`
+- 工具名称/描述：通过 `useTranslations('tools')` 动态获取
+
+### 使用方式
+```tsx
+const [query, setQuery] = useState('');
+<SearchBar query={query} setQuery={setQuery} />
+```
+
+### 注意事项
+- 搜索是实时过滤，无需点击搜索按钮
+- 结果数量显示为“找到 X 个匹配结果”
+- 无结果时显示友好提示和建议
+- **新增工具时**：必须同时更新 `src/data/tools.ts` 中的工具数据和 `SearchResults.tsx` 中的 `toolCategoryMap` 分类映射，确保新工具自动纳入搜索
+
+## 常用工具功能
+
+### 组件结构
+- `FavoriteToolsContext.tsx`：常用工具上下文，管理用户选择的常用工具状态
+- 首页展示用户选择的常用工具（替代原精选工具）
+- 工具箱页面工具卡片上显示星形按钮，点击可添加/移除常用
+
+### 数据存储
+- 使用 `localStorage` 持久化用户选择的常用工具
+- 存储键名：`favoriteTools`
+- 存储格式：工具key数组（如 `['crop', 'jsonFormat', 'qrcode']`）
+
+### Context API
+```typescript
+const { favorites, addFavorite, removeFavorite, isFavorite, toggleFavorite } = useFavoriteTools();
+```
+
+### 使用方式
+```tsx
+// 在工具卡片上添加常用按钮
+<button onClick={() => toggleFavorite(tool.key)}>
+  {isFavorite(tool.key) ? '⭐' : '☆'}
+</button>
+
+// 获取用户常用工具列表
+const { favorites } = useFavoriteTools();
+```
+
+### 国际化支持
+- 添加常用：`common.addFavorite`
+- 移除常用：`common.removeFavorite`
+- 首页标题：`home.myFavorites`
+- 无常用提示：`home.noFavorites`
+
+### 注意事项
+- 新增工具时无需额外配置，自动支持常用功能
+- 用户选择的常用工具会跨会话持久化保存
 
 ## 快速命令
 
