@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { allTools, ToolItem } from '@/src/data/tools';
+import { Link } from '@/src/i18n/navigation';
 
 type SearchResult = {
   tool: ToolItem;
@@ -15,7 +16,6 @@ export default function SearchResults({
   query: string;
 }) {
   const t = useTranslations('tools');
-  const searchT = useTranslations('search');
   
   // Define category mapping for tools
   const toolCategoryMap: Record<string, string> = {
@@ -107,9 +107,10 @@ export default function SearchResults({
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {results.map((result, index) => (
-          <div
+          <Link
             key={index}
-            className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-4 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 cursor-pointer"
+            href={`/tools/${result.tool.key}`}
+            className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-4 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 cursor-pointer block"
           >
             <div className="flex items-center">
               <div className={`w-10 h-10 bg-gradient-to-br ${result.tool.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
@@ -124,7 +125,7 @@ export default function SearchResults({
                 </p>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

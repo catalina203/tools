@@ -130,6 +130,68 @@ npm run start    # 启动生产服务器
 npm run lint     # ESLint 检查
 ```
 
+## 工具开发规范
+
+### 文件结构
+
+| 类型 | 路径 | 说明 |
+|-----|------|------|
+| 工具组件 | `app/components/tools/[ToolName]Tool.tsx` | 工具主组件 |
+| 动态路由 | `app/[locale]/tools/[slug]/page.tsx` | 根据 slug 加载工具 |
+| 占位页 | `app/components/tools/ComingSoonTool.tsx` | 未实现工具显示 |
+
+### 页面布局（灵活组合）
+
+1. **导航栏**（必选）：返回工具箱 + 语言切换 + 主题切换
+2. **标题区**（必选）：工具名 + 描述
+3. **主体区**（根据工具类型选择）：
+   - 左右布局：操作区 + 预览区
+   - 单列布局：仅操作区（无预览工具）
+4. **SEO区**（必选）：
+   - 功能介绍：3列卡片（必选）
+   - 使用说明：4步带序号（必选）
+   - 常见问题：3个Q&A（复杂工具必选）
+   - 相关工具：4个链接（有明确关联时添加）
+
+### 国际化命名规范
+
+```
+tools.[category].[toolName]        # 工具名（去掉 Tools 后缀）
+tools.[category].[toolName]Desc    # 工具描述
+tools.[category].[toolName]FeatureTitle  # 功能介绍标题
+tools.[category].[toolName]FeatureDesc   # 功能介绍描述
+tools.[category].[toolName]Feature1Title # 功能1名
+tools.[category].[toolName]Feature1Desc  # 功能1描述
+tools.[category].[toolName]Step1~4       # 使用步骤
+tools.[category].[toolName]Faq1~3Q       # FAQ问题
+tools.[category].[toolName]Faq1~3A       # FAQ答案
+```
+
+### 组件要求
+
+- 使用 `'use client'`（客户端组件）
+- 无需后端处理，所有数据在浏览器本地完成
+- 必须支持深色/浅色主题切换
+- 必须支持中英文双语
+- 图像处理使用 Canvas API + FileReader API
+
+### 样式规范
+
+- 组件：`'use client'`
+- 主题：`dark:bg-[#0a0a1a]` 配合 `dark:text-white`
+- 圆角：`rounded-2xl`
+- 边框：`border border-gray-200 dark:border-white/10`
+- 动画：`transition-all duration-300`
+- 渐变色：参考 `from-pink-500 to-rose-500` 风格
+
+### 检查清单
+
+- ✅ `npm run build` 必须通过
+- ✅ TypeScript 类型检查通过
+- ✅ ESLint 无新增错误
+- ✅ 中英文显示正常
+- ✅ 深色/浅色主题切换正常
+
 ## 框架惯例
 
 - **React 版本**：19.2.4
@@ -162,11 +224,19 @@ npm run lint     # ESLint 检查
 2. **在 `messages/en.json` 添加英文翻译**
 3. **在组件中使用 `useTranslations` hook**
 
+### SEO 内容翻译要求
+每个工具必须包含以下翻译键：
+- `[toolName]FeatureTitle` / `FeatureDesc`
+- `[toolName]Feature1Title` / `Feature1Desc`（3个功能）
+- `[toolName]Step1~4`（4步使用说明）
+- `[toolName]Faq1~3Q` / `Faq1~3A`（3个常见问题）
+
 ### 翻译键命名规范
 ```
 tools.categories.image          # 图像处理分类名
 tools.imageTools.crop           # 图片裁剪工具名
 tools.imageTools.cropDesc       # 图片裁剪工具描述
+tools.[category].[toolName]     # 新命名规范（推荐）
 common.home                     # 首页导航文本
 common.search                   # 搜索按钮文本
 ```

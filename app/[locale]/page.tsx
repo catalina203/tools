@@ -156,9 +156,10 @@ export default function Home() {
               favoriteTools.map((tool, index) => {
                 if (!tool) return null;
                 return (
-                  <div
+                  <Link
                     key={index}
-                    className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-6 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 cursor-pointer overflow-hidden"
+                    href={`/tools/${tool.nameKey}`}
+                    className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-6 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 cursor-pointer overflow-hidden block"
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
                     <div className="relative z-10">
@@ -179,7 +180,7 @@ export default function Home() {
                         {tt(`${tool.category}Tools.${tool.descriptionKey}` as any)}
                       </p>
                     </div>
-                  </div>
+                  </Link>
                 );
               })
             ) : (

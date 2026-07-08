@@ -200,9 +200,10 @@ export default function ToolsPage() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                 {category.tools.map((tool, toolIndex) => (
-                  <div
+                  <Link
                     key={toolIndex}
-                    className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-5 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 cursor-pointer overflow-hidden"
+                    href={`/tools/${tool.key}`}
+                    className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-5 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 cursor-pointer overflow-hidden block"
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
                     <div className="relative z-10">
@@ -217,10 +218,11 @@ export default function ToolsPage() {
                         </div>
                         <button
                           onClick={(e) => {
+                            e.preventDefault();
                             e.stopPropagation();
                             toggleFavorite(tool.key);
                           }}
-                          className={`p-2 rounded-lg transition-all ${
+                          className={`p-2 rounded-lg transition-all relative z-20 ${
                             isFavorite(tool.key)
                               ? 'text-yellow-500 hover:text-yellow-600'
                               : 'text-gray-400 hover:text-yellow-500'
@@ -234,7 +236,7 @@ export default function ToolsPage() {
                         {t(`${category.nameKey}Tools.${tool.key}Desc` as any)}
                       </p>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
