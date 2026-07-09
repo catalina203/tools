@@ -271,6 +271,21 @@ export default function MyComponent() {
 - 位置：`app/components/LanguageSwitcher.tsx`
 - 在导航栏中与 ThemeToggle 一起使用
 
+## 已完成工具
+
+### 图像处理工具（7个）
+| 工具 | 路径 | 功能 | 状态 |
+|------|------|------|------|
+| crop | `/tools/crop` | 图片裁剪，支持比例锁定 | ✅ 已完成 |
+| compress | `/tools/compress` | 图片压缩，支持JPEG/PNG/WebP | ✅ 已完成 |
+| resize | `/tools/resize` | 图片缩放，支持自定义尺寸和预设比例 | ✅ 已完成 |
+| rotate | `/tools/rotate` | 图片旋转，支持任意角度和翻转 | ✅ 已完成 |
+| brightness | `/tools/brightness` | 亮度调整，支持0-200%范围 | ✅ 已完成 |
+| contrast | `/tools/contrast` | 对比度调整，支持0-200%范围 | ✅ 已完成 |
+| saturation | `/tools/saturation` | 饱和度调整，支持0-200%范围 | ✅ 已完成 |
+| hue | `/tools/hue` | 色调调整，支持0-360度旋转 | ✅ 已完成 |
+| grayscale | `/tools/grayscale` | 灰度转换，支持0-100%强度 | ✅ 已完成 |
+
 ## 办公工具产品计划
 
 **愿景**：构建一个全面的在线办公工具箱，纯Web实现，无需后端/AI模型。

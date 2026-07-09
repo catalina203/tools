@@ -11,6 +11,9 @@ const toolComponents: Record<string, React.ComponentType> = {
   rotate: dynamic(() => import('@/app/components/tools/RotateTool'), { ssr: false }),
   brightness: dynamic(() => import('@/app/components/tools/BrightnessTool'), { ssr: false }),
   contrast: dynamic(() => import('@/app/components/tools/ContrastTool'), { ssr: false }),
+  saturation: dynamic(() => import('@/app/components/tools/SaturationTool'), { ssr: false }),
+  hue: dynamic(() => import('@/app/components/tools/HueTool'), { ssr: false }),
+  grayscale: dynamic(() => import('@/app/components/tools/GrayscaleTool'), { ssr: false }),
 };
 
 type Props = {
