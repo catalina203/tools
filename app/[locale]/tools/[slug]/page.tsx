@@ -7,6 +7,10 @@ import ComingSoonTool from '@/app/components/tools/ComingSoonTool';
 const toolComponents: Record<string, React.ComponentType> = {
   crop: dynamic(() => import('@/app/components/tools/CropTool'), { ssr: false }),
   compress: dynamic(() => import('@/app/components/tools/CompressTool'), { ssr: false }),
+  resize: dynamic(() => import('@/app/components/tools/ResizeTool'), { ssr: false }),
+  rotate: dynamic(() => import('@/app/components/tools/RotateTool'), { ssr: false }),
+  brightness: dynamic(() => import('@/app/components/tools/BrightnessTool'), { ssr: false }),
+  contrast: dynamic(() => import('@/app/components/tools/ContrastTool'), { ssr: false }),
 };
 
 type Props = {
