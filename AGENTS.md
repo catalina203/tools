@@ -59,7 +59,7 @@
 
 ### 搜索逻辑
 1. **数据源**：从 `src/data/tools.ts` 导入 `allTools` 数组（包含所有88个工具）
-2. **分类映射**：`toolCategoryMap` 对象定义每个工具key对应的分类（image/text/dev/efficiency/file/data/design）
+2. **分类映射**：`toolCategoryMap` 对象定义每个工具key对应的分类（image/text/dev/efficiency/file/data）
 3. **匹配规则**：搜索时匹配以下三个字段（不区分大小写）：
    - 工具名称（通过i18n获取当前语言的翻译）
    - 工具描述（通过i18n获取当前语言的翻译）
@@ -237,6 +237,12 @@ tools.categories.image          # 图像处理分类名
 tools.imageTools.crop           # 图片裁剪工具名
 tools.imageTools.cropDesc       # 图片裁剪工具描述
 tools.[category].[toolName]     # 新命名规范（推荐）
+tools.[category].[toolName]Desc # 工具描述
+tools.[category].[toolName]FeatureTitle  # 功能介绍标题
+tools.[category].[toolName]FeatureDesc   # 功能介绍描述
+tools.[category].[toolName]Step1~4       # 使用步骤
+tools.[category].[toolName]Faq1~3Q       # FAQ问题
+tools.[category].[toolName]Faq1~3A       # FAQ答案
 common.home                     # 首页导航文本
 common.search                   # 搜索按钮文本
 ```
@@ -286,20 +292,21 @@ export default function MyComponent() {
 - 图片对比（原图vs效果图）
 
 #### 文本处理（纯JS）
-- JSON格式化/压缩/验证
-- XML格式化/压缩
-- YAML转JSON
-- CSV转JSON
 - Markdown实时预览
 - 字数统计、文本去重
 - 大小写转换、繁简转换
-- 正则表达式测试
+- Lorem Ipsum占位文本生成
+- 文本对比、文本转义
+
+#### 编码开发工具
+- JSON格式化/压缩/验证
+- XML格式化/压缩
+- SQL格式化
+- YAML转JSON、CSV转JSON
 - URL编码/解码、Base64编解码
 - 哈希计算（MD5/SHA-1/SHA-256）
 - UUID生成、随机密码生成
-- Lorem Ipsum占位文本生成
-
-#### 编码开发工具
+- 正则表达式测试与可视化
 - JSON可视化树形展示
 - 颜色选择器/渐变生成器
 - 阴影生成器
@@ -309,6 +316,9 @@ export default function MyComponent() {
 - 单位换算（长度/重量/温度/面积/体积）
 - 日期计算器（天数差/加减）
 - 邮箱格式验证
+- CSS变量管理
+- 响应式断点测试
+- 对比度检查器（无障碍）
 
 ### 中等优先级增强工具
 #### 文件处理
@@ -333,7 +343,7 @@ export default function MyComponent() {
 - 时区转换
 - 密码强度检测
 
-#### 设计辅助工具
+#### 设计辅助工具（已合并到开发工具）
 - 配色方案生成器
 - 字体预览与对比
 - 网格布局生成器
@@ -367,7 +377,7 @@ export default function MyComponent() {
    1. 基础项目脚手架（已完成）
    2. 国际化支持（已完成）
    3. 图像处理工具（约2周）
-   4. 文本/编码工具（约1.5周）
+   4. 文本处理/开发工具（约1.5周）
    5. 文件处理与数据工具（约1.5周）
    6. 办公效率工具（约1周）
    7. UI打磨、响应式优化（约1周）

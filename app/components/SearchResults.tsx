@@ -19,37 +19,41 @@ export default function SearchResults({
   
   // Define category mapping for tools
   const toolCategoryMap: Record<string, string> = {
-    // Image tools
+    // Image tools (24)
     'crop': 'image', 'resize': 'image', 'rotate': 'image', 'brightness': 'image',
     'contrast': 'image', 'saturation': 'image', 'hue': 'image', 'grayscale': 'image',
     'vintage': 'image', 'blur': 'image', 'sharpen': 'image', 'watermark': 'image',
     'formatConvert': 'image', 'compress': 'image', 'mosaic': 'image', 'grid': 'image',
     'rounded': 'image', 'colorExtract': 'image', 'eyedropper': 'image', 'exif': 'image',
     'base64': 'image', 'compare': 'image', 'bgRemove': 'image', 'toPdf': 'image',
-    // Text tools
-    'jsonFormat': 'text', 'xmlFormat': 'text', 'yamlToJson': 'text', 'csvToJson': 'text',
-    'markdown': 'text', 'wordCount': 'text', 'dedup': 'text', 'caseConvert': 'text',
-    'traditionalSimplified': 'text', 'regexTest': 'text', 'urlEncode': 'text',
-    'password': 'text', 'lorem': 'text', 'escape': 'text', 'sqlFormat': 'text', 'diff': 'text',
-    // Dev tools
-    'colorPicker': 'dev', 'gradient': 'dev', 'shadow': 'dev', 'flexbox': 'dev',
+    // Text tools (18)
+    'markdown': 'text', 'markdownToHtml': 'text', 'wordCount': 'text',
+    'textClean': 'text', 'whitespace': 'text', 'dedup': 'text',
+    'caseConvert': 'text', 'traditionalSimplified': 'text', 'escape': 'text', 'textReverse': 'text',
+    'lineSort': 'text', 'lineNumber': 'text', 'trimText': 'text',
+    'mergeLines': 'text', 'splitText': 'text', 'extractInfo': 'text',
+    'lorem': 'text', 'diff': 'text',
+    // Dev tools (32)
+    'jsonFormat': 'dev', 'xmlFormat': 'dev', 'sqlFormat': 'dev', 'colorConvert': 'dev',
+    'yamlToJson': 'dev', 'csvToJson': 'dev', 'urlEncode': 'dev', 'base64Text': 'dev',
+    'md5': 'dev', 'sha': 'dev', 'uuid': 'dev', 'password': 'dev', 'emailValidate': 'dev',
+    'regexTest': 'dev', 'regexVisual': 'dev', 'jsonVisual': 'dev',
+    'colorPicker': 'dev', 'gradient': 'dev', 'shadow': 'dev',
+    'flexbox': 'dev', 'gridLayout': 'dev', 'gridGenerator': 'dev', 'cssVariable': 'dev',
+    'responsiveTest': 'dev', 'contrastCheck': 'dev',
     'radix': 'dev', 'timestamp': 'dev', 'unitConvert': 'dev', 'dateCalc': 'dev',
-    'emailValidate': 'dev', 'jsonVisual': 'dev', 'colorConvert': 'dev', 'regexVisual': 'dev',
     'mimeQuery': 'dev',
-    // Efficiency tools
+    // Efficiency tools (14)
     'qrcode': 'efficiency', 'barcode': 'efficiency', 'calculator': 'efficiency',
     'scientificCalc': 'efficiency', 'notepad': 'efficiency', 'stickyNote': 'efficiency',
     'countdown': 'efficiency', 'stopwatch': 'efficiency', 'pomodoro': 'efficiency',
     'worldClock': 'efficiency', 'timezone': 'efficiency', 'passwordStrength': 'efficiency',
     'randomNum': 'efficiency', 'radixCalc': 'efficiency',
-    // File tools
+    // File tools (6)
     'imageConvert': 'file', 'zip': 'file', 'unzip': 'file', 'preview': 'file',
     'fileHash': 'file', 'editor': 'file',
-    // Data tools
+    // Data tools (4)
     'csvEditor': 'data', 'jsonEditor': 'data', 'chart': 'data', 'statistics': 'data',
-    // Design tools
-    'colorScheme': 'design', 'fontPreview': 'design', 'gridGenerator': 'design',
-    'contrastCheck': 'design', 'responsiveTest': 'design', 'cssVariable': 'design'
   };
 
   const results = useMemo(() => {

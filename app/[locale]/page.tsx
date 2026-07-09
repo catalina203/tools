@@ -25,18 +25,15 @@ export default function Home() {
       let category = '';
       if (['crop', 'resize', 'rotate', 'brightness', 'contrast', 'saturation', 'hue', 'grayscale', 'vintage', 'blur', 'sharpen', 'watermark', 'formatConvert', 'compress', 'mosaic', 'grid', 'rounded', 'colorExtract', 'eyedropper', 'exif', 'base64', 'compare', 'bgRemove', 'toPdf'].includes(key)) {
         category = 'image';
-      } else if (['jsonFormat', 'xmlFormat', 'yamlToJson', 'csvToJson', 'markdown', 'wordCount', 'dedup', 'caseConvert', 'traditionalSimplified', 'regexTest', 'urlEncode', 'md5', 'sha', 'uuid', 'password', 'lorem', 'escape', 'sqlFormat', 'diff'].includes(key)) {
+      } else if (['markdown', 'markdownToHtml', 'wordCount', 'textClean', 'whitespace', 'dedup', 'caseConvert', 'traditionalSimplified', 'escape', 'textReverse', 'lineSort', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'extractInfo', 'lorem', 'diff'].includes(key)) {
         category = 'text';
-      } else if (['colorPicker', 'gradient', 'shadow', 'flexbox', 'radix', 'timestamp', 'unitConvert', 'dateCalc', 'emailValidate', 'jsonVisual', 'colorConvert', 'regexVisual', 'mimeQuery'].includes(key)) {
-        category = 'dev';
+      } else if (['colorPicker', 'gradient', 'shadow', 'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck', 'radix', 'timestamp', 'unitConvert', 'dateCalc', 'emailValidate', 'jsonVisual', 'colorConvert', 'regexVisual', 'mimeQuery', 'jsonFormat', 'xmlFormat', 'sqlFormat', 'yamlToJson', 'csvToJson', 'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'regexTest', 'escape'].includes(key)) {
       } else if (['qrcode', 'barcode', 'calculator', 'scientificCalc', 'notepad', 'stickyNote', 'countdown', 'stopwatch', 'pomodoro', 'worldClock', 'timezone', 'passwordStrength', 'randomNum', 'radixCalc'].includes(key)) {
         category = 'efficiency';
       } else if (['imageConvert', 'zip', 'unzip', 'preview', 'fileHash', 'editor'].includes(key)) {
         category = 'file';
       } else if (['csvEditor', 'jsonEditor', 'chart', 'statistics'].includes(key)) {
         category = 'data';
-      } else if (['colorScheme', 'fontPreview', 'gridGenerator', 'contrastCheck', 'responsiveTest', 'cssVariable'].includes(key)) {
-        category = 'design';
       }
       return {
         nameKey: key,
@@ -50,12 +47,11 @@ export default function Home() {
 
   const categories = [
     { nameKey: 'image', icon: '🖼️', count: 24, gradient: 'from-pink-500 to-rose-500' },
-    { nameKey: 'text', icon: '📝', count: 20, gradient: 'from-emerald-500 to-teal-500' },
-    { nameKey: 'dev', icon: '🛠️', count: 14, gradient: 'from-blue-500 to-cyan-500' },
+    { nameKey: 'text', icon: '📝', count: 18, gradient: 'from-emerald-500 to-teal-500' },
+    { nameKey: 'dev', icon: '🛠️', count: 32, gradient: 'from-blue-500 to-cyan-500' },
     { nameKey: 'efficiency', icon: '⚡', count: 14, gradient: 'from-amber-500 to-orange-500' },
     { nameKey: 'file', icon: '📁', count: 6, gradient: 'from-violet-500 to-purple-500' },
     { nameKey: 'data', icon: '📊', count: 4, gradient: 'from-indigo-500 to-blue-500' },
-    { nameKey: 'design', icon: '🎨', count: 6, gradient: 'from-rose-500 to-pink-500' },
   ];
 
   return (
