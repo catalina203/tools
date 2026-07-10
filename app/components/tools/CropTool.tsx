@@ -6,7 +6,7 @@ import { Link } from '@/src/i18n/navigation';
 import LanguageSwitcher from '@/app/components/LanguageSwitcher';
 import ThemeToggle from '@/app/components/ThemeToggle';
 
-export default function CropTool() {
+export default function CropTool({ children }: { children?: React.ReactNode }) {
   const t = useTranslations('tools');
   const tc = useTranslations('common');
 
@@ -343,67 +343,7 @@ export default function CropTool() {
           </div>
         </div>
 
-        <div className="mt-16 space-y-12">
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('imageTools.cropFeatureTitle')}</h2>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">{t('imageTools.cropFeatureDesc')}</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {[
-                { icon: '✂️', key: 'cropFeature1' },
-                { icon: '📐', key: 'cropFeature2' },
-                { icon: '💾', key: 'cropFeature3' },
-              ].map((f) => (
-                <div key={f.key} className="bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-xl p-5">
-                  <span className="text-2xl mb-3 block">{f.icon}</span>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{t(`imageTools.${f.key}Title` as any)}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{t(`imageTools.${f.key}Desc` as any)}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('imageTools.howToUse')}</h2>
-            <ol className="space-y-3 text-gray-600 dark:text-gray-400">
-              {[1, 2, 3, 4].map((i) => (
-                <li key={i} className="flex items-start">
-                  <span className="flex-shrink-0 w-7 h-7 bg-pink-100 dark:bg-pink-500/20 text-pink-600 dark:text-pink-400 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">{i}</span>
-                  <span>{t(`imageTools.cropStep${i}` as any)}</span>
-                </li>
-              ))}
-            </ol>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('imageTools.faq')}</h2>
-            <div className="space-y-4">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-xl p-5">
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{t(`imageTools.cropFaq${i}Q` as any)}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{t(`imageTools.cropFaq${i}A` as any)}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('imageTools.relatedTools')}</h2>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/tools/resize" className="px-4 py-2 bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:border-violet-300 dark:hover:border-violet-500/50 transition-colors">
-                {t('imageTools.resize')}
-              </Link>
-              <Link href="/tools/rotate" className="px-4 py-2 bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:border-violet-300 dark:hover:border-violet-500/50 transition-colors">
-                {t('imageTools.rotate')}
-              </Link>
-              <Link href="/tools/compress" className="px-4 py-2 bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:border-violet-300 dark:hover:border-violet-500/50 transition-colors">
-                {t('imageTools.compress')}
-              </Link>
-              <Link href="/tools/formatConvert" className="px-4 py-2 bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:border-violet-300 dark:hover:border-violet-500/50 transition-colors">
-                {t('imageTools.formatConvert')}
-              </Link>
-            </div>
-          </section>
-        </div>
+        {children}
       </div>
     </div>
   );

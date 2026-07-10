@@ -192,6 +192,21 @@ tools.[category].[toolName]Faq1~3A       # FAQ答案
 - ✅ ESLint 无新增错误
 - ✅ 中英文显示正常
 - ✅ 深色/浅色主题切换正常
+- ✅ SEO 规范（见下方）
+
+### SEO 规范
+
+#### 架构规则
+- `page.tsx` 必须是**服务端组件**，通过 `generateMetadata` 生成 `<title>`、`<meta description>`
+- SEO 内容（功能介绍、步骤、FAQ）通过 `ToolSEO.tsx` 服务端渲染，作为 `children` 传入工具组件
+- 工具组件只负责操作区（CSR），接受 `children` prop 并在操作区后渲染
+
+#### 新增工具检查清单
+- [ ] `zh.json` / `en.json` 包含完整 SEO 翻译键（Feature、Step1~4、Faq1~3）
+- [ ] `generateMetadata` 正确生成 title 和 description
+- [ ] `ToolSEO.tsx` 的 `featureIcons` 和 `colorMap` 已添加配置
+- [ ] `page.tsx` 的 `knownTools` 和 `relatedToolsMap` 已添加
+- [ ] 工具组件接受 `children` prop
 
 ## 框架惯例
 

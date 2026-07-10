@@ -6,7 +6,7 @@ import { Link } from '@/src/i18n/navigation';
 import LanguageSwitcher from '@/app/components/LanguageSwitcher';
 import ThemeToggle from '@/app/components/ThemeToggle';
 
-export default function HueTool() {
+export default function HueTool({ children }: { children?: React.ReactNode }) {
   const t = useTranslations('tools');
   const tc = useTranslations('common');
 
@@ -215,59 +215,7 @@ export default function HueTool() {
           </div>
         </div>
 
-        <div className="mt-16 space-y-12">
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('imageTools.hueFeatureTitle')}</h2>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">{t('imageTools.hueFeatureDesc')}</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {[
-                { icon: '🎨', key: 'hueFeature1' },
-                { icon: '🎚️', key: 'hueFeature2' },
-                { icon: '⚡', key: 'hueFeature3' },
-              ].map((f) => (
-                <div key={f.key} className="bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-xl p-5">
-                  <span className="text-2xl mb-3 block">{f.icon}</span>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{t(`imageTools.${f.key}Title` as any)}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{t(`imageTools.${f.key}Desc` as any)}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('imageTools.howToUse')}</h2>
-            <ol className="space-y-3 text-gray-600 dark:text-gray-400">
-              {[1, 2, 3, 4].map((i) => (
-                <li key={i} className="flex items-start">
-                  <span className="flex-shrink-0 w-7 h-7 bg-fuchsia-100 dark:bg-fuchsia-500/20 text-fuchsia-600 dark:text-fuchsia-400 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">{i}</span>
-                  <span>{t(`imageTools.hueStep${i}` as any)}</span>
-                </li>
-              ))}
-            </ol>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('imageTools.faq')}</h2>
-            <div className="space-y-4">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-xl p-5">
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{t(`imageTools.hueFaq${i}Q` as any)}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{t(`imageTools.hueFaq${i}A` as any)}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('imageTools.relatedTools')}</h2>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/tools/saturation" className="px-4 py-2 bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:border-fuchsia-300 dark:hover:border-fuchsia-500/50 transition-colors">{t('imageTools.saturation')}</Link>
-              <Link href="/tools/brightness" className="px-4 py-2 bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:border-fuchsia-300 dark:hover:border-fuchsia-500/50 transition-colors">{t('imageTools.brightness')}</Link>
-              <Link href="/tools/contrast" className="px-4 py-2 bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:border-fuchsia-300 dark:hover:border-fuchsia-500/50 transition-colors">{t('imageTools.contrast')}</Link>
-              <Link href="/tools/grayscale" className="px-4 py-2 bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:border-fuchsia-300 dark:hover:border-fuchsia-500/50 transition-colors">{t('imageTools.grayscale')}</Link>
-            </div>
-          </section>
-        </div>
+        {children}
       </div>
     </div>
   );
