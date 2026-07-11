@@ -27,6 +27,12 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
   splitText: dynamic(() => import('@/app/components/tools/SplitTextTool'), { ssr: false }) as any,
   lorem: dynamic(() => import('@/app/components/tools/LoremTool'), { ssr: false }) as any,
   diff: dynamic(() => import('@/app/components/tools/DiffTool'), { ssr: false }) as any,
+  jsonFormat: dynamic(() => import('@/app/components/tools/JsonFormatTool'), { ssr: false }) as any,
+  xmlFormat: dynamic(() => import('@/app/components/tools/XmlFormatTool'), { ssr: false }) as any,
+  sqlFormat: dynamic(() => import('@/app/components/tools/SqlFormatTool'), { ssr: false }) as any,
+  colorConvert: dynamic(() => import('@/app/components/tools/ColorConvertTool'), { ssr: false }) as any,
+  yamlToJson: dynamic(() => import('@/app/components/tools/YamlToJsonTool'), { ssr: false }) as any,
+  csvToJson: dynamic(() => import('@/app/components/tools/CsvToJsonTool'), { ssr: false }) as any,
 };
 
 type Props = {

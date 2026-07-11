@@ -43,6 +43,12 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
     splitText: ['✂️', '📑', '📋'],
     lorem: ['📄', '🎲', '📋'],
     diff: ['⚖️', '🔍', '📋'],
+    jsonFormat: ['📋', '🔧', '📄'],
+    xmlFormat: ['📄', '🔧', '📋'],
+    sqlFormat: ['🗄️', '🔧', '📋'],
+    colorConvert: ['🎨', '🔄', '🎯'],
+    yamlToJson: ['📄', '🔄', '📋'],
+    csvToJson: ['📊', '🔄', '📋'],
   };
 
   const icons = featureIcons[slug] || ['✨', '⚡', '🔄'];
@@ -74,6 +80,12 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
     splitText: 'purple',
     lorem: 'gray',
     diff: 'emerald',
+    jsonFormat: 'indigo',
+    xmlFormat: 'indigo',
+    sqlFormat: 'orange',
+    colorConvert: 'fuchsia',
+    yamlToJson: 'purple',
+    csvToJson: 'green',
   };
   const color = colorMap[slug] || 'violet';
 

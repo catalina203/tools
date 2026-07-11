@@ -8,6 +8,7 @@ const knownTools = [
   'wordCount', 'textClean', 'caseConvert', 'textReverse',
   'markdownToHtml', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber',
   'trimText', 'mergeLines', 'splitText', 'lorem', 'diff',
+  'jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson',
 ];
 
 const relatedToolsMap: Record<string, string[]> = {
@@ -34,6 +35,12 @@ const relatedToolsMap: Record<string, string[]> = {
   splitText: ['mergeLines', 'lineNumber', 'trimText'],
   lorem: ['wordCount', 'diff', 'textReverse'],
   diff: ['lorem', 'lineSort', 'mergeLines'],
+  jsonFormat: ['xmlFormat', 'sqlFormat', 'yamlToJson'],
+  xmlFormat: ['jsonFormat', 'sqlFormat', 'yamlToJson'],
+  sqlFormat: ['jsonFormat', 'xmlFormat', 'yamlToJson'],
+  colorConvert: ['jsonFormat', 'yamlToJson', 'csvToJson'],
+  yamlToJson: ['jsonFormat', 'csvToJson', 'colorConvert'],
+  csvToJson: ['jsonFormat', 'yamlToJson', 'colorConvert'],
 };
 
 type Props = {
@@ -45,7 +52,8 @@ export async function generateMetadata({ params }: Props) {
   const t = await getTranslations({ locale, namespace: 'tools' });
 
   const isTextTool = ['wordCount', 'textClean', 'caseConvert', 'textReverse', 'markdownToHtml', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'lorem', 'diff'].includes(slug);
-  const category = isTextTool ? 'textTools' : 'imageTools';
+  const isDevTool = ['jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson'].includes(slug);
+  const category = isTextTool ? 'textTools' : isDevTool ? 'devTools' : 'imageTools';
 
   const title = t(`${category}.${slug}` as any);
   const description = t(`${category}.${slug}Desc` as any);
