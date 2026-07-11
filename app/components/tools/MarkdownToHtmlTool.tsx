@@ -1,0 +1,224 @@
+'use client';
+
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/src/i18n/navigation';
+import LanguageSwitcher from '@/app/components/LanguageSwitcher';
+import ThemeToggle from '@/app/components/ThemeToggle';
+
+export default function MarkdownToHtmlTool({ children }: { children?: React.ReactNode }) {
+  const t = useTranslations('tools');
+  const tc = useTranslations('common');
+
+  const [markdown, setMarkdown] = useState('');
+  const [html, setHtml] = useState('');
+  const [previewMode, setPreviewMode] = useState<'html' | 'rendered'>('rendered');
+
+  const convert = () => {
+    if (!markdown) {
+      setHtml('');
+      return;
+    }
+    const result = markdownToHtml(markdown);
+    setHtml(result);
+  };
+
+  const copyHtml = () => {
+    if (html) {
+      navigator.clipboard.writeText(html);
+    }
+  };
+
+  const clearAll = () => {
+    setMarkdown('');
+    setHtml('');
+  };
+
+  return (
+    <div className="min-h-screen bg-white dark:bg-[#0a0a1a] transition-colors">
+      <nav className="flex items-center justify-between px-8 py-5 max-w-7xl mx-auto border-b border-gray-200 dark:border-white/5">
+        <div className="flex items-center space-x-4">
+          <Link
+            href="/tools"
+            className="flex items-center text-gray-500 dark:text-gray-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            {tc('tools')}
+          </Link>
+          <span className="text-gray-300 dark:text-gray-600">/</span>
+          <span className="text-lg font-semibold text-gray-900 dark:text-white">
+            {t('textTools.markdownToHtml')}
+          </span>
+        </div>
+        <div className="flex items-center space-x-3">
+          <LanguageSwitcher />
+          <ThemeToggle />
+        </div>
+      </nav>
+
+      <div className="max-w-6xl mx-auto px-8 py-10">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{t('textTools.markdownToHtml')}</h1>
+          <p className="text-gray-500 dark:text-gray-400">{t('textTools.markdownToHtmlDesc')}</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-1 space-y-6">
+            <div className="bg-gray-50 dark:bg-[#1a1a2e] rounded-2xl border border-gray-200 dark:border-white/10 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t('textTools.inputText')}</h3>
+              <textarea
+                value={markdown}
+                onChange={(e) => setMarkdown(e.target.value)}
+                className="w-full h-96 bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-xl p-4 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none font-mono text-sm"
+                placeholder={t('textTools.inputPlaceholder')}
+                spellCheck={false}
+              />
+            </div>
+
+            <div className="flex gap-4">
+              <button
+                onClick={convert}
+                disabled={!markdown}
+                className="flex-1 py-3.5 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-400 hover:to-indigo-400 text-white rounded-xl font-medium transition-all shadow-lg shadow-blue-500/30 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              >
+                <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+                {t('textTools.convert')}
+              </button>
+              <button
+                onClick={clearAll}
+                disabled={!markdown && !html}
+                className="px-6 py-3.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {t('textTools.clearAll')}
+              </button>
+            </div>
+          </div>
+
+          <div className="lg:col-span-2 space-y-6">
+            <div className="bg-gray-50 dark:bg-[#1a1a2e] rounded-2xl border border-gray-200 dark:border-white/10 p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('textTools.previewMode')}</h3>
+                <div className="flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-lg p-1">
+                  <button
+                    onClick={() => setPreviewMode('rendered')}
+                    className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
+                      previewMode === 'rendered'
+                        ? 'bg-blue-500 text-white'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    }`}
+                  >
+                    {t('textTools.rendered')}
+                  </button>
+                  <button
+                    onClick={() => setPreviewMode('html')}
+                    className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
+                      previewMode === 'html'
+                        ? 'bg-blue-500 text-white'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    }`}
+                  >
+                    {t('textTools.htmlSource')}
+                  </button>
+                </div>
+              </div>
+
+              {previewMode === 'rendered' ? (
+                <div
+                  className="prose prose-gray dark:prose-invert max-w-none bg-white dark:bg-gray-900 rounded-xl p-6 min-h-[300px] border border-gray-200 dark:border-white/10"
+                  dangerouslySetInnerHTML={{ __html: html || '' }}
+                />
+              ) : (
+                <textarea
+                  value={html}
+                  readOnly
+                  className="w-full h-[300px] bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-xl p-4 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none font-mono text-sm"
+                  placeholder={t('textTools.resultPlaceholder')}
+                />
+              )}
+            </div>
+
+            {html && (
+              <div className="bg-gray-50 dark:bg-[#1a1a2e] rounded-2xl border border-gray-200 dark:border-white/10 p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('textTools.actions')}</h3>
+                  <button
+                    onClick={copyHtml}
+                    className="px-4 py-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:border-blue-300 dark:hover:border-blue-500/50 transition-colors flex items-center gap-2"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 012-2h10a2 2 0 012 2v12a2 2 0 01-2 2h-10a2 2 0 01-2-2V5z" />
+                    </svg>
+                    {t('textTools.copy')}
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <div className="bg-gray-50 dark:bg-[#1a1a2e] rounded-2xl border border-gray-200 dark:border-white/10 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t('textTools.tips')}</h3>
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500">•</span>
+                  {t('textTools.tip1')}
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500">•</span>
+                  {t('textTools.tip2')}
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-500">•</span>
+                  {t('textTools.tip3')}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function markdownToHtml(markdown: string): string {
+  let html = markdown;
+
+  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+  html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+  html = html.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
+  html = html.replace(/\*(.*?)\*/gim, '<em>$1</em>');
+  html = html.replace(/__(.*?)__/gim, '<strong>$1</strong>');
+  html = html.replace(/_(.*?)_/gim, '<em>$1</em>');
+
+  html = html.replace(/`(.*?)`/gim, '<code>$1</code>');
+  html = html.replace(/```([\s\S]*?)```/gim, '<pre><code>$1</code></pre>');
+
+  html = html.replace(/^\s*[-*+]\s+(.*)$/gim, '<li>$1</li>');
+  html = html.replace(/(<li>.*<\/li>)/gim, '<ul>$1</ul>');
+  html = html.replace(/<\/ul>\s*<ul>/gim, '');
+
+  html = html.replace(/^\s*(\d+)\.\s+(.*)$/gim, '<li>$2</li>');
+  html = html.replace(/(<li>.*<\/li>)/gim, '<ol>$1</ol>');
+  html = html.replace(/<\/ol>\s*<ol>/gim, '');
+
+  html = html.replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+
+  html = html.replace(/^>\s*(.*)$/gim, '<blockquote>$1</blockquote>');
+  html = html.replace(/<\/blockquote>\s*<blockquote>/gim, '<br>');
+
+  html = html.replace(/^---$/gim, '<hr>');
+  html = html.replace(/^___$/gim, '<hr>');
+
+  html = html.replace(/\n\n/gim, '</p><p>');
+  html = html.replace(/^(?!<[hulpbo])/gim, '<p>');
+  html = html.replace(/(?<!>)$/gim, '</p>');
+  html = html.replace(/<p>\s*<\/p>/gim, '');
+
+  return html;
+}
