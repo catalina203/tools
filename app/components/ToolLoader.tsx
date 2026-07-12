@@ -33,6 +33,13 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
   colorConvert: dynamic(() => import('@/app/components/tools/ColorConvertTool'), { ssr: false }) as any,
   yamlToJson: dynamic(() => import('@/app/components/tools/YamlToJsonTool'), { ssr: false }) as any,
   csvToJson: dynamic(() => import('@/app/components/tools/CsvToJsonTool'), { ssr: false }) as any,
+  urlEncode: dynamic(() => import('@/app/components/tools/UrlEncodeTool'), { ssr: false }) as any,
+  base64Text: dynamic(() => import('@/app/components/tools/Base64TextTool'), { ssr: false }) as any,
+  md5: dynamic(() => import('@/app/components/tools/Md5Tool'), { ssr: false }) as any,
+  sha: dynamic(() => import('@/app/components/tools/ShaTool'), { ssr: false }) as any,
+  uuid: dynamic(() => import('@/app/components/tools/UuidTool'), { ssr: false }) as any,
+  password: dynamic(() => import('@/app/components/tools/PasswordTool'), { ssr: false }) as any,
+  emailValidate: dynamic(() => import('@/app/components/tools/EmailValidateTool'), { ssr: false }) as any,
 };
 
 type Props = {

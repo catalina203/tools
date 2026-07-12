@@ -19,7 +19,7 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
   const category = isTextTool ? 'text' : isDevTool ? 'dev' : isEfficiencyTool ? 'efficiency' : isFileTool ? 'file' : isDataTool ? 'data' : 'image';
   const categoryKey = `${category}Tools`;
 
-  const featureIcons: Record<string, string[]> = {
+const featureIcons: Record<string, string[]> = {
     crop: ['✂️', '🔒', '📥'],
     compress: ['📦', '🎚️', '⚡'],
     resize: ['🔍', '📐', '⚡'],
@@ -49,6 +49,13 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
     colorConvert: ['🎨', '🔄', '🎯'],
     yamlToJson: ['📄', '🔄', '📋'],
     csvToJson: ['📊', '🔄', '📋'],
+    urlEncode: ['🔗', '🔒', '📋'],
+    base64Text: ['🔐', '🔄', '📋'],
+    md5: ['🔐', '#️⃣', '📋'],
+    sha: ['🔐', '#️⃣', '📋'],
+    uuid: ['🆔', '🎲', '📋'],
+    password: ['🔑', '🎲', '🛡️'],
+    emailValidate: ['📧', '✅', '📋'],
   };
 
   const icons = featureIcons[slug] || ['✨', '⚡', '🔄'];
@@ -86,6 +93,13 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
     colorConvert: 'fuchsia',
     yamlToJson: 'purple',
     csvToJson: 'green',
+    urlEncode: 'blue',
+    base64Text: 'green',
+    md5: 'yellow',
+    sha: 'orange',
+    uuid: 'purple',
+    password: 'rose',
+    emailValidate: 'indigo',
   };
   const color = colorMap[slug] || 'violet';
 
@@ -99,6 +113,10 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
     fuchsia: { bg: 'bg-fuchsia-100 dark:bg-fuchsia-500/20', text: 'text-fuchsia-600 dark:text-fuchsia-400', ring: 'hover:border-fuchsia-300 dark:hover:border-fuchsia-500/50' },
     zinc: { bg: 'bg-zinc-100 dark:bg-zinc-500/20', text: 'text-zinc-600 dark:text-zinc-400', ring: 'hover:border-zinc-300 dark:hover:border-zinc-500/50' },
     pink: { bg: 'bg-pink-100 dark:bg-pink-500/20', text: 'text-pink-600 dark:text-pink-400', ring: 'hover:border-pink-300 dark:hover:border-pink-500/50' },
+    yellow: { bg: 'bg-yellow-100 dark:bg-yellow-500/20', text: 'text-yellow-600 dark:text-yellow-400', ring: 'hover:border-yellow-300 dark:hover:border-yellow-500/50' },
+    orange: { bg: 'bg-orange-100 dark:bg-orange-500/20', text: 'text-orange-600 dark:text-orange-400', ring: 'hover:border-orange-300 dark:hover:border-orange-500/50' },
+    rose: { bg: 'bg-rose-100 dark:bg-rose-500/20', text: 'text-rose-600 dark:text-rose-400', ring: 'hover:border-rose-300 dark:hover:border-rose-500/50' },
+    indigo: { bg: 'bg-indigo-100 dark:bg-indigo-500/20', text: 'text-indigo-600 dark:text-indigo-400', ring: 'hover:border-indigo-300 dark:hover:border-indigo-500/50' },
   };
   const cc = colorClasses[color] || colorClasses.violet;
 
