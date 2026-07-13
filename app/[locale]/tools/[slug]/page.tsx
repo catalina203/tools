@@ -11,6 +11,7 @@ const knownTools = [
   'jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson',
   'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate',
   'regexTest', 'regexVisual', 'jsonVisual', 'colorPicker', 'gradient', 'shadow',
+  'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck',
 ];
 
 const relatedToolsMap: Record<string, string[]> = {
@@ -56,6 +57,12 @@ const relatedToolsMap: Record<string, string[]> = {
   colorPicker: ['colorConvert', 'gradient', 'shadow'],
   gradient: ['colorPicker', 'shadow', 'colorConvert'],
   shadow: ['colorPicker', 'gradient', 'colorConvert'],
+  flexbox: ['gridLayout', 'gridGenerator', 'cssVariable'],
+  gridLayout: ['flexbox', 'gridGenerator', 'cssVariable'],
+  gridGenerator: ['flexbox', 'gridLayout', 'cssVariable'],
+  cssVariable: ['flexbox', 'gridLayout', 'responsiveTest'],
+  responsiveTest: ['flexbox', 'contrastCheck', 'cssVariable'],
+  contrastCheck: ['responsiveTest', 'cssVariable', 'colorConvert'],
 };
 
 type Props = {

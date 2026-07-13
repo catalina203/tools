@@ -46,6 +46,12 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
   colorPicker: dynamic(() => import('@/app/components/tools/ColorPickerTool'), { ssr: false }) as any,
   gradient: dynamic(() => import('@/app/components/tools/GradientTool'), { ssr: false }) as any,
   shadow: dynamic(() => import('@/app/components/tools/ShadowTool'), { ssr: false }) as any,
+  flexbox: dynamic(() => import('@/app/components/tools/FlexboxTool'), { ssr: false }) as any,
+  gridLayout: dynamic(() => import('@/app/components/tools/GridLayoutTool'), { ssr: false }) as any,
+  gridGenerator: dynamic(() => import('@/app/components/tools/GridGeneratorTool'), { ssr: false }) as any,
+  cssVariable: dynamic(() => import('@/app/components/tools/CssVariableTool'), { ssr: false }) as any,
+  responsiveTest: dynamic(() => import('@/app/components/tools/ResponsiveTestTool'), { ssr: false }) as any,
+  contrastCheck: dynamic(() => import('@/app/components/tools/ContrastCheckTool'), { ssr: false }) as any,
 };
 
 type Props = {
