@@ -94,6 +94,8 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
   stopwatch: ['⏱️', '🏁', '📋'],
   worldClock: ['🌍', '🕐', '🏙️'],
   timezone: ['🔄', '🌏', '🕐'],
+  randomNum: ['🎲', '🔢', '📋'],
+  radixCalc: ['🔢', '🔄', '📋'],
 };
 
   const icons = featureIcons[slug] || ['✨', '⚡', '🔄'];
@@ -167,6 +169,8 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
   stopwatch: 'cyan',
   worldClock: 'violet',
   timezone: 'teal',
+  randomNum: 'purple',
+  radixCalc: 'amber',
 };
   const color = colorMap[slug] || 'violet';
 

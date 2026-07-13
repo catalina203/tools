@@ -68,7 +68,9 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
   countdown: dynamic(() => import('@/app/components/tools/CountdownTool'), { ssr: false }) as any,
   stopwatch: dynamic(() => import('@/app/components/tools/StopwatchTool'), { ssr: false }) as any,
   worldClock: dynamic(() => import('@/app/components/tools/WorldClockTool'), { ssr: false }) as any,
-  timezone: dynamic(() => import('@/app/components/tools/TimezoneTool'), { ssr: false }) as any,
+   timezone: dynamic(() => import('@/app/components/tools/TimezoneTool'), { ssr: false }) as any,
+  randomNum: dynamic(() => import('@/app/components/tools/RandomNumTool'), { ssr: false }) as any,
+  radixCalc: dynamic(() => import('@/app/components/tools/RadixCalcTool'), { ssr: false }) as any,
 };
 
 type Props = {

@@ -15,6 +15,7 @@ const knownTools = [
   'radix', 'timestamp', 'unitConvert', 'dateCalc', 'mimeQuery',
   'calculator', 'qrcode', 'barcode', 'passwordStrength', 'notepad', 'pomodoro',
   'scientificCalc', 'stickyNote', 'countdown', 'stopwatch', 'worldClock', 'timezone',
+  'randomNum', 'radixCalc',
 ];
 
 const relatedToolsMap: Record<string, string[]> = {
@@ -83,6 +84,8 @@ const relatedToolsMap: Record<string, string[]> = {
   stopwatch: ['pomodoro', 'countdown', 'worldClock'],
   worldClock: ['timezone', 'countdown', 'pomodoro'],
   timezone: ['worldClock', 'countdown', 'unitConvert'],
+  randomNum: ['calculator', 'password', 'uuid'],
+  radixCalc: ['radix', 'calculator', 'scientificCalc'],
 };
 
 type Props = {
@@ -95,7 +98,7 @@ export async function generateMetadata({ params }: Props) {
 
   const isTextTool = ['wordCount', 'textClean', 'caseConvert', 'textReverse', 'markdownToHtml', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'lorem', 'diff'].includes(slug);
   const isDevTool = ['jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson', 'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate', 'regexTest', 'regexVisual', 'jsonVisual', 'colorPicker', 'gradient', 'shadow', 'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck', 'radix', 'timestamp', 'unitConvert', 'dateCalc', 'mimeQuery'].includes(slug);
-  const isEfficiencyTool = ['calculator', 'qrcode', 'barcode', 'passwordStrength', 'notepad', 'pomodoro', 'scientificCalc', 'stickyNote', 'countdown', 'stopwatch', 'worldClock', 'timezone'].includes(slug);
+  const isEfficiencyTool = ['calculator', 'qrcode', 'barcode', 'passwordStrength', 'notepad', 'pomodoro', 'scientificCalc', 'stickyNote', 'countdown', 'stopwatch', 'worldClock', 'timezone', 'randomNum', 'radixCalc'].includes(slug);
   const category = isTextTool ? 'textTools' : isDevTool ? 'devTools' : isEfficiencyTool ? 'efficiencyTools' : 'imageTools';
 
   const title = t(`${category}.${slug}` as any);
