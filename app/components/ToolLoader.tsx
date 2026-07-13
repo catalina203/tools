@@ -52,6 +52,11 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
   cssVariable: dynamic(() => import('@/app/components/tools/CssVariableTool'), { ssr: false }) as any,
   responsiveTest: dynamic(() => import('@/app/components/tools/ResponsiveTestTool'), { ssr: false }) as any,
   contrastCheck: dynamic(() => import('@/app/components/tools/ContrastCheckTool'), { ssr: false }) as any,
+  radix: dynamic(() => import('@/app/components/tools/RadixTool'), { ssr: false }) as any,
+  timestamp: dynamic(() => import('@/app/components/tools/TimestampTool'), { ssr: false }) as any,
+  unitConvert: dynamic(() => import('@/app/components/tools/UnitConvertTool'), { ssr: false }) as any,
+  dateCalc: dynamic(() => import('@/app/components/tools/DateCalcTool'), { ssr: false }) as any,
+  mimeQuery: dynamic(() => import('@/app/components/tools/MimeQueryTool'), { ssr: false }) as any,
 };
 
 type Props = {

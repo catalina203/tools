@@ -12,6 +12,7 @@ const knownTools = [
   'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate',
   'regexTest', 'regexVisual', 'jsonVisual', 'colorPicker', 'gradient', 'shadow',
   'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck',
+  'radix', 'timestamp', 'unitConvert', 'dateCalc', 'mimeQuery',
 ];
 
 const relatedToolsMap: Record<string, string[]> = {
@@ -63,6 +64,11 @@ const relatedToolsMap: Record<string, string[]> = {
   cssVariable: ['flexbox', 'gridLayout', 'responsiveTest'],
   responsiveTest: ['flexbox', 'contrastCheck', 'cssVariable'],
   contrastCheck: ['responsiveTest', 'cssVariable', 'colorConvert'],
+  radix: ['timestamp', 'unitConvert', 'dateCalc'],
+  timestamp: ['radix', 'unitConvert', 'dateCalc'],
+  unitConvert: ['radix', 'timestamp', 'dateCalc'],
+  dateCalc: ['radix', 'timestamp', 'unitConvert'],
+  mimeQuery: ['radix', 'timestamp', 'unitConvert'],
 };
 
 type Props = {
