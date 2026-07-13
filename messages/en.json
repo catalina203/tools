@@ -997,6 +997,7 @@
       "contrastCheckFaq2A": "No. Large text (18px+ or 14px+ bold) has lower requirements: AA is 3:1, AAA is 4.5:1. Normal text requires higher: AA is 4.5:1, AAA is 7:1.",
       "contrastCheckFaq3Q": "Are suggested colors guaranteed to work?",
       "contrastCheckFaq3A": "Suggested colors are based solely on luminance adjustment to meet contrast ratios. Consider your brand palette and design style when choosing the final color.",
+      "grayscale": "Grayscale Simulation",
       "flexDirection": "Flex Direction",
       "flexWrap": "Flex Wrap",
       "justifyContent": "Justify Content",

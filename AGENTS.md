@@ -345,7 +345,7 @@ const fs = require('fs');
 
 ## 已完成工具
 
-### 图像处理工具（7个）
+### 图像处理工具（9个）
 | 工具 | 路径 | 功能 | 状态 |
 |------|------|------|------|
 | crop | `/tools/crop` | 图片裁剪，支持比例锁定 | ✅ 已完成 |
@@ -358,93 +358,140 @@ const fs = require('fs');
 | hue | `/tools/hue` | 色调调整，支持0-360度旋转 | ✅ 已完成 |
 | grayscale | `/tools/grayscale` | 灰度转换，支持0-100%强度 | ✅ 已完成 |
 
+### 文本处理工具（7个）
+| 工具 | 路径 | 功能 | 状态 |
+|------|------|------|------|
+| textClean | `/tools/textClean` | 文本清理，去除空格/空行/特殊字符 | ✅ 已完成 |
+| textReverse | `/tools/textReverse` | 文本反转，支持字符/单词/行级 | ✅ 已完成 |
+| lineSort | `/tools/lineSort` | 行排序，按字母/数字/长度排序 | ✅ 已完成 |
+| caseConvert | `/tools/caseConvert` | 大小写转换，多种命名格式 | ✅ 已完成 |
+| traditionalSimplified | `/tools/traditionalSimplified` | 繁简互转 | ✅ 已完成 |
+| trimText | `/tools/trimText` | 文本截断，按字符/行数截断 | ✅ 已完成 |
+| splitText | `/tools/splitText` | 分割文本，按分隔符拆分 | ✅ 已完成 |
+
+### 编码开发工具（28个）
+
+#### 批次 1 - 正则工具（已完成）
+| 工具 | 路径 | 功能 |
+|------|------|------|
+| regexTest | `/tools/regexTest` | 正则表达式测试，支持匹配/替换/分割 |
+| regexVisual | `/tools/regexVisual` | 正则表达式可视化图解 |
+
+#### 批次 2 - 可视化工具（已完成）
+| 工具 | 路径 | 功能 |
+|------|------|------|
+| jsonVisual | `/tools/jsonVisual` | JSON树形展示，支持搜索/过滤 |
+| colorPicker | `/tools/colorPicker` | 颜色选择器，支持HEX/RGB/HSL/HSV/CMYK |
+| gradient | `/tools/gradient` | CSS渐变生成器，线性和径向 |
+| shadow | `/tools/shadow` | CSS阴影生成器，多层阴影叠加 |
+
+#### 批次 3 - 布局工具（已完成）
+| 工具 | 路径 | 功能 |
+|------|------|------|
+| flexbox | `/tools/flexbox` | Flexbox布局可视化 |
+| gridLayout | `/tools/gridLayout` | Grid布局可视化 |
+| gridGenerator | `/tools/gridGenerator` | 网格背景生成器 |
+| cssVariable | `/tools/cssVariable` | CSS变量管理 |
+| responsiveTest | `/tools/responsiveTest` | 响应式多尺寸预览 |
+| contrastCheck | `/tools/contrastCheck` | WCAG对比度检查 |
+
+#### 批次 4 - 转换计算工具（已完成）
+| 工具 | 路径 | 功能 |
+|------|------|------|
+| radix | `/tools/radix` | 进制转换，2/8/10/16进制互转 |
+| timestamp | `/tools/timestamp` | 时间戳与日期双向转换 |
+| unitConvert | `/tools/unitConvert` | 单位换算，8大类单位 |
+| dateCalc | `/tools/dateCalc` | 日期计算器，天数差/加减 |
+| mimeQuery | `/tools/mimeQuery` | MIME类型查询，130+类型 |
+
+#### 其他已实现的编码工具（已完成，无SEO）
+| 工具 | 路径 | 功能 |
+|------|------|------|
+| jsonFormat | `/tools/jsonFormat` | JSON格式化/压缩/验证 |
+| xmlFormat | `/tools/xmlFormat` | XML格式化/压缩 |
+| sqlFormat | `/tools/sqlFormat` | SQL格式化 |
+| colorConvert | `/tools/colorConvert` | HEX/RGB/HSL/HSV/CMYK互转 |
+| yamlToJson | `/tools/yamlToJson` | YAML与JSON互转 |
+| csvToJson | `/tools/csvToJson` | CSV与JSON互转 |
+| urlEncode | `/tools/urlEncode` | URL编码/解码 |
+| base64Text | `/tools/base64Text` | Base64编解码 |
+| md5 | `/tools/md5` | MD5哈希计算 |
+| sha | `/tools/sha` | SHA-1/256/384/512哈希 |
+| uuid | `/tools/uuid` | UUID/GUID生成 |
+| password | `/tools/password` | 随机安全密码生成 |
+| emailValidate | `/tools/emailValidate` | 邮箱格式验证 |
+
+## 待完成工具
+
+### 批次 5 - 办公效率工具（待开发）
+| 工具 | 分类 | 功能 |
+|------|------|------|
+| qrcode | 效率工具 | 二维码生成器 |
+| barcode | 效率工具 | 条形码生成器 |
+| calculator | 效率工具 | 标准计算器 |
+| scientificCalc | 效率工具 | 科学计算器 |
+| notepad | 效率工具 | 在线记事本 |
+| stickyNote | 效率工具 | 便签纸工具 |
+| countdown | 效率工具 | 事件倒计时 |
+| stopwatch | 效率工具 | 秒表/计时器 |
+| pomodoro | 效率工具 | 番茄钟 |
+| worldClock | 效率工具 | 世界时钟 |
+| timezone | 效率工具 | 时区转换 |
+| passwordStrength | 效率工具 | 密码强度检测 |
+
+### 批次 6 - 文件处理工具（待开发）
+| 工具 | 分类 | 功能 |
+|------|------|------|
+| imageConvert | 文件处理 | 图片格式互转 |
+| zip | 文件处理 | ZIP文件压缩 |
+| unzip | 文件处理 | ZIP文件解压 |
+| preview | 文件处理 | 图片/文本预览 |
+| fileHash | 文件处理 | 计算文件哈希值 |
+| editor | 文件处理 | 在线代码编辑 |
+
+### 批次 7 - 数据处理工具（待开发）
+| 工具 | 分类 | 功能 |
+|------|------|------|
+| csvEditor | 数据处理 | 在线CSV编辑 |
+| jsonEditor | 数据处理 | JSON在线编辑 |
+| chart | 数据处理 | 数据图表（柱状/折线/饼图） |
+| statistics | 数据处理 | 基本统计分析 |
+
+### 批次 8 - 图像增强工具（待开发）
+| 工具 | 分类 | 功能 |
+|------|------|------|
+| vintage | 图像处理 | 复古滤镜 |
+| blur | 图像处理 | 高斯模糊 |
+| sharpen | 图像处理 | 锐化增强 |
+| watermark | 图像处理 | 水印添加 |
+| formatConvert | 图像处理 | 格式转换 |
+| mosaic | 图像处理 | 拼图拼接 |
+| grid | 图像处理 | 九宫格切图 |
+| rounded | 图像处理 | 圆角边框 |
+| colorExtract | 图像处理 | 颜色提取 |
+| eyedropper | 图像处理 | 取色器 |
+| exif | 图像处理 | EXIF信息 |
+| base64 | 图像处理 | 图片Base64转换 |
+| compare | 图像处理 | 图片对比 |
+| bgRemove | 图像处理 | 背景移除 |
+| toPdf | 图像处理 | 图片转PDF |
+
+### 批次 9 - 文本增强工具（待开发）
+| 工具 | 分类 | 功能 |
+|------|------|------|
+| markdown | 文本处理 | Markdown预览 |
+| markdownToHtml | 文本处理 | Markdown转HTML |
+| wordCount | 文本处理 | 字符/词数/行数统计 |
+| whitespace | 文本处理 | 空白处理 |
+| dedup | 文本处理 | 文本去重 |
+| escape | 文本处理 | HTML/JS转义 |
+| lineNumber | 文本处理 | 添加行号 |
+| mergeLines | 文本处理 | 合并行 |
+| extractInfo | 文本处理 | 信息提取 |
+| lorem | 文本处理 | Lorem Ipsum生成 |
+| diff | 文本处理 | 文本差异对比 |
+
 ## 办公工具产品计划
-
-**愿景**：构建一个全面的在线办公工具箱，纯Web实现，无需后端/AI模型。
-
-1. **功能矩阵（按开发优先级排序）**
-
-### 高优先级核心工具
-#### 图像处理（Canvas API实现）
-- 裁剪、缩放、旋转、翻转、裁剪比例锁定
-- 亮度/对比度/色相/饱和度调整
-- 颜色替换、黑白滤镜、复古滤镜
-- 模糊、锐化效果
-- 水印添加（文字/图片）
-- 格式转换（JPG/PNG/WebP/SVG/ICO）
-- 图片压缩、图片转Base64
-- 拼图/拼接、九宫格切图
-- 圆角/边框添加
-- 图片信息查看（EXIF）
-- 颜色提取、取色器
-- 图片对比（原图vs效果图）
-
-#### 文本处理（纯JS）
-- Markdown实时预览
-- 字数统计、文本去重
-- 大小写转换、繁简转换
-- Lorem Ipsum占位文本生成
-- 文本对比、文本转义
-
-#### 编码开发工具
-- JSON格式化/压缩/验证
-- XML格式化/压缩
-- SQL格式化
-- YAML转JSON、CSV转JSON
-- URL编码/解码、Base64编解码
-- 哈希计算（MD5/SHA-1/SHA-256）
-- UUID生成、随机密码生成
-- 正则表达式测试与可视化
-- JSON可视化树形展示
-- 颜色选择器/渐变生成器
-- 阴影生成器
-- Flexbox/Grid布局可视化
-- 进制转换（2/8/10/16进制）
-- 时间戳转换（Unix↔日期）
-- 单位换算（长度/重量/温度/面积/体积）
-- 日期计算器（天数差/加减）
-- 邮箱格式验证
-- CSS变量管理
-- 响应式断点测试
-- 对比度检查器（无障碍）
-
-### 中等优先级增强工具
-#### 文件处理
-- 文件格式转换（图片互转）
-- 文件压缩/解压（ZIP）
-- 文件预览（图片/PDF/文本）
-- 文件哈希计算
-
-#### 数据处理
-- CSV在线编辑器
-- JSON数据可视化
-- 数据图表生成（柱状/折线/饼图）
-- 数据统计分析
-
-#### 办公效率工具
-- 二维码生成器
-- 条形码生成器
-- 计算器（标准/科学）
-- 记事本/便签
-- 倒计时/计时器/番茄钟
-- 世界时钟
-- 时区转换
-- 密码强度检测
-
-#### 设计辅助工具（已合并到开发工具）
-- 配色方案生成器
-- 字体预览与对比
-- 网格布局生成器
-- 对比度检查器（无障碍）
-- 响应式断点测试
-
-### 低优先级进阶功能
-- 图片背景移除（简单算法）
-- 图片转PDF
-- 多图片批量处理
-- 数据导出（Excel/CSV）
-- 本地存储历史记录
-- PWA离线支持
 
 2. **技术栈**
    - 前端：Next.js (App Router), TypeScript, Tailwind CSS
@@ -462,14 +509,16 @@ const fs = require('fs');
    - 主题切换：通过 ThemeContext 和 localStorage 实现持久化
 
 4. **里程碑**
-   1. 基础项目脚手架（已完成）
-   2. 国际化支持（已完成）
-   3. 图像处理工具（约2周）
-   4. 文本处理/开发工具（约1.5周）
-   5. 文件处理与数据工具（约1.5周）
-   6. 办公效率工具（约1周）
-   7. UI打磨、响应式优化（约1周）
-   8. 部署到Vercel（约0.5周）
+   1. 基础项目脚手架（✅ 已完成）
+   2. 国际化支持（✅ 已完成）
+   3. 图像处理工具 - 基础9个（✅ 已完成）
+   4. 文本处理工具 - 基础7个（✅ 已完成）
+   5. 编码开发工具 - 28个（✅ 已完成，含4个批次）
+   6. 办公效率工具（⬜ 待开发 - 批次5）
+   7. 文件处理工具（⬜ 待开发 - 批次6）
+   8. 数据处理工具（⬜ 待开发 - 批次7）
+   9. 图像增强工具（⬜ 待开发 - 批次8）
+   10. 文本增强工具（⬜ 待开发 - 批次9）
 
 5. **测试**
    - 单元测试：vitest（覆盖工具函数）
@@ -483,9 +532,10 @@ const fs = require('fs');
    - `docs/` 文件夹包含功能指南与API文档
 
 **下一步**：
-- 实现首批高优先级工具（图像处理）
+- 推进批次5：办公效率工具（qrcode、barcode、calculator、notepad 等）
 - 每个工具必须同时支持中英文
 - 优先实现纯Web工具，不依赖后端或AI模型
+- 新增工具时同时更新 `src/data/tools.ts`、`ToolLoader.tsx`、page.tsx、ToolSEO.tsx
 
 ## 常见任务
 

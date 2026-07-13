@@ -997,6 +997,7 @@
       "contrastCheckFaq2A": "不一样。大文本（18px 以上或 14px 以上加粗）要求较低：AA 为 3:1，AAA 为 4.5:1。普通文本要求更高：AA 为 4.5:1，AAA 为 7:1。",
       "contrastCheckFaq3Q": "建议的颜色一定可用吗？",
       "contrastCheckFaq3A": "建议颜色仅基于亮度调整，确保对比度达标。实际使用时建议结合品牌色和设计风格，选择最合适的方案。",
+      "grayscale": "灰度模拟",
       "flexDirection": "主轴方向",
       "flexWrap": "换行方式",
       "justifyContent": "主轴对齐",
