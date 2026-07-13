@@ -6,7 +6,7 @@ import ComingSoonTool from '@/app/components/tools/ComingSoonTool';
 const knownTools = [
   'crop', 'compress', 'resize', 'rotate', 'brightness', 'contrast', 'saturation', 'hue', 'grayscale',
   'wordCount', 'textClean', 'caseConvert', 'textReverse',
-  'markdownToHtml', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber',
+  'markdown', 'markdownToHtml', 'whitespace', 'dedup', 'extractInfo', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber',
   'trimText', 'mergeLines', 'splitText', 'lorem', 'diff',
   'jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson',
   'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate',
@@ -32,9 +32,13 @@ const relatedToolsMap: Record<string, string[]> = {
   textClean: ['wordCount', 'caseConvert', 'textReverse'],
   caseConvert: ['wordCount', 'textClean', 'textReverse'],
   textReverse: ['wordCount', 'textClean', 'caseConvert'],
-  markdownToHtml: ['wordCount', 'textClean', 'caseConvert'],
+  markdown: ['markdownToHtml', 'wordCount', 'textClean'],
+  markdownToHtml: ['markdown', 'wordCount', 'textClean'],
   lineSort: ['wordCount', 'textClean', 'mergeLines'],
   traditionalSimplified: ['caseConvert', 'escape', 'textReverse'],
+  whitespace: ['textClean', 'wordCount', 'trimText'],
+  dedup: ['lineSort', 'whitespace', 'mergeLines'],
+  extractInfo: ['emailValidate', 'regexTest', 'splitText'],
   escape: ['traditionalSimplified', 'caseConvert', 'lineNumber'],
   lineNumber: ['trimText', 'mergeLines', 'splitText'],
   trimText: ['lineNumber', 'mergeLines', 'splitText'],
@@ -96,7 +100,7 @@ export async function generateMetadata({ params }: Props) {
   const { slug, locale } = await params;
   const t = await getTranslations({ locale, namespace: 'tools' });
 
-  const isTextTool = ['wordCount', 'textClean', 'caseConvert', 'textReverse', 'markdownToHtml', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'lorem', 'diff'].includes(slug);
+  const isTextTool = ['wordCount', 'textClean', 'caseConvert', 'textReverse', 'markdown', 'markdownToHtml', 'whitespace', 'dedup', 'extractInfo', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'lorem', 'diff'].includes(slug);
   const isDevTool = ['jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson', 'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate', 'regexTest', 'regexVisual', 'jsonVisual', 'colorPicker', 'gradient', 'shadow', 'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck', 'radix', 'timestamp', 'unitConvert', 'dateCalc', 'mimeQuery'].includes(slug);
   const isEfficiencyTool = ['calculator', 'qrcode', 'barcode', 'passwordStrength', 'notepad', 'pomodoro', 'scientificCalc', 'stickyNote', 'countdown', 'stopwatch', 'worldClock', 'timezone', 'randomNum', 'radixCalc'].includes(slug);
   const category = isTextTool ? 'textTools' : isDevTool ? 'devTools' : isEfficiencyTool ? 'efficiencyTools' : 'imageTools';

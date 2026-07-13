@@ -10,7 +10,7 @@ type ToolSEOProps = {
 export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolSEOProps) {
   const t = await getTranslations({ locale, namespace: 'tools' });
 
-  const textTools = ['wordCount', 'textClean', 'caseConvert', 'textReverse', 'markdownToHtml', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'lorem', 'diff'];
+  const textTools = ['wordCount', 'textClean', 'caseConvert', 'textReverse', 'markdown', 'markdownToHtml', 'whitespace', 'dedup', 'extractInfo', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'lorem', 'diff'];
   const devTools = ['jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson', 'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate', 'regexTest', 'regexVisual', 'jsonVisual', 'colorPicker', 'gradient', 'shadow', 'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck', 'radix', 'timestamp', 'unitConvert', 'dateCalc', 'mimeQuery'];
   const efficiencyTools = ['qrcode', 'barcode', 'calculator', 'scientificCalc', 'notepad', 'stickyNote', 'countdown', 'stopwatch', 'pomodoro', 'worldClock', 'timezone', 'passwordStrength', 'randomNum', 'radixCalc'];
   const fileTools = ['imageConvert', 'zip', 'unzip', 'preview', 'fileHash', 'editor'];
@@ -42,7 +42,11 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
     textClean: ['🧹', '✂️', '✨'],
     caseConvert: ['Aa', '🔄', '📋'],
     textReverse: ['⇄', '🔁', '📋'],
+    markdown: ['📝', '👁️', '📋'],
     markdownToHtml: ['📝', '🔄', '🌐'],
+    whitespace: ['✂️', '📏', '🧹'],
+    dedup: ['🗑️', '#️⃣', '📋'],
+    extractInfo: ['🔍', '📧', '🌐'],
     lineSort: ['📑', '⬆️', '🔄'],
     traditionalSimplified: ['🇨🇳', '🇹🇼', '🔄'],
     escape: ['🔒', '🔓', '📋'],
@@ -117,6 +121,10 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
     textClean: 'emerald',
     caseConvert: 'teal',
     textReverse: 'violet',
+    markdown: 'blue',
+    whitespace: 'cyan',
+    dedup: 'rose',
+    extractInfo: 'emerald',
     markdownToHtml: 'blue',
     lineSort: 'purple',
     traditionalSimplified: 'indigo',
