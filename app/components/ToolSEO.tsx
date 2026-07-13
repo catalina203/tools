@@ -82,6 +82,18 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
   unitConvert: ['⇄', '📏', '📋'],
   dateCalc: ['📅', '➕', '📋'],
   mimeQuery: ['📋', '🔍', '📄'],
+  calculator: ['🔢', '🧮', '📋'],
+  qrcode: ['📱', '🎨', '📥'],
+  barcode: ['📊', '🎨', '📥'],
+  passwordStrength: ['🔐', '📊', '💡'],
+  notepad: ['📝', '💾', '📊'],
+  pomodoro: ['🍅', '⏱️', '📊'],
+  scientificCalc: ['🔢', '📐', '📋'],
+  stickyNote: ['📝', '🎨', '💾'],
+  countdown: ['⏰', '📅', '🎯'],
+  stopwatch: ['⏱️', '🏁', '📋'],
+  worldClock: ['🌍', '🕐', '🏙️'],
+  timezone: ['🔄', '🌏', '🕐'],
 };
 
   const icons = featureIcons[slug] || ['✨', '⚡', '🔄'];
@@ -143,6 +155,18 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
   unitConvert: 'blue',
   dateCalc: 'purple',
   mimeQuery: 'violet',
+  calculator: 'blue',
+  qrcode: 'violet',
+  barcode: 'emerald',
+  passwordStrength: 'indigo',
+  notepad: 'amber',
+  pomodoro: 'rose',
+  scientificCalc: 'indigo',
+  stickyNote: 'yellow',
+  countdown: 'red',
+  stopwatch: 'cyan',
+  worldClock: 'violet',
+  timezone: 'teal',
 };
   const color = colorMap[slug] || 'violet';
 

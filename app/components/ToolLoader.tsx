@@ -57,6 +57,18 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
   unitConvert: dynamic(() => import('@/app/components/tools/UnitConvertTool'), { ssr: false }) as any,
   dateCalc: dynamic(() => import('@/app/components/tools/DateCalcTool'), { ssr: false }) as any,
   mimeQuery: dynamic(() => import('@/app/components/tools/MimeQueryTool'), { ssr: false }) as any,
+  calculator: dynamic(() => import('@/app/components/tools/CalculatorTool'), { ssr: false }) as any,
+  qrcode: dynamic(() => import('@/app/components/tools/QRCodeTool'), { ssr: false }) as any,
+  barcode: dynamic(() => import('@/app/components/tools/BarcodeTool'), { ssr: false }) as any,
+  passwordStrength: dynamic(() => import('@/app/components/tools/PasswordStrengthTool'), { ssr: false }) as any,
+  notepad: dynamic(() => import('@/app/components/tools/NotepadTool'), { ssr: false }) as any,
+  pomodoro: dynamic(() => import('@/app/components/tools/PomodoroTool'), { ssr: false }) as any,
+  scientificCalc: dynamic(() => import('@/app/components/tools/ScientificCalcTool'), { ssr: false }) as any,
+  stickyNote: dynamic(() => import('@/app/components/tools/StickyNoteTool'), { ssr: false }) as any,
+  countdown: dynamic(() => import('@/app/components/tools/CountdownTool'), { ssr: false }) as any,
+  stopwatch: dynamic(() => import('@/app/components/tools/StopwatchTool'), { ssr: false }) as any,
+  worldClock: dynamic(() => import('@/app/components/tools/WorldClockTool'), { ssr: false }) as any,
+  timezone: dynamic(() => import('@/app/components/tools/TimezoneTool'), { ssr: false }) as any,
 };
 
 type Props = {

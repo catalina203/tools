@@ -13,6 +13,8 @@ const knownTools = [
   'regexTest', 'regexVisual', 'jsonVisual', 'colorPicker', 'gradient', 'shadow',
   'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck',
   'radix', 'timestamp', 'unitConvert', 'dateCalc', 'mimeQuery',
+  'calculator', 'qrcode', 'barcode', 'passwordStrength', 'notepad', 'pomodoro',
+  'scientificCalc', 'stickyNote', 'countdown', 'stopwatch', 'worldClock', 'timezone',
 ];
 
 const relatedToolsMap: Record<string, string[]> = {
@@ -69,6 +71,18 @@ const relatedToolsMap: Record<string, string[]> = {
   unitConvert: ['radix', 'timestamp', 'dateCalc'],
   dateCalc: ['radix', 'timestamp', 'unitConvert'],
   mimeQuery: ['radix', 'timestamp', 'unitConvert'],
+  calculator: ['scientificCalc', 'radix', 'dateCalc'],
+  qrcode: ['barcode', 'password', 'uuid'],
+  barcode: ['qrcode', 'password', 'uuid'],
+  passwordStrength: ['password', 'uuid', 'emailValidate'],
+  notepad: ['wordCount', 'textClean', 'caseConvert'],
+  pomodoro: ['stopwatch', 'countdown', 'worldClock'],
+  scientificCalc: ['calculator', 'radix', 'unitConvert'],
+  stickyNote: ['notepad', 'wordCount', 'textClean'],
+  countdown: ['pomodoro', 'stopwatch', 'worldClock'],
+  stopwatch: ['pomodoro', 'countdown', 'worldClock'],
+  worldClock: ['timezone', 'countdown', 'pomodoro'],
+  timezone: ['worldClock', 'countdown', 'unitConvert'],
 };
 
 type Props = {
@@ -81,7 +95,8 @@ export async function generateMetadata({ params }: Props) {
 
   const isTextTool = ['wordCount', 'textClean', 'caseConvert', 'textReverse', 'markdownToHtml', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'lorem', 'diff'].includes(slug);
   const isDevTool = ['jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson', 'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate', 'regexTest', 'regexVisual', 'jsonVisual', 'colorPicker', 'gradient', 'shadow', 'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck', 'radix', 'timestamp', 'unitConvert', 'dateCalc', 'mimeQuery'].includes(slug);
-  const category = isTextTool ? 'textTools' : isDevTool ? 'devTools' : 'imageTools';
+  const isEfficiencyTool = ['calculator', 'qrcode', 'barcode', 'passwordStrength', 'notepad', 'pomodoro', 'scientificCalc', 'stickyNote', 'countdown', 'stopwatch', 'worldClock', 'timezone'].includes(slug);
+  const category = isTextTool ? 'textTools' : isDevTool ? 'devTools' : isEfficiencyTool ? 'efficiencyTools' : 'imageTools';
 
   const title = t(`${category}.${slug}` as any);
   const description = t(`${category}.${slug}Desc` as any);
