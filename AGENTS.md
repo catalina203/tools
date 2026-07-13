@@ -286,6 +286,63 @@ export default function MyComponent() {
 - 位置：`app/components/LanguageSwitcher.tsx`
 - 在导航栏中与 ThemeToggle 一起使用
 
+### ICU 消息格式规范（重要）
+
+**翻译文件不是纯文本，而是 ICU 模板语言。** 任何类似代码、正则、技术语法的字符串都必须按 ICU 规则转义，否则构建会报错（`UNCLOSED_TAG`、`MALFORMED_ARGUMENT`、`FORMATTING_ERROR` 等）。
+
+#### 禁止直接使用的字符
+
+| 字符 | ICU 含义 | 规避方案 |
+|------|----------|----------|
+| `<` `>` | 标签语法 | 替换为 `<` `>` |
+| `{` `}` | 参数占位符 / 格式化 | 避免使用，或写成 `&lbrace;` `&rbrace;` |
+| `#` | 复数选择 | 避免在数字后直接使用 |
+| `|` | 选择器分隔 | 避免在参数中使用 |
+
+#### 实战示例
+
+**❌ 错误写法（会导致构建失败）：**
+```json
+"regexTestFaq3A": "支持。使用 (?<name>...) 语法，结果表格会显示分组名称和内容。"
+"regexTestFaq1A": "常见原因：1) 未转义特殊字符（如 . * + ? ^ $ ( ) [ ] { } | \\） 2) 标志位选择错误"
+"regexPlaceholder": "输入正则表达式，如 ^\\d{4}-\\d{2}-\\d{2}$"
+```
+
+**✅ 正确写法：**
+```json
+"regexTestFaq3A": "支持。使用 (?<name>...) 语法，结果表格会显示分组名称和内容。"
+"regexTestFaq1A": "常见原因：1) 未转义特殊字符（如点号、星号、加号、问号、脱字符、美元符、括号、方括号、花括号、竖线、反斜杠）。 2) 标志位选择错误..."
+"regexPlaceholder": "输入正则表达式，如 ^\\d+$"
+```
+
+#### 开发时自查清单（新增工具/页面时必须检查）
+
+- [ ] 所有翻译值中**无**原始 `<` `>` 字符（正则、HTML、XML、代码片段均需转义）
+- [ ] 所有翻译值中**无**原始 `{}` 字符（除非是有意的 ICU 参数）
+- [ ] 正则示例、代码片段改用文字描述或 HTML 实体
+- [ ] 运行 `npm run build` 验证编译通过（编译阶段会捕获 ICU 错误）
+- [ ] 本地访问页面确认无控制台报错
+
+#### 快速检测脚本（可集成到 pre-commit 或 CI）
+
+```bash
+node -e "
+const fs = require('fs');
+['zh.json','en.json'].forEach(f => {
+  const d = JSON.parse(fs.readFileSync('messages/'+f));
+  const check = (obj, path='') => {
+    Object.entries(obj).forEach(([k,v]) => {
+      if (typeof v === 'string') {
+        if (/[<>]/.test(v)) console.warn(f, path+'.'+k, '包含 < 或 >');
+        if (/\{[^}]*\}/.test(v) && !/^\\$\\{/.test(v)) console.warn(f, path+'.'+k, '包含 {} 疑似 ICU 参数');
+      } else check(v, path+'.'+k);
+    });
+  };
+  check(d.tools);
+});
+"
+```
+
 ## 已完成工具
 
 ### 图像处理工具（7个）

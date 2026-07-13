@@ -10,6 +10,7 @@ const knownTools = [
   'trimText', 'mergeLines', 'splitText', 'lorem', 'diff',
   'jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson',
   'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate',
+  'regexTest', 'regexVisual',
 ];
 
 const relatedToolsMap: Record<string, string[]> = {
@@ -49,6 +50,8 @@ const relatedToolsMap: Record<string, string[]> = {
   uuid: ['password', 'md5', 'sha'],
   password: ['uuid', 'md5', 'sha'],
   emailValidate: ['password', 'uuid', 'base64Text'],
+  regexTest: ['regexVisual', 'escape', 'splitText'],
+  regexVisual: ['regexTest', 'jsonVisual', 'escape'],
 };
 
 type Props = {
@@ -60,7 +63,7 @@ export async function generateMetadata({ params }: Props) {
   const t = await getTranslations({ locale, namespace: 'tools' });
 
   const isTextTool = ['wordCount', 'textClean', 'caseConvert', 'textReverse', 'markdownToHtml', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'lorem', 'diff'].includes(slug);
-  const isDevTool = ['jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson', 'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate'].includes(slug);
+  const isDevTool = ['jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson', 'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate', 'regexTest', 'regexVisual', 'jsonVisual', 'colorPicker', 'gradient', 'shadow', 'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck', 'radix', 'timestamp', 'unitConvert', 'dateCalc', 'mimeQuery'].includes(slug);
   const category = isTextTool ? 'textTools' : isDevTool ? 'devTools' : 'imageTools';
 
   const title = t(`${category}.${slug}` as any);

@@ -10,16 +10,25 @@ type ToolSEOProps = {
 export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolSEOProps) {
   const t = await getTranslations({ locale, namespace: 'tools' });
 
-  const isTextTool = ['wordCount', 'textClean', 'caseConvert', 'textReverse', 'markdownToHtml', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'lorem', 'diff'].includes(slug);
-  const isDevTool = ['jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson', 'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate', 'regexTest', 'regexVisual', 'jsonVisual', 'colorPicker', 'gradient', 'shadow', 'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck', 'radix', 'timestamp', 'unitConvert', 'dateCalc', 'mimeQuery'].includes(slug);
-  const isEfficiencyTool = ['qrcode', 'barcode', 'calculator', 'scientificCalc', 'notepad', 'stickyNote', 'countdown', 'stopwatch', 'pomodoro', 'worldClock', 'timezone', 'passwordStrength', 'randomNum', 'radixCalc'].includes(slug);
-  const isFileTool = ['imageConvert', 'zip', 'unzip', 'preview', 'fileHash', 'editor'].includes(slug);
-  const isDataTool = ['csvEditor', 'jsonEditor', 'chart', 'statistics'].includes(slug);
+  const textTools = ['wordCount', 'textClean', 'caseConvert', 'textReverse', 'markdownToHtml', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'lorem', 'diff'];
+  const devTools = ['jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson', 'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate', 'regexTest', 'regexVisual', 'jsonVisual', 'colorPicker', 'gradient', 'shadow', 'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck', 'radix', 'timestamp', 'unitConvert', 'dateCalc', 'mimeQuery'];
+  const efficiencyTools = ['qrcode', 'barcode', 'calculator', 'scientificCalc', 'notepad', 'stickyNote', 'countdown', 'stopwatch', 'pomodoro', 'worldClock', 'timezone', 'passwordStrength', 'randomNum', 'radixCalc'];
+  const fileTools = ['imageConvert', 'zip', 'unzip', 'preview', 'fileHash', 'editor'];
+  const dataTools = ['csvEditor', 'jsonEditor', 'chart', 'statistics'];
 
-  const category = isTextTool ? 'text' : isDevTool ? 'dev' : isEfficiencyTool ? 'efficiency' : isFileTool ? 'file' : isDataTool ? 'data' : 'image';
-  const categoryKey = `${category}Tools`;
+  const getToolCategory = (tool: string): string => {
+    if (textTools.includes(tool)) return 'textTools';
+    if (devTools.includes(tool)) return 'devTools';
+    if (efficiencyTools.includes(tool)) return 'efficiencyTools';
+    if (fileTools.includes(tool)) return 'fileTools';
+    if (dataTools.includes(tool)) return 'dataTools';
+    return 'imageTools';
+  };
 
-const featureIcons: Record<string, string[]> = {
+  const currentCategory = getToolCategory(slug);
+  const categoryKey = currentCategory;
+
+  const featureIcons: Record<string, string[]> = {
     crop: ['✂️', '🔒', '📥'],
     compress: ['📦', '🎚️', '⚡'],
     resize: ['🔍', '📐', '⚡'],
@@ -56,7 +65,24 @@ const featureIcons: Record<string, string[]> = {
     uuid: ['🆔', '🎲', '📋'],
     password: ['🔑', '🎲', '🛡️'],
     emailValidate: ['📧', '✅', '📋'],
-  };
+  regexTest: ['🔍', '🧪', '📋'],
+  regexVisual: ['📊', '🔍', '🌐'],
+  jsonVisual: ['🌳', '🔍', '📋'],
+  colorPicker: ['🎨', '🌈', '📋'],
+  gradient: ['🌈', '🎨', '📋'],
+  shadow: ['🌫️', '◧', '📋'],
+  flexbox: ['⊞', '📐', '📋'],
+  gridLayout: ['⊞', '📐', '📋'],
+  gridGenerator: ['⊞', '📐', '📋'],
+  cssVariable: [':', '🎨', '📋'],
+  responsiveTest: ['📱', '💻', '🖥️'],
+  contrastCheck: ['◐', '♿', '📋'],
+  radix: ['⇄', '#️⃣', '📋'],
+  timestamp: ['⌚', '🔄', '📋'],
+  unitConvert: ['⇄', '📏', '📋'],
+  dateCalc: ['📅', '➕', '📋'],
+  mimeQuery: ['📋', '🔍', '📄'],
+};
 
   const icons = featureIcons[slug] || ['✨', '⚡', '🔄'];
   const featurePrefix = `${slug}Feature`;
@@ -100,7 +126,24 @@ const featureIcons: Record<string, string[]> = {
     uuid: 'purple',
     password: 'rose',
     emailValidate: 'indigo',
-  };
+  regexTest: 'purple',
+  regexVisual: 'indigo',
+  jsonVisual: 'amber',
+  colorPicker: 'pink',
+  gradient: 'violet',
+  shadow: 'gray',
+  flexbox: 'cyan',
+  gridLayout: 'indigo',
+  gridGenerator: 'cyan',
+  cssVariable: 'purple',
+  responsiveTest: 'emerald',
+  contrastCheck: 'amber',
+  radix: 'amber',
+  timestamp: 'emerald',
+  unitConvert: 'blue',
+  dateCalc: 'purple',
+  mimeQuery: 'violet',
+};
   const color = colorMap[slug] || 'violet';
 
   const colorClasses: Record<string, { bg: string; text: string; ring: string }> = {
@@ -164,11 +207,14 @@ const featureIcons: Record<string, string[]> = {
         <section>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t(`${categoryKey}.relatedTools`)}</h2>
           <div className="flex flex-wrap gap-3">
-            {relatedTools.map((tool) => (
-              <Link key={tool} href={`/tools/${tool}`} className={`px-4 py-2 bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 ${cc.ring} transition-colors`}>
-                {t(`${categoryKey}.${tool}` as any)}
-              </Link>
-            ))}
+            {relatedTools.map((tool) => {
+              const toolCategory = getToolCategory(tool);
+              return (
+                <Link key={tool} href={`/tools/${tool}`} className={`px-4 py-2 bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 ${cc.ring} transition-colors`}>
+                  {t(`${toolCategory}.${tool}` as any)}
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}

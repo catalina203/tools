@@ -40,6 +40,8 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
   uuid: dynamic(() => import('@/app/components/tools/UuidTool'), { ssr: false }) as any,
   password: dynamic(() => import('@/app/components/tools/PasswordTool'), { ssr: false }) as any,
   emailValidate: dynamic(() => import('@/app/components/tools/EmailValidateTool'), { ssr: false }) as any,
+  regexTest: dynamic(() => import('@/app/components/tools/RegexTestTool'), { ssr: false }) as any,
+  regexVisual: dynamic(() => import('@/app/components/tools/RegexVisualTool'), { ssr: false }) as any,
 };
 
 type Props = {
