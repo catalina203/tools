@@ -10,7 +10,7 @@ const knownTools = [
   'trimText', 'mergeLines', 'splitText', 'lorem', 'diff',
   'jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson',
   'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate',
-  'regexTest', 'regexVisual',
+  'regexTest', 'regexVisual', 'jsonVisual', 'colorPicker', 'gradient', 'shadow',
 ];
 
 const relatedToolsMap: Record<string, string[]> = {
@@ -52,6 +52,10 @@ const relatedToolsMap: Record<string, string[]> = {
   emailValidate: ['password', 'uuid', 'base64Text'],
   regexTest: ['regexVisual', 'escape', 'splitText'],
   regexVisual: ['regexTest', 'jsonVisual', 'escape'],
+  jsonVisual: ['regexTest', 'jsonFormat', 'yamlToJson'],
+  colorPicker: ['colorConvert', 'gradient', 'shadow'],
+  gradient: ['colorPicker', 'shadow', 'colorConvert'],
+  shadow: ['colorPicker', 'gradient', 'colorConvert'],
 };
 
 type Props = {

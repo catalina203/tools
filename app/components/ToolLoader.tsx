@@ -42,6 +42,10 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
   emailValidate: dynamic(() => import('@/app/components/tools/EmailValidateTool'), { ssr: false }) as any,
   regexTest: dynamic(() => import('@/app/components/tools/RegexTestTool'), { ssr: false }) as any,
   regexVisual: dynamic(() => import('@/app/components/tools/RegexVisualTool'), { ssr: false }) as any,
+  jsonVisual: dynamic(() => import('@/app/components/tools/JsonVisualTool'), { ssr: false }) as any,
+  colorPicker: dynamic(() => import('@/app/components/tools/ColorPickerTool'), { ssr: false }) as any,
+  gradient: dynamic(() => import('@/app/components/tools/GradientTool'), { ssr: false }) as any,
+  shadow: dynamic(() => import('@/app/components/tools/ShadowTool'), { ssr: false }) as any,
 };
 
 type Props = {
