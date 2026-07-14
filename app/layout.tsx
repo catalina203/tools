@@ -5,8 +5,8 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { FavoriteToolsProvider } from "./context/FavoriteToolsContext";
 
 export const metadata: Metadata = {
-  title: "办公工具箱 - 一站式在线工具集合",
-  description: "提供图像处理、文本编辑、格式转换等实用工具，让您的办公效率翻倍。",
+  title: "ToolsBox - 一站式在线工具集合",
+  description: "提供图像处理、文本编辑、格式转换等实用工具，让您的效率翻倍。",
 };
 
 export default function RootLayout({
