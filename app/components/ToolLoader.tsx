@@ -28,6 +28,11 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
   compare: dynamic(() => import('@/app/components/tools/CompareTool'), { ssr: false }) as any,
   toPdf: dynamic(() => import('@/app/components/tools/ToPdfTool'), { ssr: false }) as any,
   bgRemove: dynamic(() => import('@/app/components/tools/BgRemoveTool'), { ssr: false }) as any,
+  zip: dynamic(() => import('@/app/components/tools/ZipTool'), { ssr: false }) as any,
+  unzip: dynamic(() => import('@/app/components/tools/UnzipTool'), { ssr: false }) as any,
+  preview: dynamic(() => import('@/app/components/tools/PreviewTool'), { ssr: false }) as any,
+  fileHash: dynamic(() => import('@/app/components/tools/FileHashTool'), { ssr: false }) as any,
+  editor: dynamic(() => import('@/app/components/tools/EditorTool'), { ssr: false }) as any,
   wordCount: dynamic(() => import('@/app/components/tools/WordCountTool'), { ssr: false }) as any,
   textClean: dynamic(() => import('@/app/components/tools/TextCleanTool'), { ssr: false }) as any,
   caseConvert: dynamic(() => import('@/app/components/tools/CaseConvertTool'), { ssr: false }) as any,
@@ -90,6 +95,10 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
    timezone: dynamic(() => import('@/app/components/tools/TimezoneTool'), { ssr: false }) as any,
   randomNum: dynamic(() => import('@/app/components/tools/RandomNumTool'), { ssr: false }) as any,
   radixCalc: dynamic(() => import('@/app/components/tools/RadixCalcTool'), { ssr: false }) as any,
+  csvEditor: dynamic(() => import('@/app/components/tools/CsvEditorTool'), { ssr: false }) as any,
+  jsonEditor: dynamic(() => import('@/app/components/tools/JsonEditorTool'), { ssr: false }) as any,
+  chart: dynamic(() => import('@/app/components/tools/ChartTool'), { ssr: false }) as any,
+  statistics: dynamic(() => import('@/app/components/tools/StatisticsTool'), { ssr: false }) as any,
 };
 
 type Props = {

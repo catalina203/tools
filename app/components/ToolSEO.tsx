@@ -53,6 +53,11 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
     compare: ['👁️', '⚖️', '🔄'],
     toPdf: ['📄', '🖼️', '📥'],
     bgRemove: ['🎨', '✂️', '📥'],
+    zip: ['📦', '⚡', '📥'],
+    unzip: ['📤', '🔓', '📥'],
+    preview: ['👁️', '🖼️', '📄'],
+    fileHash: ['#️⃣', '🔐', '📋'],
+    editor: ['📝', '✏️', '💾'],
     wordCount: ['📊', '📝', '📋'],
     textClean: ['🧹', '✂️', '✨'],
     caseConvert: ['Aa', '🔄', '📋'],
@@ -115,6 +120,10 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
   timezone: ['🔄', '🌏', '🕐'],
   randomNum: ['🎲', '🔢', '📋'],
   radixCalc: ['🔢', '🔄', '📋'],
+  csvEditor: ['📊', '✏️', '📥'],
+  jsonEditor: ['{ }', '🌳', '✏️'],
+  chart: ['📊', '📈', '🥧'],
+  statistics: ['📊', '#️⃣', '📋'],
 };
 
   const icons = featureIcons[slug] || ['✨', '⚡', '🔄'];
@@ -147,6 +156,11 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
     compare: 'blue',
     toPdf: 'red',
     bgRemove: 'teal',
+    zip: 'blue',
+    unzip: 'emerald',
+    preview: 'violet',
+    fileHash: 'amber',
+    editor: 'indigo',
     wordCount: 'pink',
     textClean: 'emerald',
     caseConvert: 'teal',
@@ -209,6 +223,10 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
   timezone: 'teal',
   randomNum: 'purple',
   radixCalc: 'amber',
+  csvEditor: 'emerald',
+  jsonEditor: 'amber',
+  chart: 'blue',
+  statistics: 'violet',
 };
   const color = colorMap[slug] || 'violet';
 

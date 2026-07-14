@@ -9,6 +9,7 @@ const knownTools = [
   'rounded', 'grid', 'watermark',
   'colorExtract', 'eyedropper', 'exif', 'base64',
   'formatConvert', 'compare', 'toPdf', 'bgRemove',
+  'zip', 'unzip', 'preview', 'fileHash', 'editor',
   'wordCount', 'textClean', 'caseConvert', 'textReverse',
   'markdown', 'markdownToHtml', 'whitespace', 'dedup', 'extractInfo', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber',
   'trimText', 'mergeLines', 'splitText', 'lorem', 'diff',
@@ -20,6 +21,7 @@ const knownTools = [
   'calculator', 'qrcode', 'barcode', 'passwordStrength', 'notepad', 'pomodoro',
   'scientificCalc', 'stickyNote', 'countdown', 'stopwatch', 'worldClock', 'timezone',
   'randomNum', 'radixCalc',
+  'csvEditor', 'jsonEditor', 'chart', 'statistics',
 ];
 
 const relatedToolsMap: Record<string, string[]> = {
@@ -47,6 +49,11 @@ const relatedToolsMap: Record<string, string[]> = {
   compare: ['formatConvert', 'compress', 'blur'],
   toPdf: ['compare', 'formatConvert', 'compress'],
   bgRemove: ['compare', 'formatConvert', 'compress'],
+  zip: ['unzip', 'fileHash', 'preview'],
+  unzip: ['zip', 'preview', 'fileHash'],
+  preview: ['zip', 'unzip', 'editor'],
+  fileHash: ['zip', 'unzip', 'preview'],
+  editor: ['preview', 'zip', 'fileHash'],
   wordCount: ['textClean', 'caseConvert', 'textReverse'],
   textClean: ['wordCount', 'caseConvert', 'textReverse'],
   caseConvert: ['wordCount', 'textClean', 'textReverse'],
@@ -109,6 +116,10 @@ const relatedToolsMap: Record<string, string[]> = {
   timezone: ['worldClock', 'countdown', 'unitConvert'],
   randomNum: ['calculator', 'password', 'uuid'],
   radixCalc: ['radix', 'calculator', 'scientificCalc'],
+  csvEditor: ['jsonEditor', 'statistics', 'chart'],
+  jsonEditor: ['csvEditor', 'chart', 'statistics'],
+  chart: ['statistics', 'csvEditor', 'jsonEditor'],
+  statistics: ['chart', 'csvEditor', 'jsonEditor'],
 };
 
 type Props = {
@@ -122,7 +133,9 @@ export async function generateMetadata({ params }: Props) {
   const isTextTool = ['wordCount', 'textClean', 'caseConvert', 'textReverse', 'markdown', 'markdownToHtml', 'whitespace', 'dedup', 'extractInfo', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'lorem', 'diff'].includes(slug);
   const isDevTool = ['jsonFormat', 'xmlFormat', 'sqlFormat', 'colorConvert', 'yamlToJson', 'csvToJson', 'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'emailValidate', 'regexTest', 'regexVisual', 'jsonVisual', 'colorPicker', 'gradient', 'shadow', 'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck', 'radix', 'timestamp', 'unitConvert', 'dateCalc', 'mimeQuery'].includes(slug);
   const isEfficiencyTool = ['calculator', 'qrcode', 'barcode', 'passwordStrength', 'notepad', 'pomodoro', 'scientificCalc', 'stickyNote', 'countdown', 'stopwatch', 'worldClock', 'timezone', 'randomNum', 'radixCalc'].includes(slug);
-  const category = isTextTool ? 'textTools' : isDevTool ? 'devTools' : isEfficiencyTool ? 'efficiencyTools' : 'imageTools';
+  const isFileTool = ['zip', 'unzip', 'preview', 'fileHash', 'editor'].includes(slug);
+  const isDataTool = ['csvEditor', 'jsonEditor', 'chart', 'statistics'].includes(slug);
+  const category = isTextTool ? 'textTools' : isDevTool ? 'devTools' : isEfficiencyTool ? 'efficiencyTools' : isFileTool ? 'fileTools' : isDataTool ? 'dataTools' : 'imageTools';
 
   const title = t(`${category}.${slug}` as any);
   const description = t(`${category}.${slug}Desc` as any);
