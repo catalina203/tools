@@ -111,37 +111,6 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">
               <span className="bg-gradient-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
-                {t('categories')}
-              </span>
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400">{t('categoriesDesc')}</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {categories.map((category, index) => (
-              <Link
-                key={index}
-                href="/tools"
-                className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-6 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 overflow-hidden"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
-                <div className="relative z-10 text-center">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${category.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg`}>
-                    <span className="text-3xl">{category.icon}</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                    {tt(`categories.${category.nameKey}` as any)}
-                  </h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">{category.count}个工具</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <div className="mb-24">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
                 {t('myFavorites')}
               </span>
             </h2>
@@ -199,6 +168,37 @@ export default function Home() {
                 </Link>
               </div>
             )}
+          </div>
+        </div>
+
+        <div className="mb-24">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+                {t('categories')}
+              </span>
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">{t('categoriesDesc')}</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {categories.map((category, index) => (
+              <Link
+                key={index}
+                href="/tools"
+                className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-6 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 overflow-hidden"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+                <div className="relative z-10 text-center">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${category.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+                    <span className="text-3xl">{category.icon}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                    {tt(`categories.${category.nameKey}` as any)}
+                  </h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">{category.count}个工具</p>
+                </div>
+              </Link>
+            ))}
           </div>
           <div className="text-center mt-10">
             <Link

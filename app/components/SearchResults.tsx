@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { allTools, ToolItem } from '@/src/data/tools';
 import { Link } from '@/src/i18n/navigation';
+import { useFavoriteTools } from '@/app/context/FavoriteToolsContext';
 
 type SearchResult = {
   tool: ToolItem;
@@ -16,6 +17,7 @@ export default function SearchResults({
   query: string;
 }) {
   const t = useTranslations('tools');
+  const { toggleFavorite, isFavorite } = useFavoriteTools();
   
   // Define category mapping for tools
   const toolCategoryMap: Record<string, string> = {
@@ -114,17 +116,23 @@ export default function SearchResults({
           <Link
             key={index}
             href={`/tools/${result.tool.key}`}
-            className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-4 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 cursor-pointer block"
+            className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-5 pr-12 hover:border-violet-500/30 dark:hover:border-white/20 hover:shadow-lg hover:shadow-violet-500/5 transition-all duration-300 cursor-pointer block"
           >
-            <div className="flex items-center">
-              <div className={`w-10 h-10 bg-gradient-to-br ${result.tool.gradient} rounded-xl flex items-center justify-center shadow-lg`}>
-                <span className="text-lg">{result.tool.icon}</span>
+            <button
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(result.tool.key); }}
+              className="absolute top-3 right-3 text-xl hover:scale-110 transition-transform z-10"
+            >
+              {isFavorite(result.tool.key) ? '⭐' : '☆'}
+            </button>
+            <div className="flex items-center gap-4">
+              <div className={`w-12 h-12 bg-gradient-to-br ${result.tool.gradient} rounded-xl flex items-center justify-center shadow-lg shrink-0`}>
+                <span className="text-xl">{result.tool.icon}</span>
               </div>
-              <div className="ml-3 flex-1">
-                <h4 className="text-sm font-semibold text-gray-900 dark:text-white">
+              <div className="min-w-0">
+                <h4 className="text-sm font-semibold text-gray-900 dark:text-white truncate">
                   {t(`${result.category}Tools.${result.tool.key}` as any)}
                 </h4>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
                   {t(`${result.category}Tools.${result.tool.key}Desc` as any)}
                 </p>
               </div>
