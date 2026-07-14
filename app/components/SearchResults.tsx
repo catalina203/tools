@@ -129,7 +129,7 @@ export default function SearchResults({
                 <span className="text-xl">{result.tool.icon}</span>
               </div>
               <div className="min-w-0">
-                <h4 className="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                <h4 className="text-sm font-semibold text-gray-900 dark:text-white truncate" title={t(`${result.category}Tools.${result.tool.key}` as any)}>
                   {t(`${result.category}Tools.${result.tool.key}` as any)}
                 </h4>
                 <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">

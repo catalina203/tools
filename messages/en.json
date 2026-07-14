@@ -13,6 +13,29 @@
     "addFavorite": "Add to Favorites",
     "removeFavorite": "Remove from Favorites"
   },
+  "about": {
+    "title": "About Office Toolbox",
+    "subtitle": "All-in-One Online Tool Collection",
+    "description": "Office Toolbox is a pure front-end online tool collection covering image processing, text editing, format conversion, development assistance, office productivity, and more. All tools run locally in your browser — no data is uploaded to any server, ensuring your privacy.",
+    "stats": "Platform Stats",
+    "statsDesc": "A growing collection of tools",
+    "toolCount": "tools",
+    "categoryCount": "categories",
+    "localProcess": "Local Processing",
+    "features": "Core Features",
+    "featuresDesc": "Why choose Office Toolbox",
+    "feature1Title": "100% Local",
+    "feature1Desc": "All tools use browser native APIs — no backend server, no software installation required. Data is processed entirely on your device and never uploaded.",
+    "feature2Title": "Cross-Platform",
+    "feature2Desc": "Responsive design works perfectly on desktop, tablet, and mobile. Open your browser anytime, anywhere — no device or platform restrictions.",
+    "feature3Title": "Bilingual",
+    "feature3Desc": "Full support for both Chinese and English interfaces. Switch languages with one click and all content updates instantly.",
+    "feature4Title": "Dark Mode",
+    "feature4Desc": "Supports dark and light themes to protect your eyes while keeping the interface beautiful. Theme preference is persisted locally.",
+    "privacy": "Privacy Statement",
+    "privacyDesc": "Your data security is our top priority. All tools in Office Toolbox run locally in your browser. We have no backend servers and do not collect, store, or transmit any of your data. Files you process, text you enter, and outputs you generate exist only on your device. All temporary data is automatically cleared when you close the page.",
+    "footer": "Making office easier"
+  },
   "search": {
     "noResults": "No matching tools found",
     "tryAlternative": "Try different keywords or view all tools"
