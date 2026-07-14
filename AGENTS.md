@@ -49,6 +49,10 @@
 - `src/data/` - 数据文件
   - `tools.ts` - 所有工具数据定义（88个工具）
 - `public/` - 静态资源
+  - `_headers` - Cloudflare 静态资源缓存配置
+- `wrangler.jsonc` - Cloudflare Workers 配置
+- `open-next.config.ts` - OpenNext Cloudflare 适配器配置
+- `.dev.vars` - 本地开发环境变量
 - `package.json` - 依赖和脚本
 
 ## 搜索功能
@@ -125,9 +129,12 @@ const { favorites } = useFavoriteTools();
 
 ```bash
 npm run dev      # 启动开发服务器 (http://localhost:3000)
-npm run build    # 生产构建
+npm run build    # Next.js 生产构建
 npm run start    # 启动生产服务器
 npm run lint     # ESLint 检查
+npm run preview  # OpenNext 构建 + 本地 Workers 预览 (需 Node.js >=22)
+npm run deploy   # OpenNext 构建 + 部署到 Cloudflare Workers
+npm run cf-typegen # 生成 Cloudflare 环境类型定义
 ```
 
 ## 工具开发规范
@@ -217,6 +224,8 @@ tools.[category].[toolName]Faq1~3A       # FAQ答案
 - **ESLint**：平面配置 (eslint.config.mjs)
 - **CSS**：全局 CSS 位于 `app/globals.css`
 - **i18n**：使用 next-intl 库实现国际化
+- **部署**：Cloudflare Workers（通过 @opennextjs/cloudflare 适配器）
+- **Node.js 要求**：本地开发 ≥ v20，本地 Workers 预览 + 部署 ≥ v22
 
 ## 重要事项
 
@@ -450,44 +459,53 @@ const fs = require('fs');
 | randomNum | `/tools/randomNum` | 随机数生成器 | ✅ 已完成 |
 | radixCalc | `/tools/radixCalc` | 进制计算器 | ✅ 已完成 |
 
-## 待完成工具
+## 已完成工具（完整列表）
 
-### 批次 5 - 文件处理工具（待开发）
-| 工具 | 分类 | 功能 |
-|------|------|------|
-| imageConvert | 文件处理 | 图片格式互转 |
-| zip | 文件处理 | ZIP文件压缩 |
-| unzip | 文件处理 | ZIP文件解压 |
-| preview | 文件处理 | 图片/文本预览 |
-| fileHash | 文件处理 | 计算文件哈希值 |
-| editor | 文件处理 | 在线代码编辑 |
+### 图像处理工具（24个，含基础+增强）
+| 工具 | 路径 | 功能 | 状态 |
+|------|------|------|------|
+| crop | `/tools/crop` | 图片裁剪 | ✅ 已完成 |
+| compress | `/tools/compress` | 图片压缩 | ✅ 已完成 |
+| resize | `/tools/resize` | 图片缩放 | ✅ 已完成 |
+| rotate | `/tools/rotate` | 图片旋转 | ✅ 已完成 |
+| brightness | `/tools/brightness` | 亮度调整 | ✅ 已完成 |
+| contrast | `/tools/contrast` | 对比度调整 | ✅ 已完成 |
+| saturation | `/tools/saturation` | 饱和度调整 | ✅ 已完成 |
+| hue | `/tools/hue` | 色调调整 | ✅ 已完成 |
+| grayscale | `/tools/grayscale` | 灰度转换 | ✅ 已完成 |
+| vintage | `/tools/vintage` | 复古滤镜 | ✅ 已完成 |
+| blur | `/tools/blur` | 高斯模糊 | ✅ 已完成 |
+| sharpen | `/tools/sharpen` | 锐化增强 | ✅ 已完成 |
+| watermark | `/tools/watermark` | 水印添加 | ✅ 已完成 |
+| formatConvert | `/tools/formatConvert` | 格式转换 | ✅ 已完成 |
+| mosaic | `/tools/mosaic` | 拼图拼接 | ✅ 已完成 |
+| grid | `/tools/grid` | 九宫格切图 | ✅ 已完成 |
+| rounded | `/tools/rounded` | 圆角边框 | ✅ 已完成 |
+| colorExtract | `/tools/colorExtract` | 颜色提取 | ✅ 已完成 |
+| eyedropper | `/tools/eyedropper` | 取色器 | ✅ 已完成 |
+| exif | `/tools/exif` | EXIF信息 | ✅ 已完成 |
+| base64 | `/tools/base64` | 图片Base64转换 | ✅ 已完成 |
+| compare | `/tools/compare` | 图片对比 | ✅ 已完成 |
+| bgRemove | `/tools/bgRemove` | 背景移除 | ✅ 已完成 |
+| toPdf | `/tools/toPdf` | 图片转PDF | ✅ 已完成 |
 
-### 批次 6 - 数据处理工具（待开发）
-| 工具 | 分类 | 功能 |
-|------|------|------|
-| csvEditor | 数据处理 | 在线CSV编辑 |
-| jsonEditor | 数据处理 | JSON在线编辑 |
-| chart | 数据处理 | 数据图表（柱状/折线/饼图） |
-| statistics | 数据处理 | 基本统计分析 |
+### 文件处理工具（6个）
+| 工具 | 路径 | 功能 | 状态 |
+|------|------|------|------|
+| imageConvert | `/tools/imageConvert` | 图片格式互转 | ✅ 已完成 |
+| zip | `/tools/zip` | ZIP文件压缩 | ✅ 已完成 |
+| unzip | `/tools/unzip` | ZIP文件解压 | ✅ 已完成 |
+| preview | `/tools/preview` | 图片/文本预览 | ✅ 已完成 |
+| fileHash | `/tools/fileHash` | 计算文件哈希值 | ✅ 已完成 |
+| editor | `/tools/editor` | 在线代码编辑 | ✅ 已完成 |
 
-### 批次 7 - 图像增强工具（待开发）
-| 工具 | 分类 | 功能 |
-|------|------|------|
-| vintage | 图像处理 | 复古滤镜 |
-| blur | 图像处理 | 高斯模糊 |
-| sharpen | 图像处理 | 锐化增强 |
-| watermark | 图像处理 | 水印添加 |
-| formatConvert | 图像处理 | 格式转换 |
-| mosaic | 图像处理 | 拼图拼接 |
-| grid | 图像处理 | 九宫格切图 |
-| rounded | 图像处理 | 圆角边框 |
-| colorExtract | 图像处理 | 颜色提取 |
-| eyedropper | 图像处理 | 取色器 |
-| exif | 图像处理 | EXIF信息 |
-| base64 | 图像处理 | 图片Base64转换 |
-| compare | 图像处理 | 图片对比 |
-| bgRemove | 图像处理 | 背景移除 |
-| toPdf | 图像处理 | 图片转PDF |
+### 数据处理工具（4个）
+| 工具 | 路径 | 功能 | 状态 |
+|------|------|------|------|
+| csvEditor | `/tools/csvEditor` | 在线CSV编辑 | ✅ 已完成 |
+| jsonEditor | `/tools/jsonEditor` | JSON在线编辑 | ✅ 已完成 |
+| chart | `/tools/chart` | 数据图表 | ✅ 已完成 |
+| statistics | `/tools/statistics` | 基本统计分析 | ✅ 已完成 |
 
 ## 办公工具产品计划
 
@@ -513,9 +531,10 @@ const fs = require('fs');
    4. 文本处理工具 - 7个基础 + 11个增强（✅ 已完成，共18个）
    5. 编码开发工具 - 28个（✅ 已完成，含4个批次）
    6. 办公效率工具 - 14个（✅ 已完成，含 randomNum、radixCalc）
-   7. 文件处理工具（⬜ 待开发 - 批次5）
-   8. 数据处理工具（⬜ 待开发 - 批次6）
-   9. 图像增强工具（⬜ 待开发 - 批次7）
+   7. 文件处理工具 - 6个（✅ 已完成）
+   8. 数据处理工具 - 4个（✅ 已完成）
+   9. 图像增强工具 - 15个（✅ 已完成）
+   10. Cloudflare Workers 部署（✅ 已完成）
 
 5. **测试**
    - 单元测试：vitest（覆盖工具函数）
@@ -524,21 +543,25 @@ const fs = require('fs');
 
 6. **CI/CD**
    - GitHub Actions：lint → typecheck → test → build → deploy
+   - 生产部署：`npm run deploy`（OpenNext 构建 + wrangler 部署到 Cloudflare Workers）
+   - 预览：`npm run preview`（OpenNext 构建 + wrangler 本地预览）
+   - Cloudflare Workers 免费计划限制：压缩体积 ≤ 3MB，请求 ≤ 10万/天，CPU ≤ 10ms/请求
 
 7. **文档**
    - `docs/` 文件夹包含功能指南与API文档
 
 **下一步**：
-- 推进批次5：文件处理工具（imageConvert、zip、unzip、preview、fileHash、editor）
-- 每个工具必须同时支持中英文
-- 优先实现纯Web工具，不依赖后端或AI模型
+- 配置自定义域名（Cloudflare Dashboard → Workers → toolsbox → Triggers → Custom Domains）
+- 如需 R2 缓存，创建 R2 bucket 并在 `wrangler.jsonc` 中配置 `NEXT_INC_CACHE_R2_BUCKET` 绑定
 - 新增工具时同时更新 `src/data/tools.ts`、`ToolLoader.tsx`、page.tsx、ToolSEO.tsx
 
 ## 常见任务
 
 ```bash
-npm run dev  # 运行开发服务器
-npm run build # 生产构建
+npm run dev      # 本地开发 (Node.js, next dev)
+npm run build    # Next.js 生产构建
+npm run preview  # OpenNext 构建 + 本地 Workers 预览 (需 Node.js >=22)
+npm run deploy   # OpenNext 构建 + 部署到 Cloudflare Workers
 ```
 
 项目维护者：克隆此仓库，`npm install`，然后 `npm run dev`。请 Fork 本仓库开始开发。
