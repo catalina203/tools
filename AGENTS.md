@@ -358,7 +358,7 @@ const fs = require('fs');
 | hue | `/tools/hue` | 色调调整，支持0-360度旋转 | ✅ 已完成 |
 | grayscale | `/tools/grayscale` | 灰度转换，支持0-100%强度 | ✅ 已完成 |
 
-### 文本处理工具（7个）
+### 文本处理工具（18个）
 | 工具 | 路径 | 功能 | 状态 |
 |------|------|------|------|
 | textClean | `/tools/textClean` | 文本清理，去除空格/空行/特殊字符 | ✅ 已完成 |
@@ -368,6 +368,17 @@ const fs = require('fs');
 | traditionalSimplified | `/tools/traditionalSimplified` | 繁简互转 | ✅ 已完成 |
 | trimText | `/tools/trimText` | 文本截断，按字符/行数截断 | ✅ 已完成 |
 | splitText | `/tools/splitText` | 分割文本，按分隔符拆分 | ✅ 已完成 |
+| wordCount | `/tools/wordCount` | 字符/词数/行数统计 | ✅ 已完成 |
+| markdown | `/tools/markdown` | Markdown预览 | ✅ 已完成 |
+| markdownToHtml | `/tools/markdownToHtml` | Markdown转HTML | ✅ 已完成 |
+| whitespace | `/tools/whitespace` | 空白处理 | ✅ 已完成 |
+| dedup | `/tools/dedup` | 文本去重 | ✅ 已完成 |
+| escape | `/tools/escape` | HTML/JS转义 | ✅ 已完成 |
+| lineNumber | `/tools/lineNumber` | 添加行号 | ✅ 已完成 |
+| mergeLines | `/tools/mergeLines` | 合并行 | ✅ 已完成 |
+| extractInfo | `/tools/extractInfo` | 信息提取 | ✅ 已完成 |
+| lorem | `/tools/lorem` | Lorem Ipsum生成 | ✅ 已完成 |
+| diff | `/tools/diff` | 文本差异对比 | ✅ 已完成 |
 
 ### 编码开发工具（28个）
 
@@ -421,25 +432,27 @@ const fs = require('fs');
 | password | `/tools/password` | 随机安全密码生成 |
 | emailValidate | `/tools/emailValidate` | 邮箱格式验证 |
 
+### 办公效率工具（14个）
+| 工具 | 路径 | 功能 | 状态 |
+|------|------|------|------|
+| calculator | `/tools/calculator` | 标准计算器 | ✅ 已完成 |
+| scientificCalc | `/tools/scientificCalc` | 科学计算器 | ✅ 已完成 |
+| qrcode | `/tools/qrcode` | 二维码生成器 | ✅ 已完成 |
+| barcode | `/tools/barcode` | 条形码生成器 | ✅ 已完成 |
+| notepad | `/tools/notepad` | 在线记事本 | ✅ 已完成 |
+| stickyNote | `/tools/stickyNote` | 便签纸工具 | ✅ 已完成 |
+| countdown | `/tools/countdown` | 事件倒计时 | ✅ 已完成 |
+| stopwatch | `/tools/stopwatch` | 秒表/计时器 | ✅ 已完成 |
+| pomodoro | `/tools/pomodoro` | 番茄钟 | ✅ 已完成 |
+| worldClock | `/tools/worldClock` | 世界时钟 | ✅ 已完成 |
+| timezone | `/tools/timezone` | 时区转换 | ✅ 已完成 |
+| passwordStrength | `/tools/passwordStrength` | 密码强度检测 | ✅ 已完成 |
+| randomNum | `/tools/randomNum` | 随机数生成器 | ✅ 已完成 |
+| radixCalc | `/tools/radixCalc` | 进制计算器 | ✅ 已完成 |
+
 ## 待完成工具
 
-### 批次 5 - 办公效率工具（待开发）
-| 工具 | 分类 | 功能 |
-|------|------|------|
-| qrcode | 效率工具 | 二维码生成器 |
-| barcode | 效率工具 | 条形码生成器 |
-| calculator | 效率工具 | 标准计算器 |
-| scientificCalc | 效率工具 | 科学计算器 |
-| notepad | 效率工具 | 在线记事本 |
-| stickyNote | 效率工具 | 便签纸工具 |
-| countdown | 效率工具 | 事件倒计时 |
-| stopwatch | 效率工具 | 秒表/计时器 |
-| pomodoro | 效率工具 | 番茄钟 |
-| worldClock | 效率工具 | 世界时钟 |
-| timezone | 效率工具 | 时区转换 |
-| passwordStrength | 效率工具 | 密码强度检测 |
-
-### 批次 6 - 文件处理工具（待开发）
+### 批次 5 - 文件处理工具（待开发）
 | 工具 | 分类 | 功能 |
 |------|------|------|
 | imageConvert | 文件处理 | 图片格式互转 |
@@ -449,7 +462,7 @@ const fs = require('fs');
 | fileHash | 文件处理 | 计算文件哈希值 |
 | editor | 文件处理 | 在线代码编辑 |
 
-### 批次 7 - 数据处理工具（待开发）
+### 批次 6 - 数据处理工具（待开发）
 | 工具 | 分类 | 功能 |
 |------|------|------|
 | csvEditor | 数据处理 | 在线CSV编辑 |
@@ -457,7 +470,7 @@ const fs = require('fs');
 | chart | 数据处理 | 数据图表（柱状/折线/饼图） |
 | statistics | 数据处理 | 基本统计分析 |
 
-### 批次 8 - 图像增强工具（待开发）
+### 批次 7 - 图像增强工具（待开发）
 | 工具 | 分类 | 功能 |
 |------|------|------|
 | vintage | 图像处理 | 复古滤镜 |
@@ -475,21 +488,6 @@ const fs = require('fs');
 | compare | 图像处理 | 图片对比 |
 | bgRemove | 图像处理 | 背景移除 |
 | toPdf | 图像处理 | 图片转PDF |
-
-### 批次 9 - 文本增强工具（待开发）
-| 工具 | 分类 | 功能 |
-|------|------|------|
-| markdown | 文本处理 | Markdown预览 |
-| markdownToHtml | 文本处理 | Markdown转HTML |
-| wordCount | 文本处理 | 字符/词数/行数统计 |
-| whitespace | 文本处理 | 空白处理 |
-| dedup | 文本处理 | 文本去重 |
-| escape | 文本处理 | HTML/JS转义 |
-| lineNumber | 文本处理 | 添加行号 |
-| mergeLines | 文本处理 | 合并行 |
-| extractInfo | 文本处理 | 信息提取 |
-| lorem | 文本处理 | Lorem Ipsum生成 |
-| diff | 文本处理 | 文本差异对比 |
 
 ## 办公工具产品计划
 
@@ -512,13 +510,12 @@ const fs = require('fs');
    1. 基础项目脚手架（✅ 已完成）
    2. 国际化支持（✅ 已完成）
    3. 图像处理工具 - 基础9个（✅ 已完成）
-   4. 文本处理工具 - 基础7个（✅ 已完成）
+   4. 文本处理工具 - 7个基础 + 11个增强（✅ 已完成，共18个）
    5. 编码开发工具 - 28个（✅ 已完成，含4个批次）
-   6. 办公效率工具（⬜ 待开发 - 批次5）
-   7. 文件处理工具（⬜ 待开发 - 批次6）
-   8. 数据处理工具（⬜ 待开发 - 批次7）
-   9. 图像增强工具（⬜ 待开发 - 批次8）
-   10. 文本增强工具（⬜ 待开发 - 批次9）
+   6. 办公效率工具 - 14个（✅ 已完成，含 randomNum、radixCalc）
+   7. 文件处理工具（⬜ 待开发 - 批次5）
+   8. 数据处理工具（⬜ 待开发 - 批次6）
+   9. 图像增强工具（⬜ 待开发 - 批次7）
 
 5. **测试**
    - 单元测试：vitest（覆盖工具函数）
@@ -532,7 +529,7 @@ const fs = require('fs');
    - `docs/` 文件夹包含功能指南与API文档
 
 **下一步**：
-- 推进批次5：办公效率工具（qrcode、barcode、calculator、notepad 等）
+- 推进批次5：文件处理工具（imageConvert、zip、unzip、preview、fileHash、editor）
 - 每个工具必须同时支持中英文
 - 优先实现纯Web工具，不依赖后端或AI模型
 - 新增工具时同时更新 `src/data/tools.ts`、`ToolLoader.tsx`、page.tsx、ToolSEO.tsx
