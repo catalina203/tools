@@ -6,6 +6,7 @@ import ComingSoonTool from '@/app/components/tools/ComingSoonTool';
 const knownTools = [
   'crop', 'compress', 'resize', 'rotate', 'brightness', 'contrast', 'saturation', 'hue', 'grayscale',
   'blur', 'vintage', 'sharpen', 'mosaic',
+  'rounded', 'grid', 'watermark',
   'wordCount', 'textClean', 'caseConvert', 'textReverse',
   'markdown', 'markdownToHtml', 'whitespace', 'dedup', 'extractInfo', 'lineSort', 'traditionalSimplified', 'escape', 'lineNumber',
   'trimText', 'mergeLines', 'splitText', 'lorem', 'diff',
@@ -33,6 +34,9 @@ const relatedToolsMap: Record<string, string[]> = {
   vintage: ['grayscale', 'blur', 'saturation'],
   sharpen: ['blur', 'contrast', 'brightness'],
   mosaic: ['crop', 'resize', 'grid'],
+  rounded: ['crop', 'resize', 'watermark'],
+  watermark: ['rounded', 'crop', 'grid'],
+  grid: ['mosaic', 'crop', 'rounded'],
   wordCount: ['textClean', 'caseConvert', 'textReverse'],
   textClean: ['wordCount', 'caseConvert', 'textReverse'],
   caseConvert: ['wordCount', 'textClean', 'textReverse'],
