@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/src/i18n/navigation';
 import ThemeToggle from '@/app/components/ThemeToggle';
@@ -11,6 +12,17 @@ export default function ToolsPage() {
   const t = useTranslations('tools');
   const tc = useTranslations('common');
   const { isFavorite, toggleFavorite } = useFavoriteTools();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category');
+    if (category) {
+      const el = document.getElementById(`category-${category}`);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      }
+    }
+  }, []);
 
   const categories = [
     { nameKey: 'image', icon: '🖼️', tools: imageTools, gradient: 'from-pink-500 to-violet-500' },
@@ -32,14 +44,14 @@ export default function ToolsPage() {
 
       {/* 顶部导航 */}
       <nav className="relative z-10 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
-        <div className="flex items-center space-x-3">
+        <Link href="/" className="flex items-center space-x-3">
           <div className="w-11 h-11 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/30">
             <span className="text-white text-xl">⚡</span>
           </div>
           <span className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
             {tc('appName')}
           </span>
-        </div>
+        </Link>
         <div className="flex items-center space-x-6">
           <Link href="/" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors font-medium">
             {tc('home')}
@@ -75,7 +87,7 @@ export default function ToolsPage() {
         {/* 工具分类 */}
         <div className="space-y-24">
           {categories.map((category, categoryIndex) => (
-            <div key={categoryIndex}>
+            <div key={categoryIndex} id={`category-${category.nameKey}`} className="scroll-mt-24">
               <div className="flex items-center mb-10">
                 <div className={`w-16 h-16 bg-gradient-to-br ${category.gradient} rounded-2xl flex items-center justify-center shadow-lg mr-6`}>
                   <span className="text-3xl">{category.icon}</span>

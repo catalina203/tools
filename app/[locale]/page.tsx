@@ -14,7 +14,7 @@ export default function Home() {
   const t = useTranslations('home');
   const tc = useTranslations('common');
   const tt = useTranslations('tools');
-  const { favorites } = useFavoriteTools();
+  const { favorites, removeFavorite } = useFavoriteTools();
 
   // 从allTools中获取用户选择的常用工具
   const favoriteTools = favorites
@@ -28,6 +28,7 @@ export default function Home() {
       } else if (['markdown', 'markdownToHtml', 'wordCount', 'textClean', 'whitespace', 'dedup', 'caseConvert', 'traditionalSimplified', 'escape', 'textReverse', 'lineSort', 'lineNumber', 'trimText', 'mergeLines', 'splitText', 'extractInfo', 'lorem', 'diff'].includes(key)) {
         category = 'text';
       } else if (['colorPicker', 'gradient', 'shadow', 'flexbox', 'gridLayout', 'gridGenerator', 'cssVariable', 'responsiveTest', 'contrastCheck', 'radix', 'timestamp', 'unitConvert', 'dateCalc', 'emailValidate', 'jsonVisual', 'colorConvert', 'regexVisual', 'mimeQuery', 'jsonFormat', 'xmlFormat', 'sqlFormat', 'yamlToJson', 'csvToJson', 'urlEncode', 'base64Text', 'md5', 'sha', 'uuid', 'password', 'regexTest', 'escape'].includes(key)) {
+        category = 'dev';
       } else if (['qrcode', 'barcode', 'calculator', 'scientificCalc', 'notepad', 'stickyNote', 'countdown', 'stopwatch', 'pomodoro', 'worldClock', 'timezone', 'passwordStrength', 'randomNum', 'radixCalc'].includes(key)) {
         category = 'efficiency';
       } else if (['imageConvert', 'zip', 'unzip', 'preview', 'fileHash', 'editor'].includes(key)) {
@@ -118,14 +119,21 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {favoriteTools.length > 0 ? (
-              favoriteTools.map((tool, index) => {
+              favoriteTools.map((tool) => {
                 if (!tool) return null;
                 return (
                   <Link
-                    key={index}
+                    key={tool.nameKey}
                     href={`/tools/${tool.nameKey}`}
                     className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-6 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 cursor-pointer overflow-hidden block"
                   >
+                    <button
+                      onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeFavorite(tool.nameKey); }}
+                      className="absolute top-3 right-3 w-6 h-6 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-red-100 hover:text-red-500 dark:hover:bg-red-500/20 dark:hover:text-red-400 transition-all z-10 opacity-0 group-hover:opacity-100"
+                      title={tc('removeFavorite')}
+                    >
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
                     <div className={`absolute inset-0 bg-gradient-to-br ${tool.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
                     <div className="relative z-10">
                       <div className="flex items-center mb-4">
@@ -184,7 +192,7 @@ export default function Home() {
             {categories.map((category, index) => (
               <Link
                 key={index}
-                href="/tools"
+                href={`/tools?category=${category.nameKey}`}
                 className="group relative bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-6 hover:border-violet-500/30 dark:hover:border-white/20 transition-all duration-300 overflow-hidden"
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
