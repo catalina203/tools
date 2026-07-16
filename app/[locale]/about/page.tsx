@@ -1,9 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Link } from '@/src/i18n/navigation';
-import ThemeToggle from '@/app/components/ThemeToggle';
-import LanguageSwitcher from '@/app/components/LanguageSwitcher';
+import Navbar from '@/app/components/Navbar';
 
 const stats = [
   { key: 'toolCount', value: '98', icon: '🛠️' },
@@ -29,29 +27,7 @@ export default function AboutPage() {
         <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-cyan-500/15 rounded-full blur-3xl"></div>
       </div>
 
-      <nav className="relative z-10 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
-        <Link href="/" className="flex items-center space-x-3">
-          <div className="w-11 h-11 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/30">
-            <span className="text-white text-xl">⚡</span>
-          </div>
-          <span className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-            {tc('appName')}
-          </span>
-        </Link>
-        <div className="flex items-center space-x-6">
-          <Link href="/" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors font-medium">
-            {tc('home')}
-          </Link>
-          <Link href="/tools" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors font-medium">
-            {tc('tools')}
-          </Link>
-          <Link href="/about" className="text-gray-900 dark:text-white font-medium">
-            {tc('about')}
-          </Link>
-          <LanguageSwitcher />
-          <ThemeToggle />
-        </div>
-      </nav>
+      <Navbar />
 
       <main className="relative z-10 max-w-4xl mx-auto px-8 py-20">
         <div className="text-center mb-20">
@@ -73,7 +49,7 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{t('stats')}</h2>
             <p className="text-gray-500 dark:text-gray-400">{t('statsDesc')}</p>
           </div>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {stats.map((s) => (
               <div key={s.key} className="bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 rounded-2xl p-6 text-center">
                 <span className="text-4xl mb-3 block">{s.icon}</span>

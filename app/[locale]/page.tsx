@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/src/i18n/navigation';
-import ThemeToggle from '@/app/components/ThemeToggle';
-import LanguageSwitcher from '@/app/components/LanguageSwitcher';
+import Navbar from '@/app/components/Navbar';
 import SearchBar from '@/app/components/SearchBar';
 import { useFavoriteTools } from '@/app/context/FavoriteToolsContext';
 import { allTools } from '@/src/data/tools';
@@ -63,29 +62,7 @@ export default function Home() {
         <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-cyan-500/15 rounded-full blur-3xl"></div>
       </div>
 
-      <nav className="relative z-10 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
-        <div className="flex items-center space-x-3">
-          <div className="w-11 h-11 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-violet-500/30">
-            <span className="text-white text-xl">⚡</span>
-          </div>
-          <span className="text-2xl font-bold bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-            {tc('appName')}
-          </span>
-        </div>
-        <div className="flex items-center space-x-6">
-          <Link href="/" className="text-gray-900 dark:text-white font-medium">
-            {tc('home')}
-          </Link>
-          <Link href="/tools" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors font-medium">
-            {tc('tools')}
-          </Link>
-          <Link href="/about" className="text-gray-500 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors font-medium">
-            {tc('about')}
-          </Link>
-          <LanguageSwitcher />
-          <ThemeToggle />
-        </div>
-      </nav>
+      <Navbar />
 
       <main className="relative z-10 max-w-7xl mx-auto px-8 py-20">
         <div className="text-center mb-20">

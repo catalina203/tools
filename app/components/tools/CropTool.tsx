@@ -68,12 +68,29 @@ export default function CropTool({ children }: { children?: React.ReactNode }) {
     [crop.x, crop.y]
   );
 
+  const onTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      if (!containerRef.current || !e.touches[0]) return;
+      dragging.current = true;
+      dragStart.current = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+        cx: crop.x,
+        cy: crop.y,
+      };
+    },
+    [crop.x, crop.y]
+  );
+
   useEffect(() => {
-    const onMove = (e: MouseEvent) => {
+    const onMove = (e: MouseEvent | TouchEvent) => {
       if (!dragging.current || !containerRef.current) return;
+      const clientX = 'touches' in e ? e.touches[0]?.clientX : e.clientX;
+      const clientY = 'touches' in e ? e.touches[0]?.clientY : e.clientY;
+      if (clientX == null || clientY == null) return;
       const rect = containerRef.current.getBoundingClientRect();
-      const dx = ((e.clientX - dragStart.current.x) / rect.width) * 100;
-      const dy = ((e.clientY - dragStart.current.y) / rect.height) * 100;
+      const dx = ((clientX - dragStart.current.x) / rect.width) * 100;
+      const dy = ((clientY - dragStart.current.y) / rect.height) * 100;
       const nx = Math.max(0, Math.min(100 - crop.w, dragStart.current.cx + dx));
       const ny = Math.max(0, Math.min(100 - crop.h, dragStart.current.cy + dy));
       setCrop((p) => ({ ...p, x: nx, y: ny }));
@@ -83,9 +100,13 @@ export default function CropTool({ children }: { children?: React.ReactNode }) {
     };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
+    window.addEventListener('touchmove', onMove, { passive: false });
+    window.addEventListener('touchend', onUp);
     return () => {
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('touchmove', onMove);
+      window.removeEventListener('touchend', onUp);
     };
   }, [crop.w, crop.h]);
 
@@ -193,11 +214,12 @@ export default function CropTool({ children }: { children?: React.ReactNode }) {
               ) : (
                 <>
                   <div className="bg-gray-900 dark:bg-gray-800 p-6 flex items-center justify-center min-h-[420px]">
-                    <div
-                      ref={containerRef}
-                      className="relative inline-block select-none cursor-crosshair"
-                      onMouseDown={onMouseDown}
-                    >
+                      <div
+                        ref={containerRef}
+                        className="relative inline-block select-none cursor-crosshair touch-none"
+                        onMouseDown={onMouseDown}
+                        onTouchStart={onTouchStart}
+                      >
                       <img
                         ref={imgRef}
                         src={imageSrc}
