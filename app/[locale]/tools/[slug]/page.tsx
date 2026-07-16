@@ -141,10 +141,10 @@ export async function generateMetadata({ params }: Props) {
   const description = t(`${category}.${slug}Desc` as any);
 
   return {
-    title: `${title} - ToolsBox`,
+    title: `${title} - SnapKits`,
     description,
     openGraph: {
-      title: `${title} - ToolsBox`,
+      title: `${title} - SnapKits`,
       description,
       type: 'website',
     },

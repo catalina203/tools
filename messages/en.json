@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "ToolsBox",
+    "appName": "SnapKits",
     "home": "Home",
     "tools": "Tools",
     "about": "About",
@@ -8,22 +8,22 @@
     "searchPlaceholder": "Search tools... e.g.: crop, JSON, QR code",
     "viewAllTools": "View All Tools",
     "suggestTool": "Suggest a Tool",
-    "copyright": "© 2024 ToolsBox. Making tools easier.",
+    "copyright": "© 2024 SnapKits. Making tools easier.",
     "language": "Language",
     "addFavorite": "Add to Favorites",
     "removeFavorite": "Remove from Favorites"
   },
   "about": {
-    "title": "About ToolsBox",
+    "title": "About SnapKits",
     "subtitle": "All-in-One Online Tool Collection",
-    "description": "ToolsBox is a pure front-end online tool collection covering image processing, text editing, format conversion, development assistance, office productivity, and more. All tools run locally in your browser — no data is uploaded to any server, ensuring your privacy.",
+    "description": "SnapKits is a pure front-end online tool collection covering image processing, text editing, format conversion, development assistance, office productivity, and more. All tools run locally in your browser — no data is uploaded to any server, ensuring your privacy.",
     "stats": "Platform Stats",
     "statsDesc": "A growing collection of tools",
     "toolCount": "tools",
     "categoryCount": "categories",
     "localProcess": "Local Processing",
     "features": "Core Features",
-    "featuresDesc": "Why choose ToolsBox",
+    "featuresDesc": "Why choose SnapKits",
     "feature1Title": "100% Local",
     "feature1Desc": "All tools use browser native APIs — no backend server, no software installation required. Data is processed entirely on your device and never uploaded.",
     "feature2Title": "Cross-Platform",
@@ -33,7 +33,7 @@
     "feature4Title": "Dark Mode",
     "feature4Desc": "Supports dark and light themes to protect your eyes while keeping the interface beautiful. Theme preference is persisted locally.",
     "privacy": "Privacy Statement",
-    "privacyDesc": "Your data security is our top priority. All tools in ToolsBox run locally in your browser. We have no backend servers and do not collect, store, or transmit any of your data. Files you process, text you enter, and outputs you generate exist only on your device. All temporary data is automatically cleared when you close the page.",
+    "privacyDesc": "Your data security is our top priority. All tools in SnapKits run locally in your browser. We have no backend servers and do not collect, store, or transmit any of your data. Files you process, text you enter, and outputs you generate exist only on your device. All temporary data is automatically cleared when you close the page.",
     "footer": "Making tools easier"
   },
   "search": {

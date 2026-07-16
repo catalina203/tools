@@ -1,15 +1,15 @@
 {
   "about": {
-    "title": "关于 ToolsBox",
+    "title": "关于 SnapKits",
     "subtitle": "一站式在线工具集合",
-    "description": "ToolsBox 是一个纯前端实现的在线工具集合，涵盖图像处理、文本编辑、格式转换、开发辅助、办公效率等多个领域。所有工具均在浏览器本地运行，无需上传数据到服务器，充分保护您的隐私安全。",
+    "description": "SnapKits 是一个纯前端实现的在线工具集合，涵盖图像处理、文本编辑、格式转换、开发辅助、办公效率等多个领域。所有工具均在浏览器本地运行，无需上传数据到服务器，充分保护您的隐私安全。",
     "stats": "平台数据",
     "statsDesc": "持续增长的工具集合",
     "toolCount": "个工具",
     "categoryCount": "个分类",
     "localProcess": "纯本地处理",
     "features": "核心特性",
-    "featuresDesc": "为什么选择 ToolsBox",
+    "featuresDesc": "为什么选择 SnapKits",
     "feature1Title": "纯本地运行",
     "feature1Desc": "所有工具均使用浏览器原生 API 实现，无需后端服务器，无需安装任何软件。数据全程在本地处理，不会上传到任何服务器。",
     "feature2Title": "多端适配",
@@ -19,11 +19,11 @@
     "feature4Title": "深色模式",
     "feature4Desc": "支持深色和浅色两种主题模式，保护视力同时也让界面更美观。主题选择持久化保存到本地。",
     "privacy": "隐私声明",
-    "privacyDesc": "您的数据安全是我们的首要关注。ToolsBox 中的所有工具均在您的浏览器本地运行。我们没有任何后端服务器，不会收集、存储或传输您的任何数据。您处理的文件、输入的文本和生成的输出都只存在于您的设备上。关闭页面后，所有临时数据会被自动清除。",
+    "privacyDesc": "您的数据安全是我们的首要关注。SnapKits 中的所有工具均在您的浏览器本地运行。我们没有任何后端服务器，不会收集、存储或传输您的任何数据。您处理的文件、输入的文本和生成的输出都只存在于您的设备上。关闭页面后，所有临时数据会被自动清除。",
     "footer": "让工具更简单"
   },
   "common": {
-    "appName": "ToolsBox",
+    "appName": "SnapKits",
     "home": "首页",
     "tools": "工具箱",
     "about": "关于",
@@ -31,7 +31,7 @@
     "searchPlaceholder": "搜索工具...例如：裁剪、JSON、二维码",
     "viewAllTools": "查看全部工具",
     "suggestTool": "建议新工具",
-    "copyright": "© 2024 ToolsBox. 让工具更简单。",
+    "copyright": "© 2024 SnapKits. 让工具更简单。",
     "language": "语言",
     "addFavorite": "添加到常用",
     "removeFavorite": "移除常用"
