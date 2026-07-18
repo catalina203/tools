@@ -6,12 +6,77 @@ import { Link } from '@/src/i18n/navigation';
 import LanguageSwitcher from '@/app/components/LanguageSwitcher';
 import ThemeToggle from '@/app/components/ThemeToggle';
 
-async function computeMd5(input: string): Promise<string> {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(input);
-  const hashBuffer = await crypto.subtle.digest('MD5', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+function md5(input: string): string {
+  const rotateLeft = (x: number, n: number) => (x << n) | (x >>> (32 - n));
+  const addUnsigned = (x: number, y: number) => (x + y) >>> 0;
+
+  const K = new Array(64);
+  for (let i = 0; i < 64; i++) {
+    K[i] = Math.abs(Math.sin(i + 1)) * 4294967296;
+  }
+
+  const toUTF8 = (str: string): number[] => {
+    const bytes: number[] = [];
+    for (let i = 0; i < str.length; i++) {
+      let c = str.charCodeAt(i);
+      if (c < 0x80) bytes.push(c);
+      else if (c < 0x800) bytes.push(0xC0 | (c >> 6), 0x80 | (c & 0x3F));
+      else if (c < 0xD800 || c >= 0xE000) bytes.push(0xE0 | (c >> 12), 0x80 | ((c >> 6) & 0x3F), 0x80 | (c & 0x3F));
+      else {
+        i++;
+        c = 0x10000 + (((c & 0x3FF) << 10) | (str.charCodeAt(i) & 0x3FF));
+        bytes.push(0xF0 | (c >> 18), 0x80 | ((c >> 12) & 0x3F), 0x80 | ((c >> 6) & 0x3F), 0x80 | (c & 0x3F));
+      }
+    }
+    return bytes;
+  };
+
+  const bytes = toUTF8(input);
+  const bitLen = bytes.length * 8;
+  bytes.push(0x80);
+  while ((bytes.length * 8) % 512 !== 448) bytes.push(0);
+  bytes.push(...[(bitLen >>> 0) & 0xFF, (bitLen >>> 8) & 0xFF, (bitLen >>> 16) & 0xFF, (bitLen >>> 24) & 0xFF]);
+  bytes.push(0, 0, 0, 0);
+
+  const chunks: number[][] = [];
+  for (let i = 0; i < bytes.length; i += 64) chunks.push(bytes.slice(i, i + 64));
+
+  let a0 = 0x67452301, b0 = 0xEFCDAB89, c0 = 0x98BADCFE, d0 = 0x10325476;
+
+  for (const chunk of chunks) {
+    const M: number[] = [];
+    for (let i = 0; i < 16; i++) {
+      M[i] = chunk[i * 4] | (chunk[i * 4 + 1] << 8) | (chunk[i * 4 + 2] << 16) | (chunk[i * 4 + 3] << 24);
+    }
+
+    let A = a0, B = b0, C = c0, D = d0;
+
+    for (let i = 0; i < 64; i++) {
+      let F = 0, g = 0;
+      if (i < 16) { F = (B & C) | (~B & D); g = i; }
+      else if (i < 32) { F = (D & B) | (~D & C); g = (5 * i + 1) % 16; }
+      else if (i < 48) { F = B ^ C ^ D; g = (3 * i + 5) % 16; }
+      else { F = C ^ (B | ~D); g = (7 * i) % 16; }
+
+      F = F + A + K[i] + M[g];
+      A = D;
+      D = C;
+      C = B;
+      B = B + rotateLeft(F, [7, 12, 17, 22, 5, 9, 14, 20, 4, 11, 16, 23, 6, 10, 15, 21][Math.floor(i / 4) % 4 + (Math.floor(i / 16) * 4)]);
+    }
+
+    a0 = addUnsigned(a0, A);
+    b0 = addUnsigned(b0, B);
+    c0 = addUnsigned(c0, C);
+    d0 = addUnsigned(d0, D);
+  }
+
+  const toHex = (n: number): string => n.toString(16).padStart(8, '0');
+  return toHex(a0) + toHex(b0) + toHex(c0) + toHex(d0);
+}
+
+function computeMd5(input: string): string {
+  return md5(input);
 }
 
 export default function Md5Tool({ children }: { children?: React.ReactNode }) {
@@ -22,14 +87,14 @@ export default function Md5Tool({ children }: { children?: React.ReactNode }) {
   const [output, setOutput] = useState('');
   const [computing, setComputing] = useState(false);
 
-  const process = async () => {
+  const process = () => {
     if (!input.trim()) {
       setOutput('');
       return;
     }
     setComputing(true);
     try {
-      const hash = await computeMd5(input);
+      const hash = computeMd5(input);
       setOutput(hash);
     } catch {
       setOutput('');

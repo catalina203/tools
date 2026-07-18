@@ -7,18 +7,18 @@ import LanguageSwitcher from '@/app/components/LanguageSwitcher';
 import ThemeToggle from '@/app/components/ThemeToggle';
 
 const commonRegexes = [
-  { name: 'email', pattern: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$', desc: '邮箱地址' },
-  { name: 'url', pattern: '^https?://[^\\s/$.?#].[^\\s]*$', desc: 'URL 地址' },
-  { name: 'ipv4', pattern: '^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$', desc: 'IPv4 地址' },
-  { name: 'phone_cn', pattern: '^1[3-9]\\d{9}$', desc: '中国手机号' },
-  { name: 'id_card_cn', pattern: '^[1-9]\\d{5}(19|20)\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])\\d{3}[\\dXx]$', desc: '中国身份证' },
-  { name: 'date_iso', pattern: '^\\d{4}-\\d{2}-\\d{2}$', desc: 'ISO 日期 (YYYY-MM-DD)' },
-  { name: 'hex_color', pattern: '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$', desc: '十六进制颜色' },
-  { name: 'chinese', pattern: '[\\u4e00-\\u9fa5]+', desc: '中文字符' },
-  { name: 'number', pattern: '^-?\\d+(\\.\\d+)?$', desc: '数字(整数/小数)' },
-  { name: 'username', pattern: '^[a-zA-Z0-9_]{3,16}$', desc: '用户名(字母数字下划线)' },
-  { name: 'password_strong', pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$', desc: '强密码' },
-  { name: 'whitespace', pattern: '\\s+', desc: '空白字符' },
+  { name: 'email', pattern: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$', iFlag: false },
+  { name: 'url', pattern: '^https?://[^\\s/$.?#].[^\\s]*$', iFlag: false },
+  { name: 'ipv4', pattern: '^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$', iFlag: false },
+  { name: 'phone_cn', pattern: '^1[3-9]\\d{9}$', iFlag: false },
+  { name: 'id_card_cn', pattern: '^[1-9]\\d{5}(19|20)\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])\\d{3}[\\dXx]$', iFlag: false },
+  { name: 'date_iso', pattern: '^\\d{4}-\\d{2}-\\d{2}$', iFlag: false },
+  { name: 'hex_color', pattern: '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$', iFlag: true },
+  { name: 'chinese', pattern: '[\\u4e00-\\u9fa5]+', iFlag: false },
+  { name: 'number', pattern: '^-?\\d+(\\.\\d+)?$', iFlag: false },
+  { name: 'username', pattern: '^[a-zA-Z0-9_]{3,16}$', iFlag: false },
+  { name: 'password_strong', pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$', iFlag: false },
+  { name: 'whitespace', pattern: '\\s+', iFlag: false },
 ];
 
 type Token =
@@ -203,22 +203,22 @@ function getTokenColor(token: Token): string {
   }
 }
 
-function getTokenLabel(token: Token): string {
+function getTokenLabel(token: Token, t: (key: string) => string): string {
   switch (token.type) {
-    case 'anchor': return token.kind === 'start' ? 'Start (^)' : 'End ($)';
-    case 'quantifier': return `Quantifier (${token.value}${token.greedy ? '' : '?'})`;
+    case 'anchor': return token.kind === 'start' ? t('devTools.tokenAnchorStart') : t('devTools.tokenAnchorEnd');
+    case 'quantifier': return `${t('devTools.tokenQuantifier')} (${token.value}${token.greedy ? '' : '?'})`;
     case 'group': 
-      if (token.isNonCapturing) return 'Non-capturing group (?:)';
-      if (token.isLookahead) return 'Lookahead (?= / ?!)';
-      if (token.isLookbehind) return 'Lookbehind (?<= / ?<!)';
-      return `Capturing group #${token.index}`;
-    case 'alternation': return 'Alternation (|)';
-    case 'charClass': return `Character class ${token.negated ? '[^...]' : '[...]'}`;
-    case 'escape': return `Escape (\\${token.value})`;
-    case 'dot': return 'Any character (.)';
-    case 'flag': return `Flag (${token.value})`;
-    case 'error': return `Error: ${token.message}`;
-    default: return 'Literal character';
+      if (token.isNonCapturing) return `${t('devTools.tokenNonCapturingGroup')} (?:)`;
+      if (token.isLookahead) return `${t('devTools.tokenLookahead')} (?= / ?!)`;
+      if (token.isLookbehind) return `${t('devTools.tokenLookbehind')} (?<= / ?<!)`;
+      return `${t('devTools.tokenCapturingGroup')} #${token.index}`;
+    case 'alternation': return `${t('devTools.tokenAlternation')} (|)`;
+    case 'charClass': return `${t('devTools.tokenCharClass')} ${token.negated ? '[^...]' : '[...]'}`;
+    case 'escape': return `${t('devTools.tokenEscape')} (\\${token.value})`;
+    case 'dot': return `${t('devTools.tokenDot')} (.)`;
+    case 'flag': return `${t('devTools.tokenFlag')} (${token.value})`;
+    case 'error': return `${t('devTools.tokenError')}: ${token.message}`;
+    default: return t('devTools.tokenLiteral');
   }
 }
 
@@ -299,7 +299,7 @@ function generateRailroadDiagram(pattern: string): string {
   return result;
 }
 
-function generateHighlightedText(testString: string, matches: Array<{ match: string; index: number; groups: string[]; length: number }>, regex: string, flags: string): React.ReactNode {
+function generateHighlightedText(testString: string, matches: Array<{ match: string; index: number; groups: string[]; length: number }>, regex: string, flags: string, t: (key: string) => string): React.ReactNode {
   if (!testString || matches.length === 0) return <span>{testString}</span>;
   
   const parts: React.ReactNode[] = [];
@@ -310,7 +310,7 @@ function generateHighlightedText(testString: string, matches: Array<{ match: str
       parts.push(<span key={`text-${i}`}>{testString.slice(lastIndex, m.index)}</span>);
     }
     parts.push(
-      <mark key={`match-${i}`} className="bg-yellow-200 dark:bg-yellow-800 text-black dark:text-white rounded px-0.5" title={`Index: ${m.index}, Length: ${m.length}${m.groups.length ? ', Groups: ' + m.groups.join(', ') : ''}`}>
+      <mark key={`match-${i}`} className="bg-yellow-200 dark:bg-yellow-800 text-black dark:text-white rounded px-0.5" title={`${t('devTools.matchIndex')}: ${m.index}, ${t('devTools.matchLength')}: ${m.length}${m.groups.length ? ', ' + t('devTools.matchGroups') + ': ' + m.groups.join(', ') : ''}`}>
         {m.match}
       </mark>
     );
@@ -380,8 +380,8 @@ export default function RegexVisualTool({ children }: { children?: React.ReactNo
   }, [regex, flags, testString]);
 
   const highlightedText = useMemo(() => 
-    generateHighlightedText(testString, matches, regex, flags),
-  [testString, matches, regex, flags]);
+    generateHighlightedText(testString, matches, regex, flags, t),
+  [testString, matches, regex, flags, t]);
 
   const railroadDiagramHtml = useMemo(() => 
     generateRailroadDiagram(regex),
@@ -403,12 +403,12 @@ export default function RegexVisualTool({ children }: { children?: React.ReactNo
   };
 
   const flagOptions = [
-    { key: 'g', label: 'g (全局)', desc: '查找所有匹配' },
-    { key: 'i', label: 'i (忽略大小写)', desc: '不区分大小写' },
-    { key: 'm', label: 'm (多行)', desc: '^$ 匹配行首尾' },
-    { key: 's', label: 's (单行)', desc: '. 匹配换行符' },
-    { key: 'u', label: 'u (Unicode)', desc: 'Unicode 模式' },
-    { key: 'y', label: 'y (粘连)', desc: '从 lastIndex 开始匹配' },
+    { key: 'g' },
+    { key: 'i' },
+    { key: 'm' },
+    { key: 's' },
+    { key: 'u' },
+    { key: 'y' },
   ];
 
   return (
@@ -457,8 +457,8 @@ export default function RegexVisualTool({ children }: { children?: React.ReactNo
                       className="w-4 h-4 text-purple-500 border-gray-300 rounded focus:ring-purple-500"
                     />
                     <div>
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{opt.label}</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">{opt.desc}</span>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t(`devTools.regexTestFlag${opt.key.toUpperCase()}Label` as any)}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">{t(`devTools.regexTestFlag${opt.key.toUpperCase()}Desc` as any)}</span>
                     </div>
                   </label>
                 ))}
@@ -474,8 +474,8 @@ export default function RegexVisualTool({ children }: { children?: React.ReactNo
                     onClick={() => loadPreset(item.pattern)}
                     className="w-full text-left p-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-white/10 rounded-lg hover:border-purple-300 dark:hover:border-purple-500/50 transition-colors text-sm"
                   >
-                    <div className="font-medium text-gray-900 dark:text-white">{item.desc}</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400 font-mono mt-0.5 truncate">/{item.pattern}/{item.desc.includes('大小写') ? 'i' : ''}</div>
+                    <div className="font-medium text-gray-900 dark:text-white">{t(`devTools.commonRegex${item.name.charAt(0).toUpperCase() + item.name.slice(1)}` as any)}</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400 font-mono mt-0.5 truncate">/{item.pattern}/{item.iFlag ? 'i' : ''}</div>
                   </button>
                 ))}
               </div>
@@ -509,9 +509,9 @@ export default function RegexVisualTool({ children }: { children?: React.ReactNo
                         <div key={i} className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 text-xs">
                           <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 mb-2">
                             <span className="font-mono bg-white dark:bg-gray-900 px-2 py-0.5 rounded">{m.match}</span>
-                            <span>索引: {m.index}</span>
-                            <span>长度: {m.length}</span>
-                            {m.groups.length > 0 && <span>分组: {m.groups.join(', ')}</span>}
+                            <span>{t('devTools.matchIndex')}: {m.index}</span>
+                            <span>{t('devTools.matchLength')}: {m.length}</span>
+                            {m.groups.length > 0 && <span>{t('devTools.matchGroups')}: {m.groups.join(', ')}</span>}
                           </div>
                         </div>
                       ))}
@@ -552,10 +552,10 @@ export default function RegexVisualTool({ children }: { children?: React.ReactNo
                         onMouseLeave={() => setActiveToken(null)}
                         className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-colors ${activeToken === token ? 'bg-purple-50 dark:bg-purple-900/30' : 'hover:bg-gray-50 dark:hover:bg-gray-800'}`}
                       >
-                        <span className={`font-mono text-sm px-2 py-1 rounded ${getTokenColor(token)} select-none`} title={getTokenLabel(token)}>
+                        <span className={`font-mono text-sm px-2 py-1 rounded ${getTokenColor(token)} select-none`} title={getTokenLabel(token, t)}>
                           {token.raw}
                         </span>
-                        <span className="text-sm text-gray-600 dark:text-gray-400 flex-1">{getTokenLabel(token)}</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400 flex-1">{getTokenLabel(token, t)}</span>
                         {token.type === 'group' && !token.isNonCapturing && token.index > 0 && (
                           <span className="text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded">#${token.index}</span>
                         )}
@@ -571,7 +571,7 @@ export default function RegexVisualTool({ children }: { children?: React.ReactNo
                   <div className="grid grid-cols-2 gap-2 text-sm">
                     <div><span className="text-purple-700 dark:text-purple-300">{t('devTools.tokenType')}: </span><span className="text-gray-900 dark:text-white capitalize">{activeToken.type}</span></div>
                     <div><span className="text-purple-700 dark:text-purple-300">{t('devTools.tokenRaw')}: </span><span className="font-mono text-gray-900 dark:text-white">{activeToken.raw}</span></div>
-                    <div className="col-span-2"><span className="text-purple-700 dark:text-purple-300">{t('devTools.tokenDescription')}: </span><span className="text-gray-900 dark:text-white">{getTokenLabel(activeToken)}</span></div>
+                    <div className="col-span-2"><span className="text-purple-700 dark:text-purple-300">{t('devTools.tokenDescription')}: </span><span className="text-gray-900 dark:text-white">{getTokenLabel(activeToken, t)}</span></div>
                   </div>
                 </div>
               )}
