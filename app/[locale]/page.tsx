@@ -180,7 +180,7 @@ export default function Home() {
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
                     {tt(`categories.${category.nameKey}` as any)}
                   </h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">{category.count}个工具</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">{tc('toolCount', { count: category.count })}</p>
                 </div>
               </Link>
             ))}

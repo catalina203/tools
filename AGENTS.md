@@ -424,6 +424,13 @@ const fs = require('fs');
 | dateCalc | `/tools/dateCalc` | 日期计算器，天数差/加减 |
 | mimeQuery | `/tools/mimeQuery` | MIME类型查询，130+类型 |
 
+#### 批次 5 - AI Token 工具（⏳ 低优先级，补充型）
+| 工具 | slug | 功能 |
+|------|------|------|
+| Token 计数器 | aiTokenCount | 支持 GPT-4o/GPT-4/Claude/Llama 等模型 token 计数 |
+| Token 费用估算 | aiTokenCost | 按模型 + 输入/输出量估算 API 调用成本 |
+| Token 可视化 | aiTokenVisual | 展示文本在 token 级别的切分位置 |
+
 #### 其他已实现的编码工具（已完成，无SEO）
 | 工具 | 路径 | 功能 |
 |------|------|------|
@@ -507,6 +514,69 @@ const fs = require('fs');
 | chart | `/tools/chart` | 数据图表 | ✅ 已完成 |
 | statistics | `/tools/statistics` | 基本统计分析 | ✅ 已完成 |
 
+## PDF 工具开发计划
+
+### 技术方案
+使用纯浏览器端开源库，零服务器成本：
+- **pdf-lib** — PDF 创建、合并、拆分、旋转、提取、删除页面、加密/解密、添加水印、添加页码、元数据编辑
+- **pdf.js** (Mozilla) — PDF 渲染为图片、PDF 信息提取
+- **jsPDF** — 文字/简单内容生成 PDF（补充场景）
+
+### 覆盖范围（与 Smallpdf 对比）
+
+| 功能 | 方案 | Smallpdf 兼容 | 说明 |
+|------|------|---------------|------|
+| 合并 PDF | pdf-lib | ✅ | 多文件合并为一个 |
+| 拆分 PDF | pdf-lib | ✅ | 按页拆分/范围提取 |
+| 压缩 PDF | pdf-lib + Canvas | ✅ | 重新压缩图片数据 |
+| 旋转 PDF | pdf-lib | ✅ | 单页/全部旋转 |
+| 删除页面 | pdf-lib | ✅ | 删除指定页面 |
+| 提取页面 | pdf-lib | ✅ | 提取指定页面为新文件 |
+| PDF 转图片 | pdf.js | ✅ | 每页渲染为 PNG/JPEG |
+| 图片转 PDF | pdf-lib (已有 toPdf) | ✅ | 已实现 |
+| 添加水印 | pdf-lib | ✅ | 文字/图片水印 |
+| 添加页码 | pdf-lib | ✅ | 页脚页码 |
+| PDF 加密 | pdf-lib | ✅ | 设置密码保护 |
+| PDF 解密 | pdf-lib | ✅ | 移除密码 |
+| 元数据编辑 | pdf-lib | ✅ | 标题/作者/主题等 |
+| PDF 信息 | pdf.js | ✅ | 页数/版本/大小等 |
+
+### 不支持（需商业 SDK）
+- PDF 转 Word/Excel 保留布局（格式转换引擎涉及逆向工程）
+- 高质量压缩（字体子集化、PDF 流优化）
+- OCR 识别
+
+### 新增工具列表
+
+| 工具 | slug | 功能 |
+|------|------|------|
+| PDF 合并 | pdfMerge | 合并多个 PDF 文件 |
+| PDF 拆分 | pdfSplit | 按页/范围拆分 PDF |
+| PDF 压缩 | pdfCompress | 重新压缩图片减小体积 |
+| PDF 旋转 | pdfRotate | 旋转 PDF 页面方向 |
+| PDF 页面管理 | pdfOrganize | 删除/提取/重排页面 |
+| PDF 转图片 | pdfToImage | 每页导出为图片 |
+| PDF 水印 | pdfWatermark | 文字/图片水印 |
+| PDF 页码 | pdfPageNumber | 添加页码 |
+| PDF 加密 | pdfProtect | 设置密码 |
+| PDF 解密 | pdfUnlock | 移除密码 |
+| PDF 属性 | pdfInfo | 查看元数据和页数信息 |
+
+### 开发顺序（按用户需求热度排序）
+1. 第一批：PDF合并、PDF拆分、PDF压缩、PDF转图片
+2. 第二批：PDF旋转、PDF页面管理、PDF水印、PDF页码
+3. 第三批：PDF加密、PDF解密、PDF属性
+
+### 检查清单
+- [ ] `npm install pdf-lib pdf.js jsPDF @types/pdf-lib`
+- [ ] 所有工具在 `src/data/tools.ts` 中注册（pdf 分类）
+- [ ] `SearchResults.tsx` 的 `toolCategoryMap` 添加 pdf 分类映射
+- [ ] `ToolSEO.tsx` 的 `featureIcons` 和 `colorMap` 添加配置
+- [ ] `page.tsx` 的 `knownTools` 和 `relatedToolsMap` 添加
+- [ ] 双语翻译键（zh.json / en.json）
+- [ ] `npm run build` 通过
+- [ ] 移动端兼容
+
 ## 办公工具产品计划
 
 2. **技术栈**
@@ -534,7 +604,9 @@ const fs = require('fs');
    7. 文件处理工具 - 6个（✅ 已完成）
    8. 数据处理工具 - 4个（✅ 已完成）
    9. 图像增强工具 - 15个（✅ 已完成）
-   10. Cloudflare Workers 部署（✅ 已完成）
+    10. Cloudflare Workers 部署（✅ 已完成）
+    11. PDF 工具 - 11个（⏳ 待开发，使用 pdf-lib / pdf.js / jsPDF）
+    12. AI Token 工具 - 3个（⏳ 低优先级，作为编码开发工具补充）
 
 5. **测试**
    - 单元测试：vitest（覆盖工具函数）

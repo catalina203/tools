@@ -32,6 +32,7 @@
     "viewAllTools": "查看全部工具",
     "suggestTool": "建议新工具",
     "copyright": "© 2024 SnapKits. 让工具更简单。",
+    "toolCount": "{count}个工具",
     "language": "语言",
     "addFavorite": "添加到常用",
     "removeFavorite": "移除常用"
