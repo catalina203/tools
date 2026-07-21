@@ -15,7 +15,7 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
   const efficiencyTools = ['qrcode', 'barcode', 'calculator', 'scientificCalc', 'notepad', 'stickyNote', 'countdown', 'stopwatch', 'pomodoro', 'worldClock', 'timezone', 'passwordStrength', 'randomNum', 'radixCalc'];
   const fileTools = ['imageConvert', 'zip', 'unzip', 'preview', 'fileHash', 'editor'];
   const dataTools = ['csvEditor', 'jsonEditor', 'chart', 'statistics'];
-  const pdfTools = ['pdfMerge', 'pdfSplit', 'pdfCompress', 'pdfToImage'];
+  const pdfTools = ['pdfMerge', 'pdfSplit', 'pdfCompress', 'pdfToImage', 'pdfRotate', 'pdfOrganize', 'pdfWatermark', 'pdfPageNumber'];
 
   const getToolCategory = (tool: string): string => {
     if (textTools.includes(tool)) return 'textTools';
@@ -130,6 +130,10 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
   pdfSplit: ['✂️', '📄', '📥'],
   pdfCompress: ['📦', '📉', '⚡'],
   pdfToImage: ['🖼️', '📄', '🔄'],
+  pdfRotate: ['🔄', '📐', '📥'],
+  pdfOrganize: ['📑', '✂️', '🔄'],
+  pdfWatermark: ['💧', '📝', '🎨'],
+  pdfPageNumber: ['#️⃣', '📄', '📥'],
 };
 
   const icons = featureIcons[slug] || ['✨', '⚡', '🔄'];
@@ -237,6 +241,10 @@ export default async function ToolSEO({ slug, locale, relatedTools = [] }: ToolS
   pdfSplit: 'cyan',
   pdfCompress: 'emerald',
   pdfToImage: 'violet',
+  pdfRotate: 'orange',
+  pdfOrganize: 'indigo',
+  pdfWatermark: 'sky',
+  pdfPageNumber: 'pink',
 };
   const color = colorMap[slug] || 'violet';
 

@@ -139,6 +139,10 @@ export const pdfTools: ToolItem[] = [
   { key: 'pdfSplit', icon: '✂️', gradient: 'from-blue-500 to-cyan-500' },
   { key: 'pdfCompress', icon: '📦', gradient: 'from-emerald-500 to-teal-500' },
   { key: 'pdfToImage', icon: '🖼️', gradient: 'from-violet-500 to-purple-500' },
+  { key: 'pdfRotate', icon: '🔄', gradient: 'from-orange-500 to-amber-500' },
+  { key: 'pdfOrganize', icon: '📑', gradient: 'from-indigo-500 to-violet-500' },
+  { key: 'pdfWatermark', icon: '💧', gradient: 'from-sky-500 to-blue-500' },
+  { key: 'pdfPageNumber', icon: '#️⃣', gradient: 'from-pink-500 to-fuchsia-500' },
 ];
 
 export const allTools: ToolItem[] = [

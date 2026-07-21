@@ -103,6 +103,10 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
   pdfSplit: dynamic(() => import('@/app/components/tools/PdfSplitTool'), { ssr: false }) as any,
   pdfCompress: dynamic(() => import('@/app/components/tools/PdfCompressTool'), { ssr: false }) as any,
   pdfToImage: dynamic(() => import('@/app/components/tools/PdfToImageTool'), { ssr: false }) as any,
+  pdfRotate: dynamic(() => import('@/app/components/tools/PdfRotateTool'), { ssr: false }) as any,
+  pdfOrganize: dynamic(() => import('@/app/components/tools/PdfOrganizeTool'), { ssr: false }) as any,
+  pdfWatermark: dynamic(() => import('@/app/components/tools/PdfWatermarkTool'), { ssr: false }) as any,
+  pdfPageNumber: dynamic(() => import('@/app/components/tools/PdfPageNumberTool'), { ssr: false }) as any,
 };
 
 type Props = {
