@@ -99,6 +99,10 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
   jsonEditor: dynamic(() => import('@/app/components/tools/JsonEditorTool'), { ssr: false }) as any,
   chart: dynamic(() => import('@/app/components/tools/ChartTool'), { ssr: false }) as any,
   statistics: dynamic(() => import('@/app/components/tools/StatisticsTool'), { ssr: false }) as any,
+  pdfMerge: dynamic(() => import('@/app/components/tools/PdfMergeTool'), { ssr: false }) as any,
+  pdfSplit: dynamic(() => import('@/app/components/tools/PdfSplitTool'), { ssr: false }) as any,
+  pdfCompress: dynamic(() => import('@/app/components/tools/PdfCompressTool'), { ssr: false }) as any,
+  pdfToImage: dynamic(() => import('@/app/components/tools/PdfToImageTool'), { ssr: false }) as any,
 };
 
 type Props = {

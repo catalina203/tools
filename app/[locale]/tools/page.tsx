@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/src/i18n/navigation';
 import Navbar from '@/app/components/Navbar';
 import { useFavoriteTools } from '@/app/context/FavoriteToolsContext';
-import { imageTools, textTools, devTools, efficiencyTools, fileTools, dataTools } from '@/src/data/tools';
+import { imageTools, textTools, devTools, efficiencyTools, fileTools, dataTools, pdfTools } from '@/src/data/tools';
 
 export default function ToolsPage() {
   const t = useTranslations('tools');
@@ -30,6 +30,7 @@ export default function ToolsPage() {
     { nameKey: 'efficiency', icon: '⚡', tools: efficiencyTools, gradient: 'from-amber-500 to-orange-500' },
     { nameKey: 'file', icon: '📁', tools: fileTools, gradient: 'from-violet-500 to-purple-500' },
     { nameKey: 'data', icon: '📊', tools: dataTools, gradient: 'from-cyan-500 to-blue-500' },
+    { nameKey: 'pdf', icon: '📄', tools: pdfTools, gradient: 'from-red-500 to-rose-500' },
   ];
 
   return (

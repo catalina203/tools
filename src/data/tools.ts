@@ -134,6 +134,13 @@ export const dataTools: ToolItem[] = [
   { key: 'statistics', icon: '📈', gradient: 'from-violet-500 to-purple-500' },
 ];
 
+export const pdfTools: ToolItem[] = [
+  { key: 'pdfMerge', icon: '📄', gradient: 'from-red-500 to-rose-500' },
+  { key: 'pdfSplit', icon: '✂️', gradient: 'from-blue-500 to-cyan-500' },
+  { key: 'pdfCompress', icon: '📦', gradient: 'from-emerald-500 to-teal-500' },
+  { key: 'pdfToImage', icon: '🖼️', gradient: 'from-violet-500 to-purple-500' },
+];
+
 export const allTools: ToolItem[] = [
   ...imageTools,
   ...textTools,
@@ -141,4 +148,5 @@ export const allTools: ToolItem[] = [
   ...efficiencyTools,
   ...fileTools,
   ...dataTools,
+  ...pdfTools,
 ];

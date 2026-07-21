@@ -22,6 +22,7 @@ const knownTools = [
   'scientificCalc', 'stickyNote', 'countdown', 'stopwatch', 'worldClock', 'timezone',
   'randomNum', 'radixCalc',
   'csvEditor', 'jsonEditor', 'chart', 'statistics',
+  'pdfMerge', 'pdfSplit', 'pdfCompress', 'pdfToImage',
 ];
 
 const relatedToolsMap: Record<string, string[]> = {
@@ -120,6 +121,10 @@ const relatedToolsMap: Record<string, string[]> = {
   jsonEditor: ['csvEditor', 'chart', 'statistics'],
   chart: ['statistics', 'csvEditor', 'jsonEditor'],
   statistics: ['chart', 'csvEditor', 'jsonEditor'],
+  pdfMerge: ['pdfSplit', 'pdfCompress', 'pdfToImage'],
+  pdfSplit: ['pdfMerge', 'pdfCompress', 'pdfToImage'],
+  pdfCompress: ['pdfMerge', 'pdfSplit', 'pdfToImage'],
+  pdfToImage: ['pdfMerge', 'pdfSplit', 'pdfCompress'],
 };
 
 type Props = {
@@ -135,7 +140,8 @@ export async function generateMetadata({ params }: Props) {
   const isEfficiencyTool = ['calculator', 'qrcode', 'barcode', 'passwordStrength', 'notepad', 'pomodoro', 'scientificCalc', 'stickyNote', 'countdown', 'stopwatch', 'worldClock', 'timezone', 'randomNum', 'radixCalc'].includes(slug);
   const isFileTool = ['zip', 'unzip', 'preview', 'fileHash', 'editor'].includes(slug);
   const isDataTool = ['csvEditor', 'jsonEditor', 'chart', 'statistics'].includes(slug);
-  const category = isTextTool ? 'textTools' : isDevTool ? 'devTools' : isEfficiencyTool ? 'efficiencyTools' : isFileTool ? 'fileTools' : isDataTool ? 'dataTools' : 'imageTools';
+  const isPdfTool = ['pdfMerge', 'pdfSplit', 'pdfCompress', 'pdfToImage'].includes(slug);
+  const category = isTextTool ? 'textTools' : isDevTool ? 'devTools' : isEfficiencyTool ? 'efficiencyTools' : isFileTool ? 'fileTools' : isDataTool ? 'dataTools' : isPdfTool ? 'pdfTools' : 'imageTools';
 
   const title = t(`${category}.${slug}` as any);
   const description = t(`${category}.${slug}Desc` as any);

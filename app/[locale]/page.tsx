@@ -34,6 +34,8 @@ export default function Home() {
         category = 'file';
       } else if (['csvEditor', 'jsonEditor', 'chart', 'statistics'].includes(key)) {
         category = 'data';
+      } else if (['pdfMerge', 'pdfSplit', 'pdfCompress', 'pdfToImage'].includes(key)) {
+        category = 'pdf';
       }
       return {
         nameKey: key,
@@ -52,6 +54,7 @@ export default function Home() {
     { nameKey: 'efficiency', icon: '⚡', count: 14, gradient: 'from-amber-500 to-orange-500' },
     { nameKey: 'file', icon: '📁', count: 6, gradient: 'from-violet-500 to-purple-500' },
     { nameKey: 'data', icon: '📊', count: 4, gradient: 'from-indigo-500 to-blue-500' },
+    { nameKey: 'pdf', icon: '📄', count: 4, gradient: 'from-red-500 to-rose-500' },
   ];
 
   return (

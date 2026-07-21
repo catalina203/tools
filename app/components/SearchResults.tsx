@@ -56,6 +56,8 @@ export default function SearchResults({
     'fileHash': 'file', 'editor': 'file',
     // Data tools (4)
     'csvEditor': 'data', 'jsonEditor': 'data', 'chart': 'data', 'statistics': 'data',
+    // PDF tools (4)
+    'pdfMerge': 'pdf', 'pdfSplit': 'pdf', 'pdfCompress': 'pdf', 'pdfToImage': 'pdf',
   };
 
   const results = useMemo(() => {
