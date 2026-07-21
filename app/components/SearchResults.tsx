@@ -56,9 +56,10 @@ export default function SearchResults({
     'fileHash': 'file', 'editor': 'file',
     // Data tools (4)
     'csvEditor': 'data', 'jsonEditor': 'data', 'chart': 'data', 'statistics': 'data',
-    // PDF tools (8)
+    // PDF tools (11)
     'pdfMerge': 'pdf', 'pdfSplit': 'pdf', 'pdfCompress': 'pdf', 'pdfToImage': 'pdf',
     'pdfRotate': 'pdf', 'pdfOrganize': 'pdf', 'pdfWatermark': 'pdf', 'pdfPageNumber': 'pdf',
+    'pdfProtect': 'pdf', 'pdfUnlock': 'pdf', 'pdfInfo': 'pdf',
   };
 
   const results = useMemo(() => {

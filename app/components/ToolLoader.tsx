@@ -107,6 +107,9 @@ const toolComponents: Record<string, React.ComponentType<{ children?: React.Reac
   pdfOrganize: dynamic(() => import('@/app/components/tools/PdfOrganizeTool'), { ssr: false }) as any,
   pdfWatermark: dynamic(() => import('@/app/components/tools/PdfWatermarkTool'), { ssr: false }) as any,
   pdfPageNumber: dynamic(() => import('@/app/components/tools/PdfPageNumberTool'), { ssr: false }) as any,
+  pdfProtect: dynamic(() => import('@/app/components/tools/PdfProtectTool'), { ssr: false }) as any,
+  pdfUnlock: dynamic(() => import('@/app/components/tools/PdfUnlockTool'), { ssr: false }) as any,
+  pdfInfo: dynamic(() => import('@/app/components/tools/PdfInfoTool'), { ssr: false }) as any,
 };
 
 type Props = {

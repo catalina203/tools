@@ -143,6 +143,9 @@ export const pdfTools: ToolItem[] = [
   { key: 'pdfOrganize', icon: '📑', gradient: 'from-indigo-500 to-violet-500' },
   { key: 'pdfWatermark', icon: '💧', gradient: 'from-sky-500 to-blue-500' },
   { key: 'pdfPageNumber', icon: '#️⃣', gradient: 'from-pink-500 to-fuchsia-500' },
+  { key: 'pdfProtect', icon: '🔒', gradient: 'from-rose-500 to-red-500' },
+  { key: 'pdfUnlock', icon: '🔓', gradient: 'from-emerald-500 to-teal-500' },
+  { key: 'pdfInfo', icon: 'ℹ️', gradient: 'from-cyan-500 to-blue-500' },
 ];
 
 export const allTools: ToolItem[] = [

@@ -24,6 +24,7 @@ const knownTools = [
   'csvEditor', 'jsonEditor', 'chart', 'statistics',
   'pdfMerge', 'pdfSplit', 'pdfCompress', 'pdfToImage',
   'pdfRotate', 'pdfOrganize', 'pdfWatermark', 'pdfPageNumber',
+  'pdfProtect', 'pdfUnlock', 'pdfInfo',
 ];
 
 const relatedToolsMap: Record<string, string[]> = {
@@ -130,6 +131,9 @@ const relatedToolsMap: Record<string, string[]> = {
   pdfOrganize: ['pdfRotate', 'pdfWatermark', 'pdfPageNumber'],
   pdfWatermark: ['pdfRotate', 'pdfOrganize', 'pdfPageNumber'],
   pdfPageNumber: ['pdfRotate', 'pdfOrganize', 'pdfWatermark'],
+  pdfProtect: ['pdfUnlock', 'pdfInfo', 'pdfWatermark'],
+  pdfUnlock: ['pdfProtect', 'pdfInfo', 'pdfPageNumber'],
+  pdfInfo: ['pdfProtect', 'pdfUnlock', 'pdfPageNumber'],
 };
 
 type Props = {
@@ -145,7 +149,7 @@ export async function generateMetadata({ params }: Props) {
   const isEfficiencyTool = ['calculator', 'qrcode', 'barcode', 'passwordStrength', 'notepad', 'pomodoro', 'scientificCalc', 'stickyNote', 'countdown', 'stopwatch', 'worldClock', 'timezone', 'randomNum', 'radixCalc'].includes(slug);
   const isFileTool = ['zip', 'unzip', 'preview', 'fileHash', 'editor'].includes(slug);
   const isDataTool = ['csvEditor', 'jsonEditor', 'chart', 'statistics'].includes(slug);
-  const isPdfTool = ['pdfMerge', 'pdfSplit', 'pdfCompress', 'pdfToImage', 'pdfRotate', 'pdfOrganize', 'pdfWatermark', 'pdfPageNumber'].includes(slug);
+  const isPdfTool = ['pdfMerge', 'pdfSplit', 'pdfCompress', 'pdfToImage', 'pdfRotate', 'pdfOrganize', 'pdfWatermark', 'pdfPageNumber', 'pdfProtect', 'pdfUnlock', 'pdfInfo'].includes(slug);
   const category = isTextTool ? 'textTools' : isDevTool ? 'devTools' : isEfficiencyTool ? 'efficiencyTools' : isFileTool ? 'fileTools' : isDataTool ? 'dataTools' : isPdfTool ? 'pdfTools' : 'imageTools';
 
   const title = t(`${category}.${slug}` as any);
