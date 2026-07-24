@@ -5,8 +5,8 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { FavoriteToolsProvider } from "./context/FavoriteToolsContext";
 
 export const metadata: Metadata = {
-  title: "SnapKits - 一站式在线工具集合",
-  description: "提供图像处理、文本编辑、格式转换等实用工具，让您的效率翻倍。",
+  title: "SnapKits - Online Tool Collection",
+  description: "Free online tools for image processing, text editing, format conversion, and more. Boost your productivity with SnapKits.",
 };
 
 export default function RootLayout({

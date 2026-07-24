@@ -26,7 +26,7 @@
 
 - `app/` - App Router (Next.js 16+)
   - `layout.tsx` - 根布局（不含字体，避免网络问题）
-  - `page.tsx` - 根页面（重定向到 /zh）
+  - `page.tsx` - 根页面（重定向到 /en）
   - `globals.css` - 全局样式
   - `context/ThemeContext.tsx` - 主题上下文（深色/浅色模式）
   - `context/FavoriteToolsContext.tsx` - 常用工具上下文（管理用户常用工具）
@@ -240,7 +240,8 @@ tools.[category].[toolName]Faq1~3A       # FAQ答案
 - 使用 `next-intl` 库实现国际化
 - 路由结构：`/[locale]/page.tsx`（locale 为 zh 或 en）
 - 语言包位于 `messages/zh.json` 和 `messages/en.json`
-- 根路径 `/` 自动重定向到 `/zh`（默认中文）
+- 根路径 `/` 由中间件内部重写（rewrite）到 `/en`（对搜索引擎透明，无 307 重定向）
+- `app/page.tsx` 仅作为占位符，实际由 `middleware.ts` 处理根路径请求
 
 ### 新增页面/工具的 i18n 流程
 **每次新增页面、工具或 UI 文案时，必须同时更新两个语言包：**
